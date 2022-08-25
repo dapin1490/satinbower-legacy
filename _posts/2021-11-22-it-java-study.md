@@ -49,4 +49,4 @@ render_with_liquid: false
 <br/>   
    
 원본 : 내 트위터   
-https://twitter.com/dapin1490/status/1448508851108544515?s=20    
+[https://twitter.com/dapin1490/status/1448508851108544515?s=20](https://twitter.com/dapin1490/status/1448508851108544515?s=20)    

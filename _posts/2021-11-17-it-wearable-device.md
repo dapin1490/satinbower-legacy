@@ -1,5 +1,5 @@
 ---
-title: 웨어러블 디바이스, 스마트 워치만 있나? | 과제 - 기사 작성
+title: 웨어러블 디바이스, 스마트 워치만 있나?
 author: dapin1490
 date: 2021-11-17 00:00:00 +0900
 categories: [IT]
@@ -29,8 +29,8 @@ render_with_liquid: false
 참고문헌   
 - 신윤미, “웨어러블 디바이스 기술동향보고서”, 과학기술일자리진흥원 S&T Market Report vol.61 (2018)
 - 한상철 외 2인, “웨어러블 스마트 기기 기술동향과 산업전망”, 한국산업기술평가관리원 KEIT PD 이슈리포트 vol.16-03 (2016)
-- “스마트워치.” 위키백과, 우리 모두의 백과사전. 2021년 5월 14일 수정, 2021년 10월 10일 접속, https://ko.wikipedia.org/wiki/%EC%8A%A4%EB%A7%88%ED%8A%B8%EC%9B%8C%EC%B9%98.
-- “사물인터넷(IoT).” ITstory. 2017년 4월 21일 수정, 2021년 10월 16일 접속, https://copycode.tistory.com/70
+- “스마트워치.” 위키백과, 우리 모두의 백과사전. 2021년 5월 14일 수정, 2021년 10월 10일 접속, [https://ko.wikipedia.org/wiki/스마트워치](https://ko.wikipedia.org/wiki/%EC%8A%A4%EB%A7%88%ED%8A%B8%EC%9B%8C%EC%B9%98).
+- “사물인터넷(IoT).” ITstory. 2017년 4월 21일 수정, 2021년 10월 16일 접속, [https://copycode.tistory.com/70](https://copycode.tistory.com/70)
 - 연구개발특구진흥재단, “애완동물용 웨어러블 시장”, *글로벌 시장동향 보고서*, no.53 (2021)
    
 <br/><br/>   
