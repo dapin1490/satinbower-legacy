@@ -11,7 +11,7 @@ render_with_liquid: false
 
 -----
   
-</br>
+<br>
   
 ### 참고
 사용한 데이터셋 : [https://www.kaggle.com/uciml/glass](https://www.kaggle.com/uciml/glass)   
@@ -19,7 +19,7 @@ render_with_liquid: false
 노션에서 정리 보기 : [https://dapin1490.notion.site/DIY-ae97a364485946ae832f52e8022bf202](https://dapin1490.notion.site/DIY-ae97a364485946ae832f52e8022bf202)   
 알림 : 내가 이해한 대로 설명하는 것이니 틀린 부분이 있을 수 있다. 지적 환영!   
   
-</br></br>
+<br><br>
   
 ### 지난 글 보기   
 [딥러닝 모델에게 데이터 떠먹이는 방법 (1)](https://dapin1490.github.io/satinbower/posts/it-deeplearning-data-1/)   
@@ -32,17 +32,17 @@ render_with_liquid: false
 \- SMOTE 오버 샘플링   
 \- ADASYN 오버 샘플링   
   
-</br></br>
+<br><br>
   
 ### 이번 글 목차   
-<p>1. 클래스 별 차등 가중치 부여하기</br>
+<p>1. 클래스 별 차등 가중치 부여하기<br>
 2. 꼭 결측치가 있어야만 속성을 삭제할 수 있는 건 아니다</p>  
   
-</br>
+<br>
   
 -----
   
-</br>
+<br>
   
 ### 1. 클래스 별 차등 가중치 부여하기
 예부터 들어보자. 여기 걸리는 사람은 많지만 죽는 사람은 적은 어떤 병이 있다. 의사는 환자의 상태를 보고 이 환자가 살지 죽을지 예측하고 싶다. 사람이 일일이 데이터를 보고 예측하기는 어려우니 딥러닝 모델의 도움을 받기로 했다. 클래스는 "생존"과 "사망" 두 가지 뿐이지만 샘플 수의 비율은 8:2 정도로 불균형하다고 하자. 이제 모델을 만들어야 한다. 어떻게 해야 할까?   
@@ -64,7 +64,7 @@ model.fit(X[train], Y_one_tr, validation_split=0.3, epochs=1000, batch_size=60, 
   
 가중치 값은 모델의 정확도를 보고 조정하는 것이긴 하지만, 0이나 1에 너무 가까우면 정확도가 오히려 떨어지는 것 같았다. 다만 이 코드에서 0번과 4번 클래스에 가중치가 1로 주어진 이유는 실제로 그 클래스가 존재하지 않기 때문이었다.  
   
-</br></br>
+<br><br>
   
 ### 2. 꼭 결측치가 있어야만 속성을 삭제할 수 있는 건 아니다
 설명을 시작하기에 앞서 단어 하나만 알고 가자. 결측치란 측정되지 않아 비어 있는 부분(null)이 존재하는 데이터를 말한다. 사전을 찾아보니 영어로는 missing value, 말 그대로의 뜻이다.  
