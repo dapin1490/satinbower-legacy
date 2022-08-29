@@ -53,7 +53,7 @@ render_with_liquid: false
   
 여기 서로 다른 두 데이터셋의 클래스 분포를 보여주는 히스토그램이 있다. 왼쪽은 유리 분류 데이터셋, 오른쪽은 별 유형 분류 데이터셋이다. 딱 봐도 비교되는 느낌이 온다. 왼쪽보다 오른쪽이 막대의 높이가 일정하다. 왜 저 히스토그램들을 비교해야 할까?   
    
-<div>
+<div style="text-align:center">
     <div style="width:50%; float:left">
         <figure>
         <img src="../assets/img/categoty-it/220305-1-hist-glass.png">
