@@ -100,7 +100,22 @@ print(data.corr()['Type'])
   
 결과는 다음 이미지와 같이 나온다.  
   
-![[이미지 1] 전체 속성 상관 관계](/assets/img/categoty-it/220305-2-1-corr-all.png "[이미지 1] 전체 속성 상관 관계") ![[이미지 2] 클래스와 각 속성간의 상관 관계](/assets/img/categoty-it/220305-2-2-corr-class.png "[이미지 2] 클래스와 각 속성간의 상관 관계")  
+<div style="text-align:center">
+    <div style="width:65%; float:left">
+        <figure>
+        <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/categoty-it/220305-2-1-corr-all.png">
+            <figcaption style="text-align:center">[이미지 1] 전체 속성 상관 관계</figcaption>
+        </figure>
+    </div>
+    <div style="width:35%; float:left">
+        <figure>
+        <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/categoty-it/220305-2-2-corr-class.png">
+            <figcaption style="text-align:center">[이미지 2] 클래스와 각 속성간의 상관 관계</figcaption>
+        </figure>
+    </div>
+</div>
+
+<div style="clear:both"></div>
   
 속성들이 서로 얼마나 관계가 있는지 알려주는 건 좋은데, 죄다 소수인데다 자릿수도 많으니 영 보기가 불편하다. 여기 이 이미지와 똑같은 정보를 알록달록한 이미지로 볼 수 있는 방법이 있다. 위에 써있는 네 가지 라이브러리 중 아래 두 가지 라이브러리를 사용하면 가능하다. 히스토그램과 히트맵을 볼 수 있는데, 나는 히트맵에 대해서만 설명하겠다. 히트맵은 간단히 열화상 카메라처럼 상관 관계 값이 클 수록 사용자가 지정한 색이 진하게 표시되고 값이 작을수록 색이 연해지는 그래프라고 보면 된다. 코드를 보자.  
   
@@ -118,7 +133,10 @@ plt.show()  # 히트맵 보여주기
   
 결과 이미지도 있다.  
   
-![[이미지 3] 상관 관계 히트맵](/assets/img/categoty-it/220305-2-3-heatmap.png "[이미지 3] 상관 관계 히트맵")  
+<figure style="text-align:center">
+<img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/categoty-it/220305-2-3-heatmap.png">
+    <figcaption>[이미지 3] 상관 관계 히트맵</figcaption>
+</figure>
   
 지금 봐야 할 것은 맨 아랫줄이다. 너무 밑에 있어서 불편하다면 맨 오른쪽 세로줄을 봐도 된다. 같은 값이 쓰여 있다.  
   
