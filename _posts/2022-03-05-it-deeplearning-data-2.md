@@ -53,7 +53,22 @@ render_with_liquid: false
   
 여기 서로 다른 두 데이터셋의 클래스 분포를 보여주는 히스토그램이 있다. 왼쪽은 유리 분류 데이터셋, 오른쪽은 별 유형 분류 데이터셋이다. 딱 봐도 비교되는 느낌이 온다. 왼쪽보다 오른쪽이 막대의 높이가 일정하다. 왜 저 히스토그램들을 비교해야 할까?   
    
-![[이미지 1] 유리 분류](/assets/img/categoty-it/220305-1-hist-glass.png "[이미지 1] 유리 분류") ![[이미지 2] 별 유형 분류](/assets/img/categoty-it/220305-2-hist-star.png "[이미지 2] 별 유형 분류")   
+<div>
+    <div style="width:50%; float:left">
+        <figure>
+        <img src="../assets/img/categoty-it/220305-1-hist-glass.png">
+            <figcaption style="text-align:center">[이미지 1] 유리 분류</figcaption>
+        </figure>
+    </div>
+    <div style="width:50%; float:left">
+        <figure>
+        <img src="../assets/img/categoty-it/220305-2-hist-star.png">
+            <figcaption style="text-align:center">[이미지 2] 별 유형 분류</figcaption>
+        </figure>
+    </div>
+</div>
+
+<div style="clear:both"></div>
    
 사람이 무언가 배우려면 충분한 경험이 필요한 것처럼 딥러닝 모델도 정확한 학습을 하려면 충분한 데이터(샘플)가 필요하고, 수험생이 공부를 할 때 특정 과목에만 집중하면 전체적인 성적이 떨어지는 것처럼 딥러닝 모델도 특정 클래스의 샘플만 너무 많으면 정확도가 떨어진다. 데이터를 준비하는 것은 사람이 하는 일이니 이런 문제를 미리 확인하고 다듬어줘야 한다. 그 방법은 여러 가지가 있겠지만 이번에는 언더, 오버 샘플링에 대해 설명한다.   
   
