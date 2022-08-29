@@ -69,7 +69,7 @@ plt.show()
 첨도가 54.7쯤 되면 아래와 같은 히스토그램을 볼 수 있다. 세로축의 Count는 값의 개수, 가로축의 K는 이 속성의 이름이다. 딱 봐도 대략 0.1과 0.7쯤에 거의 모든 값이 몰려 있는 것을 확인할 수 있다.   
    
 <figure style="text-align:center">
-<img src="../assets/img/categoty-it/220228-1-kurt-k.png">
+<img src="https://github.com/dapin1490/satinbower/tree/main/assets/img/categoty-it/220228-1-kurt-k.png">
     <figcaption>[이미지 1] 첨도가 약 54.7인 속성의 히스토그램</figcaption>
 </figure>
    
@@ -89,7 +89,7 @@ print(data.skew())
 얼핏 보면 첨도나 왜도나 같은 말을 하는 것처럼 보일 수 있다. 하지만 잘 생각해 보면 분명한 차이가 있다. 정규분포를 가지고 이해해보자. 참고용으로 가져온 아래 그래프에서 빨간 그래프와 파란 그래프만을 본다. 빨간 그래프는 평균이 0, 분산이 1인 표준 정규 분포 그래프이다. 파란 그래프는 평균은 같지만 분산이 더 작다. 이 두 그래프의 첨도와 왜도는 어떻게 다를까?   
    
 <figure style="text-align:center">
-<img src="../assets/img/categoty-it/220228-2-normal-distribution.png">
+<img src="https://github.com/dapin1490/satinbower/tree/main/assets/img/categoty-it/220228-2-normal-distribution.png">
     <figcaption>[이미지 2] 정규 분포 그래프, 출처 위키백과</figcaption>
 </figure>
    
@@ -116,7 +116,7 @@ plt.show()
 상관 관계는 숫자로 확인할 수도 있긴 하지만 히트맵으로 보면 훨씬 보기 좋다. 아래 히트맵은 상관 관계가 1에 가까울수록 진한 색을 띈다. Type가 클래스이니 맨아랫줄을 보거나 가장 오른쪽 줄을 보면 클래스와 다른 속성 간의 상관 관계를 알 수 있다. 클래스와 정비례 방향으로 상관 관계가 가장 높은 것은 속성 'Al'이고, 반비례 방향으로 상관 관계가 가장 높은 것은 속성 'Mg'이다. 어느 방향으로든 상관 관계가 가장 낮은 것은 속성 'Ca'이다.   
    
 <figure style="text-align:center">
-<img src="../assets/img/categoty-it/220228-3-heatmap.png">
+<img src="https://github.com/dapin1490/satinbower/tree/main/assets/img/categoty-it/220228-3-heatmap.png">
     <figcaption>[이미지 3] 상관 관계 시각화(히트맵)</figcaption>
 </figure>
   
@@ -127,7 +127,7 @@ plt.show()
 딥러닝 모델을 훈련시키고 그 성과를 확인하려면 테스트를 시켜야 한다. 보통은 전체 데이터셋에서 테스트 데이터를 따로 분할해 놓고 쓰거나, 모델을 실행할 때 validation_split 인자를 주어 학습 과정에서 알아서 나누어 쓰도록 한다(두 가지 방법을 한 번에 사용하기도 한다). 그런데 세상이 아무리 정보가 넘쳐나는 세상이 되었다고 한들 학습에 필요한 데이터가 부족한 문제는 얼마든지 있을 수 있다. K겹 교차검증은 이럴 때 사용할 수 있다. 그림부터 보고 이해하자.   
    
 <figure style="text-align:center">
-<img src="../assets/img/categoty-it/220228-4-k-fold.png">
+<img src="https://github.com/dapin1490/satinbower/tree/main/assets/img/categoty-it/220228-4-k-fold.png">
     <figcaption>[이미지 4] K겹 교차검증, 출처 &lt;모두의 딥러닝&gt;</figcaption>
 </figure>
    
