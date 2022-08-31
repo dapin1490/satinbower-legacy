@@ -2,8 +2,8 @@
 title: 퀵 정렬
 author: dapin1490
 date: 2022-02-06 00:00:00 +0900
-categories: [IT]
-tags: [IT, 지식, 알고리즘, 퀵정렬]
+categories: [지식, IT]
+tags: [지식, IT, 알고리즘, 퀵정렬]
 render_with_liquid: false
 ---
 

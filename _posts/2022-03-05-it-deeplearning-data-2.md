@@ -2,8 +2,8 @@
 title: 딥러닝 모델에게 데이터 떠먹이는 방법 (2)
 author: dapin1490
 date: 2022-03-05 00:00:00 +0900
-categories: [IT]
-tags: [IT, 지식, 딥러닝, 샘플링]
+categories: [지식, IT]
+tags: [지식, IT, 딥러닝, 샘플링]
 render_with_liquid: false
 ---
 

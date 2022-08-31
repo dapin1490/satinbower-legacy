@@ -2,7 +2,7 @@
 title: 다른 사람의 코드 보고 배우기
 author: dapin1490
 date: 2022-03-07 00:00:00 +0900
-categories: [IT]
+categories: [지식, IT]
 tags: [IT]
 render_with_liquid: false
 ---
