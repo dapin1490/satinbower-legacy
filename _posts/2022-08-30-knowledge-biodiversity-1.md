@@ -2,7 +2,7 @@
 title: 생물다양성과 분류학
 author: dapin1490
 date: 2022-08-30 20:10:00 +0900
-categories: [지식]
+categories: [지식, 생물]
 tags: [지식, 생물, 생물다양성, 분류학]
 render_with_liquid: false
 ---
