@@ -21,7 +21,7 @@ timezone: Asia/Seoul
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: satinbower                          # the main title
+title: 새틴바우어                          # the main title
 
 tagline: dapin1490's hand-made study blog   # it will display as the sub-title
 
@@ -44,13 +44,14 @@ social:
   email: dapin1490@gmail.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://github.com/username       # change to your github homepage
-    - https://twitter.com/username      # change to your twitter homepage
+    - https://github.com/dapin1490       # change to your github homepage
+    - https://twitter.com/dapin1490      # change to your twitter homepage
+    - https://dapin1490.postype.com
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     # - https://www.linkedin.com/in/username
 
-google_site_verification: google46ce239a05ab1907.html               # fill in to your verification string
+google_site_verification:                # fill in to your verification string
 
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
