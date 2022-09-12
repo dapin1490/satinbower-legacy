@@ -1,7 +1,7 @@
 ---
 title: 향낭 만들기, 정원 박광훈 복식박물관, 성신여대 자연사박물관
 author: dapin1490
-date: 2022-08-31 20:42:00 +0900
+date: 2022-08-31T20:42:00+09:00
 categories: [지식, 기타]
 tags: [박물관, 후기]
 render_with_liquid: false

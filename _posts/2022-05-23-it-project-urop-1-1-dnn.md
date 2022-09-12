@@ -1,7 +1,7 @@
 ---
 title: "[UROP] 1주 - 1. DNN 스터디"
 author: dapin1490
-date: 2022-05-23 00:00:00 +0900
+date: 2022-05-23T00:00:00+09:00
 categories: [지식, IT]
 tags: [프로젝트, 지식, IT, DNN, 딥러닝, 과학]
 render_with_liquid: false

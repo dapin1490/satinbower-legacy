@@ -1,7 +1,7 @@
 ---
 title: 카데인 알고리즘
 author: dapin1490
-date: 2022-05-18 00:00:00 +0900
+date: 2022-05-18T00:00:00+09:00
 categories: [지식, IT]
 tags: [지식, IT, 알고리즘, 동적계획법, 카데인알고리즘]
 render_with_liquid: false

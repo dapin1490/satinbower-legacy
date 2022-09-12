@@ -1,7 +1,7 @@
 ---
 title: 백트래킹
 author: dapin1490
-date: 2022-01-29 00:00:00 +0900
+date: 2022-01-29T00:00:00+09:00
 categories: [지식, IT]
 tags: [지식, IT, 백트래킹, 알고리즘, 재귀]
 render_with_liquid: false

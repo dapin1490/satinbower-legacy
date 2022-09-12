@@ -1,7 +1,7 @@
 ---
 title: 퀵 정렬
 author: dapin1490
-date: 2022-02-06 00:00:00 +0900
+date: 2022-02-06T00:00:00+09:00
 categories: [지식, IT]
 tags: [지식, IT, 알고리즘, 퀵정렬]
 render_with_liquid: false
