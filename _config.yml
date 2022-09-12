@@ -111,6 +111,7 @@ comments:
     reactions-enabled: "1"
     emit-metadata: "0"
     theme: "preferred_color_scheme"
+    crossorigin: "anonymous"
     # <script src="https://giscus.app/client.js"
     #     data-repo="dapin1490/satinbower"
     #     data-repo-id="R_kgDOH4O5NA"
