@@ -8,8 +8,8 @@ render_with_liquid: false
 ---
 
 <style>
-	.x-understand { color: #ccb833; }
-	.understand { color: #1380da; }
+	.x-understand { color: #f59908; }
+	.understand { color: #1a9ac1; }
 	.tab { white-space: pre; }
 	.code-block {
 		font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
