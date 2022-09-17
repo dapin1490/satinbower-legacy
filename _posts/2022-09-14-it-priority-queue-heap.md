@@ -244,7 +244,7 @@ priority_queue<string> copy_words {words}; // words의 복제본
 2. [C++ STL priority_queue 우선순위 큐 사용법](https://jungeu1509.github.io/algorithm/use-priorityqueue/)  
 3. [priority_queue emplace() in C++ STL](https://www.geeksforgeeks.org/priority_queue-emplace-in-cpp-stl/)  
 4. [priority_queue 사용법](https://dolphins-it.tistory.com/43)  
-5. [C++14 STL 철저 입문 - 3.4 | priority_queue\<T\> 컨테이너 어댑터 사용하기](https://thebook.io/006842/ch03/04/)  
+5. [C++14 STL 철저 입문 - 3.4 | priority_queue&lt;T&gt; 컨테이너 어댑터 사용하기](https://thebook.io/006842/ch03/04/)  
 6. [C++/STL 강좌 2편. 함수 객체(Function Object)](https://blog.hexabrain.net/267)  
 7. [72) 함수 객체 - 코딩의 시작, TCP School](http://www.tcpschool.com/cpp/cpp_algorithm_functor)  
 8. [[자료구조] 힙(heap)이란](https://gmlwjd9405.github.io/2018/05/10/data-structure-heap.html)  
