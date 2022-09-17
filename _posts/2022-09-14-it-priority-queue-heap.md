@@ -28,23 +28,44 @@ render_with_liquid: false
 
 <br>
 
-### 우선순위 큐 : 정렬된 큐  
+### 힙도 자료구조다
   
-우선순위 큐는 힙을 이용해 구현한다.  
-
 힙 heap : 트리의 형태로 표현됨.  
+
+<br>
   
-트리 : 사이클이 없는 그래프. [참고 1 : [자료구조] 트리](https://dapin1490.github.io/satinbower/posts/it-data-structure-tree/), [참고 2 : [자료구조] 이진 탐색 트리](https://dapin1490.github.io/satinbower/posts/it-data-structure-binary-search-tree/)  
+트리 : 사이클이 없는 그래프. [참고 : [자료구조] 트리](https://dapin1490.github.io/satinbower/posts/it-data-structure-tree/), [참고 : [자료구조] 이진 탐색 트리](https://dapin1490.github.io/satinbower/posts/it-data-structure-binary-search-tree/)  
 이진 트리 binary tree : 모든 노드가 두 개 이하의 자식을 가지는 트리.  
 포화 이진 트리 : 단말 노드를 제외한 모든 노드가 두 개의 자식을 가지는 트리.  
 완전 이진 트리 : 마지막 레벨을 제외한 모든 레벨에 노드가 완전히 채워져 있고, 마지막 레벨에서는 왼쪽부터 차례로 노드가 채워진 트리.  
 거의 완전 이진 트리 nearly complete- : 마지막 레벨에서 노드가 왼쪽부터 채워지되, 한 노드가 자식 노드를 하나만 가져도 되는 트리.  
+
+<br>
   
 힙의 구성 조건  
 - 거의 완전 이진 트리일 것
 - 부모의 키가 자식의 키보다 크거나 같아야 함(루트가 최댓값을 가짐, max heap)
 - 부모의 키가 자식의 키보다 작거나 같은 힙은 min heap
 - 같은 부모 아래의 자식 노드의 정렬은 고려하지 않는다.
+
+<br>
+  
+삽입 연산 수행 과정  
+1. 힙을 구성하는 트리의 마지막 자리에 새 요소를 넣는다.
+2. 전체 트리가 힙 성질을 만족할 때까지 새로 넣은 요소와 부모 노드를 비교하고 바꾼다.
+
+<br>
+  
+삭제 연산 수행 과정  
+1. 루트 노드를 삭제한다.
+2. 마지막 노드를 루트로 가져온다.
+3. 삽입 연산과 마찬가지로 힙 성질을 만족할 때까지 정렬한다.
+
+<br>
+
+### 우선순위 큐 : 정렬된 큐  
+  
+우선순위 큐는 힙을 이용해 구현한다.  
   
 <br>
   
@@ -183,17 +204,41 @@ priority_queue <int, vector<int>, cmp> pq;
 <br>
 
 ### 나는 큐에 넣을 내용물이 이미 준비되어 있다
-내용 추가  
+우선순위 큐 인스턴스를 생성할 때, 큐에 들어갈 요소들이 먼저 준비되어 있다면 그것을 생성자에 전달해서 초기화할 수 있다. 당연히 생성될 큐의 요소와 준비된 배열의 타입이 일치해야 한다. 예시 코드를 보자([출처](https://thebook.io/006842/ch03/04/01/)).  
+```cpp
+using namespace std;
+
+// 배열 초기화
+string wrds[] {"one", "two", "three", "four"};
+priority_queue<string> words {begin(wrds), end(wrds)}; // "two" "three" "one "four"
+
+// 큐 복제
+priority_queue<string> copy_words {words}; // words의 복제본
+```
+예시의 배열은 영단어 4개로 이루어졌고, 생성된 큐는 문자열 내림차순 우선순위 큐이다. 배열은 중괄호 생성자를 이용해 초기화되었고 우선순위 큐는 이 배열의 시작과 끝을 받아 배열의 내용으로 구성되었다. 중괄호를 저렇게 쓰는 게 어떤 의미인지 몰라서 잠시 찾아봤는데 쉽게 이해가 가지 않아서 참고 자료[9][10]로만 올려두고, 나는 저것이 생성자라고만 말해두겠다. 내가 이해를 못했는데 설명하면 안 되지.  
+  
+요점은 꼭 빈 큐를 생성해야만 하는 건 아니라는 말이다. 큐 생성 시에 전달되는 배열은 정렬되어 있을 필요가 없고, 우선순위 큐 객체를 복제하는 것도 가능하다. 벡터를 많이들 쓰긴 하지만 `front(), push_back(), pop_back(), size(empty()` 함수를 지원하는 컨테이너라면 사용 가능하여 덱을 써도 된다고 한다.  
+
+<br>
+<hr>
+<br>
+
+## 에제 문제 풀이
+내가 과제로 받은 우선순위 큐를 위한 예제 문제는 `백준 1966번 프린터 큐, 백준 1655번 가운데를 말해요` 두 가지인데, 이것까지 한 포스트에 다 풀이하면 글이 너무 길어지니 보기 지루하지 않겠는가? 링크로 첨부한다.  
+<span class="x-understand">링크 준비중</span>  
 
 <br>
 <hr>
 <br>
 
 ## 참고 자료
-[[C++ STL] Priority_queue 사용법](https://kbj96.tistory.com/15)  
-[C++ STL priority_queue 우선순위 큐 사용법](https://jungeu1509.github.io/algorithm/use-priorityqueue/)  
-[priority_queue emplace() in C++ STL](https://www.geeksforgeeks.org/priority_queue-emplace-in-cpp-stl/)  
-[priority_queue 사용법](https://dolphins-it.tistory.com/43)  
-[C++14 STL 철저 입문 - 3.4 | priority_queue\<T\> 컨테이너 어댑터 사용하기](https://thebook.io/006842/ch03/04/)  
-[C++/STL 강좌 2편. 함수 객체(Function Object)](https://blog.hexabrain.net/267)  
-[72) 함수 객체 - 코딩의 시작, TCP School](http://www.tcpschool.com/cpp/cpp_algorithm_functor)  
+1. [[C++ STL] Priority_queue 사용법](https://kbj96.tistory.com/15)  
+2. [C++ STL priority_queue 우선순위 큐 사용법](https://jungeu1509.github.io/algorithm/use-priorityqueue/)  
+3. [priority_queue emplace() in C++ STL](https://www.geeksforgeeks.org/priority_queue-emplace-in-cpp-stl/)  
+4. [priority_queue 사용법](https://dolphins-it.tistory.com/43)  
+5. [C++14 STL 철저 입문 - 3.4 | priority_queue\<T\> 컨테이너 어댑터 사용하기](https://thebook.io/006842/ch03/04/)  
+6. [C++/STL 강좌 2편. 함수 객체(Function Object)](https://blog.hexabrain.net/267)  
+7. [72) 함수 객체 - 코딩의 시작, TCP School](http://www.tcpschool.com/cpp/cpp_algorithm_functor)  
+8. [[자료구조] 힙(heap)이란](https://gmlwjd9405.github.io/2018/05/10/data-structure-heap.html)  
+9. [객체 생성시 괄호와 중괄호의 구분](https://infoscoco.com/17)  
+10. [[Modern C++]Initializer_list](https://haedallog.tistory.com/8)  
