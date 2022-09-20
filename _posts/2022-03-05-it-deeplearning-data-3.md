@@ -103,13 +103,13 @@ print(data.corr()['Type'])
 <div style="text-align:center">
     <div style="width:65%; float:left">
         <figure>
-        <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/categoty-it/220305-2-1-corr-all.png">
+        <img src="/assets/img/categoty-it/220305-2-1-corr-all.png">
             <figcaption style="text-align:center">[이미지 1] 전체 속성 상관 관계</figcaption>
         </figure>
     </div>
     <div style="width:35%; float:left">
         <figure>
-        <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/categoty-it/220305-2-2-corr-class.png">
+        <img src="/assets/img/categoty-it/220305-2-2-corr-class.png">
             <figcaption style="text-align:center">[이미지 2] 클래스와 각 속성간의 상관 관계</figcaption>
         </figure>
     </div>
@@ -134,7 +134,7 @@ plt.show()  # 히트맵 보여주기
 결과 이미지도 있다.  
   
 <figure style="text-align:center">
-<img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/categoty-it/220305-2-3-heatmap.png">
+<img src="/assets/img/categoty-it/220305-2-3-heatmap.png">
     <figcaption>[이미지 3] 상관 관계 히트맵</figcaption>
 </figure>
   

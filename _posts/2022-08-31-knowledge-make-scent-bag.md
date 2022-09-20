@@ -18,37 +18,37 @@ render_with_liquid: false
         <details>
             <summary>향낭 만들기, 복식박물관 사진</summary>
             <figure>
-                <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-1-scent-bag-kit.jpg">
+                <img src="/assets/img/category-daily/220831-1-scent-bag-kit.jpg">
                 <figcaption>향낭 만들기 재료</figcaption>
             </figure>
             <p>왼쪽부터 비단 주머니에 밑선을 그을 자와 수예용 수성펜, 매듭 끈, 다시백, 고무줄빼기, 프로그램 팜플렛이 있고, 다시백 위에 포장용 상자가 있다. 포장용 상자에는 복식박물관 스티커가 붙어 있다.</p>
             <figure>
-                <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-2-my-scent-bag.jpg">
+                <img src="/assets/img/category-daily/220831-2-my-scent-bag.jpg">
                 <figcaption>완성한 향낭</figcaption>
             </figure>
             <p>사진은 학식당에서 찍었다. 향낭 만들고 나서 밥 먹으러 가서 밥 받아 놓고 먹기 전에 찍은 거다. 꽃 자수는 목공풀로 붙인 거라고 했다. 진짜 비단 주머니에 자수가 되어 있는 게 아니다.</p>
             <figure>
-                <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-3-park-K-H-model.jpg">
+                <img src="/assets/img/category-daily/220831-3-park-K-H-model.jpg">
                 <figcaption>정원 박광훈 모형</figcaption>
             </figure>
             <p>복식박물관에 600여 벌의 한복을 기증하셨고, 19년도에 돌아가셨다고 한다. 같이 프로그램을 들었던 아주머님들은 다들 저 방 안에 있는 가구가 익숙하다며 반가워하셨지만 나는 인두나 화로 같은 것 빼고는 잘 모르겠다.</p>
             <figure>
-                <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-4-teddy-family.jpg">
+                <img src="/assets/img/category-daily/220831-4-teddy-family.jpg">
                 <figcaption>한복 입은 테디베어들</figcaption>
             </figure>
             <p>박물관에 찾아오는 어린이들이 가장 좋아하는 것이라고 한다. 박물관 구석에 있다.</p>
             <figure>
-                <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-5-queen.jpg">
+                <img src="/assets/img/category-daily/220831-5-queen.jpg">
                 <figcaption>전시관에서 찍은 사진</figcaption>
             </figure>
             <p>자세한 설명 내용은 기억이 안 난다. 황비가 입는 예복이었다고 들은 것 같다. 손에 든 물건은 나중에 다시 찾아봤는데 '규'라고 부르면 되는 것 같다.</p>
             <figure>
-                <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-6-innerwear.jpg">
+                <img src="/assets/img/category-daily/220831-6-innerwear.jpg">
                 <figcaption>전시관에서 찍은 속치마 사진</figcaption>
             </figure>
             <p>저 때깔 고운 치마가 속치마라고 한다! 중국의 한푸는 몸에 딱 붙어서 몸매를 드러내는 걸 미로 여기지만 한국의 한복은 비단으로 지은 옷을 겹겹이 입어서 풍성하게 만드는 것을 미로 여겼다고 한다. 당시엔 비싸고 귀한 재료였던 비단을 많이 살 수 있다는 재력을 보여준다는 의미도 있었다고 한다. 그래서 속옷도 저렇게 풀을 먹여 모양을 잡아주게 하거나(제일 왼쪽), 물을 들여 꾸미기도 했다고 한다(오른쪽 삼색 치마). 아래에 살짝 보이는 건 진짜 속옷이다. 이너웨어라고 부르는 그 속옷.</p>
             <figure>
-                <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-7-button.jpg">
+                <img src="/assets/img/category-daily/220831-7-button.jpg">
                 <figcaption>전시되어 있던 단추</figcaption>
             </figure>
             <p>도슨트 설명에서는 듣지 못했지만 내가 예뻐서 찍었다.</p>
@@ -66,62 +66,62 @@ render_with_liquid: false
     <details>
         <summary>사진 보기(* 벌레 사진 있음)</summary>
         <figure>
-            <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-9-okenite.jpg">
+            <img src="/assets/img/category-daily/220831-9-okenite.jpg">
             <figcaption>오케나이트</figcaption>
         </figure>
         <p>광석인데 곰팡이같이 생겨서 신기해서 찍었다.</p>
         <figure>
-            <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-10-agate.jpg">
+            <img src="/assets/img/category-daily/220831-10-agate.jpg">
             <figcaption>아게이트</figcaption>
         </figure>
         <p>예뻐서 찍었다. 굳이 내 마음에 더 들었던 전시물을 고르자면 자수정 기둥이긴 한데 그건 핸드폰 카메라로 내 마음에 들게 찍을 자신도 없고 기운도 없어서 그냥 이걸로 대리만족한 셈 치자.</p>
         <figure>
-            <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-11-cocculus-trilobus.jpg">
+            <img src="/assets/img/category-daily/220831-11-cocculus-trilobus.jpg">
             <figcaption>댕댕이덩굴 표본</figcaption>
         </figure>
         <p>이름이 재밌어서 찍었다. 이 식물에 대해서는 아무것도 모른다.</p>
         <figure>
-            <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-12-robinia-pseudoacacia.jpg">
+            <img src="/assets/img/category-daily/220831-12-robinia-pseudoacacia.jpg">
             <figcaption>아까시나무 표본</figcaption>
         </figure>
         <p>보통 아카시아 나무라고 부르는 것들이 사실은 이 식물이라고 들은 적 있는 것 같다. 학명도 잘 읽어보면 슈도아카시아라고 써있다. 이름부터 가짜 아카시아라니 한 존재의 이름으로서는 퍽 유감스러운 작명입니다만 학자들이 다 그렇죠 뭐. 학자들은 감성이 중요한 게 아니거든요. 저건 필요해서 지은 이름이지 예쁘라고 지은 이름이 아니니까 저렇게 불러야 했던 이유가 있을 겁니다.</p>
         <figure>
-            <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-13-na-bang.jpg">
+            <img src="/assets/img/category-daily/220831-13-na-bang.jpg">
             <figcaption>나방 표본 사진</figcaption>
         </figure>
         <p>내가 필요를 못느껴서 안 찍긴 했는데, 이게 바닥에 곤충 표본을 모아서 소용돌이라든가 동심원 같이 모양을 만들어서 전시한 부분에 있던 거라 따로 써있는 이름은 없고 곤충 표본 밑에 같이 꽂는 표본 이름표만 있다. 문제는 그 이름표는 저 나방에 가려서 안 보인다는 거지. 그래도 이름은 대충 안다. 옥색긴꼬리나방 아니야? 이건 전에 다른 박물관에서 본 적 있는데 생긴 게 딱 눈에 들어와서 금방 외웠어. 크기만 작았다면 귀엽다고 생각했을 테지만 저게 살아서 날아다닌다고 생각하면 아무리 때깔이 고와도 나는 피하고 싶어.</p>
         <figure>
-            <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-14-bang-dong-sa-ni.jpg">
+            <img src="/assets/img/category-daily/220831-14-bang-dong-sa-ni.jpg">
             <figcaption>방동사니 모형</figcaption>
         </figure>
         <p>내가 집 근처 강가 걸어다니다가 저렇게 생긴 식물을 몇 번 봤거든. 이름을 몰라서 사진만 찍어뒀던 것 같은데 저게 딱 그 식물이랑 비슷하게 생겨서 이건가 하고 찍어왔다. 근데 아닐 수도 있음.</p>
         <figure>
-            <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-15-plant-eat-beetle.jpg">
+            <img src="/assets/img/category-daily/220831-15-plant-eat-beetle.jpg">
             <figcaption>식식성 풍뎅이류 설명과 한살이 그림</figcaption>
         </figure>
         <p>내가 사는 집 옥상에 500리터들이 노란 수조가 있는데, 거기에 물 대신 흙이 채워져 있어. 매년 그 흙을 뒤적거리면 꼭 저렇게 생긴 굼벵이들이 서너 마리씩 굴러나오더라고. 대체 뭔가 싶었는데 여기 식식성 풍뎅이 설명이랑 한살이 보니까 대충 식식성 풍뎅이 중 하나가 아닐까 싶어서 찍었다. 난 한 번도 성체를 본 적이 없어..</p>
         <figure>
-            <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-16-worm.jpg">
+            <img src="/assets/img/category-daily/220831-16-worm.jpg">
             <figcaption>꽃무지류 유충 모형</figcaption>
         </figure>
         <p>옥상 화분에서 나오는 굼벵이가 딱 저렇게 생기고 저정도 크기야. 근처에 장수풍뎅이 유충 모형도 있었는데 그건 크기가 집에 있는 것보다 컸어.</p>
         <figure>
-            <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-17-leopard-cat.jpg">
+            <img src="/assets/img/category-daily/220831-17-leopard-cat.jpg">
             <figcaption>삵</figcaption>
         </figure>
         <p>삵이 그래도 육식성 포식자인데 너무 애처로운 얼굴과 자세로 박제된 것 같아서 사진 찍었다. 저건 너무 아기 고양이 같잖아. 저 위에 청설모 박제가 있었는데 그게 더 당당했어.</p>
         <figure>
-            <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-18-black-naped-oriole.jpg">
+            <img src="/assets/img/category-daily/220831-18-black-naped-oriole.jpg">
             <figcaption>꾀꼬리</figcaption>
         </figure>
         <p>꾀꼬리가 노란색인 줄은 몰랐다. 신기해서 찍었다.</p>
         <figure>
-            <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-19-marsh-tit.jpg">
+            <img src="/assets/img/category-daily/220831-19-marsh-tit.jpg">
             <figcaption>쇠박새</figcaption>
         </figure>
         <p>가끔 길가다 보면 보이는 참새 정도 크기에 팬더 색깔인 새 이름을 몰라서 팬더 참새라고 불렀는데 이 새인 것 같다.</p>
         <figure>
-            <img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/category-daily/220831-20-great-tit.jpg">
+            <img src="/assets/img/category-daily/220831-20-great-tit.jpg">
             <figcaption>박새</figcaption>
         </figure>
         <p>쇠박새랑 비슷하게 생겼는데 좀 더 크다. 이 새도 내가 이름을 몰라서 부르던 팬더 참새랑 비슷하게 생기긴 했는데 그 새는 아닐 것 같다.</p>

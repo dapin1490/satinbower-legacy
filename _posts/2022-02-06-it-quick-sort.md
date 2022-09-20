@@ -41,7 +41,7 @@ render_with_liquid: false
 글만 보면 아쉽기도 하고, 위키백과에 좋은 이미지가 있어서 가져왔다. 다만 기준 값을 고르는 위치가 내가 뒤에 설명할 예시 코드와는 다르다는 점은 알아둬야 한다. 내 코드는 배열의 중간에 있는 값을 피벗으로 정한다. 이미지는 이해를 돕는 참고용으로만 보자!   
    
 <figure style="text-align:center">
-<img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/categoty-it/220206-1-quick-sort.gif">
+<img src="/assets/img/categoty-it/220206-1-quick-sort.gif">
     <figcaption>[이미지 1] 퀵 정렬 애니메이션, 출처 위키백과</figcaption>
 </figure>  
    

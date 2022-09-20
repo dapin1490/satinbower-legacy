@@ -84,13 +84,13 @@ render_with_liquid: false
 			편향과 분산은 모델이 ‘복잡하게 생긴 정도’와 관련이 있다.<br>
 			아래 이미지는 회귀 모델의 정답(점)과 모델의 학습 결과(선)을 그래프로 나타낸 것이다. 셋 중 가장 나은 모델은 가운데 모델이다. 선이 정답과 가까우므로 편향 양호, 선이 지나치게 구불구불하지 않으니 분산도 양호하다.
 			<figure style="text-align:center">
-				<img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/categoty-it/220523-1-bias-variance.png">
+				<img src="/assets/img/categoty-it/220523-1-bias-variance.png">
 				<figcaption>[이미지 1] 회귀 모델의 편향과 분산에 따른 결과 그림</figcaption>
 			</figure>
 			아래 이미지는 분류 모델을 위와 같은 방식으로 나타낸 것이다.<br>
 			위와 마찬가지로 가운데 모델이 가장 양호하다.
 			<figure style="text-align:center">
-				<img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/categoty-it/220523-2-classify-bias-variance.png">
+				<img src="/assets/img/categoty-it/220523-2-classify-bias-variance.png">
 				<figcaption>[이미지 2] 분류 모델의 편향과 분산에 따른 결과 그림</figcaption>
 			</figure>
 		</li>
@@ -138,7 +138,7 @@ render_with_liquid: false
 		<li><strong>Batch Normalization(배치 정규화)</strong><br>
 			데이터를 모델에 입력하기 전에 정규화를 실행하는 것과 다르다. 모델 내부에서 은닉층의 가중치가 치우치는 것을 막기 위해(아래 [이미지 3]과 같이 되는 것을 막기 위해), 어떤 층에서 다음 층으로 가중치를 넘겨주기 전에 정규화를 하여 가중치의 범위를 제한한다. 케라스의 <em>BatchNormalization</em> 층을 말한다.
 			<figure style="text-align:center">
-				<img src="https://raw.githubusercontent.com/dapin1490/satinbower/main/assets/img/categoty-it/220523-3-batch-normalization.png">
+				<img src="/assets/img/categoty-it/220523-3-batch-normalization.png">
 				<figcaption>[이미지 3] 학습이 진행될수록 가중치가 치우쳐가는 은닉층 그림</figcaption>
 			</figure>
 		</li>
