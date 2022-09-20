@@ -11,6 +11,7 @@ render_with_liquid: false
 	.x-understand { color: #f59908; }
 	.understand { color: #1a9ac1 }
 	.more-study { color: #915ee7 }
+    .comment { color: #828282 }
     .tab { white-space: pre; }
 </style>
 
@@ -97,7 +98,7 @@ render_with_liquid: false
 <br>
 
 ## 원 핫 인코딩
-*<span style="color: #828282">이건.. 그냥 [내가 전에 썼던 블로그 글](https://dapin1490.github.io/satinbower/posts/it-deeplearning-data-1/) 그대로 가져오겠다. 이것까지 새로 찾아볼 기운이 안 나거든요.(사유 : 컨디션 문제)</span>*  
+*<span class="comment">이건.. 그냥 [내가 전에 썼던 블로그 글](https://dapin1490.github.io/satinbower/posts/it-deeplearning-data-1/) 그대로 가져오겠다. 이것까지 새로 찾아볼 기운이 안 나거든요.(사유 : 컨디션 문제)</span>*  
 &#42; 아래 글은 클래스의 원 핫 인코딩에 대해서만 설명하고 있는데, 클래스가 아니라 속성에 원 핫 인코딩을 할 수도 있다. 이 또한 범주형 값일 때 가능하며 `pandas.get_dummies()`를 사용할 수 있다.  
 
 <br>
