@@ -135,10 +135,10 @@ O() 안에 쓰인 식의 계수와 상수항은 전혀 의미가 없고, 무조�
 <br>
 
 # 이진 탐색 트리
-급하게 벼락치기한 글 구경하기 : [[자료구조] 이진 탐색 트리](https://dapin1490.github.io/satinbower/posts/it-data-structure-binary-search-tree/)  
+급하게 벼락치기한 글 구경하기 : <span><a href="https://dapin1490.github.io/satinbower/posts/it-data-structure-binary-search-tree/" target="_blank" title="[자료구조] 이진 탐색 트리">[자료구조] 이진 탐색 트리</a></span>  
   
 ## 이진 탐색 트리의 기본
-[지난 글](https://dapin1490.github.io/satinbower/posts/it-priority-queue-heap/)에서 힙에 대해 공부했다. 이진 탐색 트리는 힙과 달리 서브 트리의 좌우 정렬까지 고려하는 트리이다. 왼쪽의 값이 루트보다 크고, 오른쪽의 값이 루트보다 작다. 간단히 구글에 검색해봤는데, STL 라이브러리는 없고, 직접 구현해야 한다.  
+<span><a href="https://dapin1490.github.io/satinbower/posts/it-priority-queue-heap/" target="_blank" title="[자료구조] 우선순위 큐와 힙">지난 글</a></span>에서 힙에 대해 공부했다. 이진 탐색 트리는 힙과 달리 서브 트리의 좌우 정렬까지 고려하는 트리이다. 왼쪽의 값이 루트보다 크고, 오른쪽의 값이 루트보다 작다. 간단히 구글에 검색해봤는데, STL 라이브러리는 없고, 직접 구현해야 한다.  
   
 ## 이진 탐색 트리 설계 및 구현
 **코드 출처 : 교수님**  
@@ -155,8 +155,8 @@ O() 안에 쓰인 식의 계수와 상수항은 전혀 의미가 없고, 무조�
 &#42; 웬만한 설명은 다 주석과 출력문에 있다. 코드를 읽기만 해서는 아무리 봐도 이해가 잘 안 돼서 출력문을 잔뜩 추가하고 트리 그림까지 그려봤다. 적어도 어떻게 일이 돌아가는지는 알게 되었다. 출력문 자세히 썼으니 궁금하면 복사해서 직접 디버깅해보자.  
   
 코드가 길어 링크로 첨부한다.  
-[깃허브에서 보기](https://github.com/dapin1490/satinbower/tree/main/assets/files/code/BSTexample.cpp)  
-[코드 실행 결과 함께 보기](https://ideone.com/ORGQ01)  
+<span><a href="https://github.com/dapin1490/satinbower/tree/main/assets/files/code/BSTexample.cpp" target="_blank" title="BSTexample.cpp">깃허브에서 보기</a></span>  
+<span><a href="https://ideone.com/ORGQ01" target="_blank" title="BSTexample.cpp 실행 결과 보기">코드 실행 결과 보기</a></span>  
   
 ## 이진 탐색 트리의 효율적인 탐색
 이진 탐색 트리는 그것이 필요한 상황이라는 전제 하에, 특정 값에 대한 연산에는 효율적이다. 하지만 특정 범위에 대한 연산은 어떨까? 예를 들어 위의 예제 코드로 만들어진 트리에서 10보다 큰 값을 개수를 세고 싶다면 어떻게 해야 할까? 교수님은 맛있는 휘낭시에를 걸고 이 문제를 퀴즈로 내셨지만 아무도 시간 내에 맞히지 못했다(*<span class="x-understand">교수님이 주신 시간이 너무 적었다!</span>*).  
@@ -174,8 +174,8 @@ O() 안에 쓰인 식의 계수와 상수항은 전혀 의미가 없고, 무조�
 재귀로 구현된 삭제 메소드를 반복으로 바꾸겠다고 한참을 내 마음대로 움직여주지 않는 포인터와 기싸움을 하다가 이건 내 수준에는 이해할 수 없는 문제라고 생각해(구글에 뭐라고 검색해야 하는지도 모름) 방법을 바꿨다. private로 정의된 삭제 메소드는 그대로 두고, public로 정의된 삭제 메소드를 건드렸다. 약간의 과정이 중복하여 수행되는 점을 감수하고 private 삭제 메소드를 호출하기 전에 몇 가지 과정을 추가했다. 추가라고 말은 했지만, 순서를 바꾼 것이기도 하다. 자세한 것은 아래 코드로 확인하자.  
   
 코드가 너무 길어서 링크로 첨부한다.  
-[깃허브에서 보기](https://github.com/dapin1490/satinbower/tree/main/assets/files/code/countBST.cpp)  
-[코드 실행 결과 함께 보기](https://ideone.com/7FMgZ9)  
+<span><a href="https://github.com/dapin1490/satinbower/tree/main/assets/files/code/countBST.cpp" target="_blank" title="countBST.cpp">깃허브에서 보기</a></span>  
+<span><a href="https://ideone.com/7FMgZ9" target="_blank" title="countBST.cpp 실행 결과 보기">코드 실행 결과 보기</a></span>  
   
 # 문제 풀기
 
@@ -193,4 +193,4 @@ O() 안에 쓰인 식의 계수와 상수항은 전혀 의미가 없고, 무조�
 # 참고 자료
 1. 『C++로 쉽게 풀어쓴 자료구조』, 천인국ㆍ최영규 지음, 생능 출판사
 2. 『코딩 테스트를 위한 자료 구조와 알고리즘 with C++』, 존 캐리ㆍ셰리안 도시ㆍ파야스 라잔 지음, 황선규 옮김, 길벗 출판사
-3. [[자료구조] 이진탐색트리 (Binary Search Tree)](https://suyeon96.tistory.com/30)
+3. <span><a href="https://suyeon96.tistory.com/30" target="_blank" title="Suyeon's Blog - 호기심 많은 개발자의 기록">[자료구조] 이진탐색트리 (Binary Search Tree)</a></span>
