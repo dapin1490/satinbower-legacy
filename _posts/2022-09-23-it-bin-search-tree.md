@@ -31,7 +31,7 @@ LeetCode (ex. https://leetcode.com/problems/validate-binary-search-tree/) 문제
 ## 차례
 1. Big-O와 여러 가지 예시
 2. 이진 탐색 트리(BST), BST의 효율적인 탐색 방법
-3. 문제 풀기(링크 첨부)
+3. 문제 풀기 → 준비 중
   
 <br>
 <hr>
@@ -52,7 +52,8 @@ LeetCode (ex. https://leetcode.com/problems/validate-binary-search-tree/) 문제
 입력의 크기 n이 작을 때는 수행 시간의 상승폭이 크지만, n이 커질수록 수행 시간의 상승폭은 줄어든다. 컴퓨터 사이언스에서 log는 기본적으로 밑을 2로 갖는다고 한다(출처 : 교수님 설명).  
   
 ### O(n)  
-선형 증가. 입력의 모든 요소를 한번씩 확인해야 하는 경우가 이에 해당한다. 예를 들면 정렬되지 않은 배열에서 최댓값 찾기, 배열의 모든 요소의 합 구하기 등이 있다. 시간 복잡도가 이정도만 나와도 준수한 알고리즘이다(출처 : 교수님 설명, 이하 '교수님'으로 표기).  
+선형 증가. 입력의 모든 요소를 한번씩 확인해야 하는 경우가 이에 해당한다. 예를 들면 정렬되지 않은 배열에서 최댓값 찾기, 배열의 모든 요소의 합 구하기 등이 있다.  
+시간 복잡도가 이정도만 나와도 준수한 알고리즘이다(출처 : 교수님 설명, 이하 '교수님'으로 표기).  
   
 ### O(nlogn)
 `n ⅹ logn`이다. 여기까지도 괜찮은 알고리즘이다(교수님).  
@@ -151,184 +152,30 @@ O() 안에 쓰인 식의 계수와 상수항은 전혀 의미가 없고, 무조�
 자료형은 노드가 다 알아서 한다. 트리 클래스는 루트 관리, 삽입, 삭제, 탐색 등을 한다.  
   
 ### 전체 구현 코드 보기
-&#42; 웬만한 설명은 다 주석과 출력문에 있다. 코드를 읽기만 해서는 아무리 봐도 이해가 잘 안 돼서 출력문을 잔뜩 추가하고 트리 그림까지 그려봤다. 적어도 어떻게 일이 돌아가는지는 알게 되었다. 출력문 자세히 썼으니 궁금하면 복사해서 직접 실행해보셔라.  
-
-```cpp
-#include <iostream>
-#include <string>
-using namespace std;
-
-class node {
-public:
-	int data;
-	node* left;
-	node* right;
-};
-
-class bst {
-private:
-	node* find_impl(node* current, int value) { // private 탐색 메소드
-		if (!current) { // 현재 탐색하는 노드가 NULL인 경우
-			cout << "No matching value found for " << value << ".\n";
-			return NULL;
-		}
-
-		if (current->data == value) { // 원하는 값 찾음
-			cout << value << " has been found.\n";
-			return current;
-		}
-
-		if (value < current->data) { // 원하는 값이 더 작음
-			cout << "current is " << current->data << ". pointer moved to left.\n";
-			return find_impl(current->left, value); // 왼쪽 서브트리로 이동
-		}
-
-		// 위의 모든 선택문을 패스했다면 원하는 값이 더 큰 경우임
-		cout << "current is " << current->data << ". pointer moved to right.\n";
-		return find_impl(current->right, value); // 오른쪽 서브트리로 이동
-	}
-
-	void insert_impl(node* current, int value) { // private 삽입 메소드
-		if (value < current->data) { // 삽입할 값이 현재 탐색하는 노드보다 작음
-			if (!current->left) { // 왼쪽 서브트리 없음
-				current->left = new node{ value, NULL, NULL }; // 바로 붙임
-				cout << "current is " << current->data << ", " << value << " is inserted left\n";
-			}
-			else // 왼쪽 서브트리 있음
-				insert_impl(current->left, value); // 왼쪽 서브트리에 삽입 메소드 다시 호출
-		}
-		else { // else: 삽입할 값이 현재 탐색하는 노드보다 크거나 같음
-			if (!current->right) { // 오른쪽 서브트리 없음
-				current->right = new node{ value, NULL, NULL }; // 바로 붙임
-				cout << "current is " << current->data << ", " << value << " is inserted right\n";
-			}
-			else // else: 오른쪽 서브트리 있음
-				insert_impl(current->right, value); //오른쪽 서브트리에 삽입 메소드 다시 호출
-		}
-	}
-
-	void inorder_impl(node* start) { // private 중위순회(LDR) 메소드
-		if (!start) // 현재 탐색중인 노드가 NULL
-			return; // 돌아감
-
-		inorder_impl(start->left); // L: 왼쪽 서브트리 순회 호출
-		cout << start->data << " "; // D: 현재 노드 데이터 출력
-		inorder_impl(start->right); // R: 오른쪽 서브트리 순회 호출
-	}
-
-	node* delete_impl(node* start, int value) { // private 특정 값 삭제 메소드
-		cout << "current node is " << (start ? to_string(start->data) : "NULL") << ".\n";
-
-		if (!start) { // 현재 노드가 NULL
-			cout << "No value matches " << value << ".\n";
-			return NULL; // 삭제한 노드 없음, NULL 반환
-		}
-
-		if (value < start->data) // 삭제할 값이 현재 노드보다 작음
-			start->left = delete_impl(start->left, value); // 왼쪽 서브트리에 삭제 메소드 다시 호출
-		else if (value > start->data) // else if: 삭제할 값이 현재 노드보다 큼
-			start->right = delete_impl(start->right, value); // 오른쪽 서브트리에 삭제 메소드 다시 호출
-		else { // else: 삭제할 값이 현재 노드와 같음
-			if (!start->left) { // 왼쪽 서브트리가 없음
-				cout << "there is no left subtree. bring the right subtree.\n";
-				auto tmp = start->right; // 현재 노드의 오른쪽 서브트리를 가져옴
-				cout << "delete " << value << ".\n";
-				delete start; // 현재 노드를 지움
-				return tmp; // 아까 가져온 오른쪽 서브트리 반환
-			}
-
-			if (!start->right) { // 오른쪽 서브트리가 없음
-				cout << "there is no right subtree. bring the left subtree.\n";
-				auto tmp = start->left; // 현재 노드의 왼쪽 서브트리 가져옴
-				cout << "delete " << value << ".\n";
-				delete start; // 현재 노드를 지움
-				return tmp; // 아까 가져온 왼쪽 서브트리 반환
-			}
-
-			cout << "there are both subtrees. need successor.\n";
-			auto succNode = successor(start); // 후계자 반환 메소드 호출
-			start->data = succNode->data; // 현재 노드의 값을 후계자의 값으로 대체
-			start->right = delete_impl(start->right, succNode->data); // 아까 가져온 후계자의 원래 노드 삭제
-		}
-
-		return start;
-	}
-
-public:
-	node* root = nullptr;
-
-	node* find(int value) { // 특정 값 탐색 메소드
-		return find_impl(root, value); // 따로 구현된 private 탐색 메소드 호출
-	}
-
-	void insert(int value) { // 삽입 메소드
-		if (!root) { // 루트가 비어있다면
-			root = new node{ value, NULL, NULL }; // 로트에 바로 넣음
-			cout << value << " is inserted into root\n";
-		}
-		else // else: 루트가 비어있지 않다면
-			insert_impl(root, value); // 따로 구현된 private 삽입 메소드 호출
-	}
-
-	void inorder() { // 중위순회 메소드
-		inorder_impl(root); // 호출
-	}
-
-	node* successor(node* start) { // 후계자 반환 메소드
-		auto current = start->right; // 현재 노드의 오른쪽 서브트리 가져옴
-
-		while (current && current->left) // 지금 갖고있는 노드와 그 노드의 왼쪽 서브트리가 모두 존재하는 동안 반복
-			current = current->left; // 왼쪽 서브트리로 이동
-
-		cout << "successor is " << (current ? to_string(current->data) : "NULL") << ".\n";
-		return current; // 결과: 오른쪽 서브트리 왼쪽 맨 아래 리프노드 반환
-	}
-
-	void deleteValue(int value) { // 특정 값 삭제
-		root = delete_impl(root, value); // 호출
-	}
-};
-
-int main()
-{
-	bst tree;
-
-	tree.insert(12);
-	tree.insert(10);
-	tree.insert(20);
-	tree.insert(8);
-	tree.insert(11);
-	tree.insert(11);
-	tree.insert(15);
-	tree.insert(28);
-	tree.insert(4);
-	tree.insert(2);
-	tree.insert(27);
-
-	cout << "Inorder Traversal: ";
-	tree.inorder();
-	cout << "\n";
-
-	tree.deleteValue(12);
-	cout << "Delete 12 and Do Inorder Traversal: ";
-	tree.inorder();
-	cout << "\n";
-
-	if (tree.find(12))
-		cout << "Value 12 is in the tree.\n";
-	else
-		cout << "Value 12 is not in the tree.\n";
-
-	tree.deleteValue(11);
-	tree.deleteValue(4);
-	tree.deleteValue(0);
-	tree.inorder();
-}
-```  
+&#42; 웬만한 설명은 다 주석과 출력문에 있다. 코드를 읽기만 해서는 아무리 봐도 이해가 잘 안 돼서 출력문을 잔뜩 추가하고 트리 그림까지 그려봤다. 적어도 어떻게 일이 돌아가는지는 알게 되었다. 출력문 자세히 썼으니 궁금하면 복사해서 직접 디버깅해보자.  
+  
+코드가 길어 링크로 첨부한다.  
+[깃허브에서 보기](https://github.com/dapin1490/satinbower/tree/main/assets/files/code/BSTexample.cpp)  
+[코드 실행 결과 함께 보기](https://ideone.com/ORGQ01)  
   
 ## 이진 탐색 트리의 효율적인 탐색
 이진 탐색 트리는 그것이 필요한 상황이라는 전제 하에, 특정 값에 대한 연산에는 효율적이다. 하지만 특정 범위에 대한 연산은 어떨까? 예를 들어 위의 예제 코드로 만들어진 트리에서 10보다 큰 값을 개수를 세고 싶다면 어떻게 해야 할까? 교수님은 맛있는 휘낭시에를 걸고 이 문제를 퀴즈로 내셨지만 아무도 시간 내에 맞히지 못했다(*<span class="x-understand">교수님이 주신 시간이 너무 적었다!</span>*).  
-교수님이 직접 공개한 정답은 각 노드에 자기 자신을 포함한 자식 노드의 수를 따로 기록하는 것이었다. 교수님의 코드를 개조해서 직접 구현해보고자 했지만 삭제 연산을 제대로 구현하지 못해 실패했다. 우선은 예시 코드에 재귀로 사용된 각종 탐색 메소드부터 반복으로 바꾸고 나서 생각해봐야 할 것 같다. 미래의 제게 맡기겠습니다.  
+교수님이 직접 공개한 정답은 각 노드에 자기 자신을 포함한 자식 노드의 수를 따로 기록하는 것이었다. ~~교수님의 코드를 개조해서 직접 구현해보고자 했지만 삭제 연산을 제대로 구현하지 못해 실패했다. 우선은 예시 코드에 재귀로 사용된 각종 탐색 메소드부터 반복으로 바꾸고 나서 생각해봐야 할 것 같다. 미래의 제게 맡기겠습니다.~~  
+  
+글을 순서대로 정독했다면 알겠지만 위에서도 잠깐 언급이 된 내용이었다. 다시 한 번 보자.
+> 각 노드에 자기 자신을 포함한 자손 노드의 개수를 같이 저장한다. <br> 원하는 값을 찾을 때까지 내려가면서 <br> (1) 자기 자신보다 작거나 같으면 or 크거나 같으면 +1, <br> (2) 해당 노드의 왼쪽 or 오른쪽 자손 노드의 개수도 더한다. <br> 원하는 노드를 찾으면 해당 노드의 개수를 세고 끝낸다.  
+  
+해야 할 일은 다음과 같다
+1. 노드 클래스에 카운트 변수 추가하고, 적절한 메소드 구현하기(카운트 반환, 카운트 증감)
+2. 트리 클래스의 삽입, 삭제 연산에서 카운트도 같이 조작할 수 있도록 메소드 수정하기
+3. 특정 값보다 크거나 작은 요소의 개수 세는 메소드 구현하기 → 만드는 사람 마음이니까 '크거나 같은', '작거나 같은' 요소의 수를 세어도 된다. 나는 등호를 포함하지 않았다.
+  
+삽입 메소드 수정은 노드가 지나는 길 따라 카운트만 건드리고 가면 되니까 금방 했고 가장 어려웠던 건 삭제 메소드 수정이었다. 삭제해야 할 노드가 양쪽 서브트리를 모두 갖는 경우, 대신 삭제될 후계 노드를 선정해야 한다. 이 부분을 포함해 삭제 메소드 전체가 재귀로 구현되었고, 나는 이것을 반복 형태로 수정하지 못했다. 그렇기 때문에 삭제 메소드 내에서는 노드의 카운트를 올바르게 수정할 수가 없었다.  
+재귀로 구현된 삭제 메소드를 반복으로 바꾸겠다고 한참을 내 마음대로 움직여주지 않는 포인터와 기싸움을 하다가 이건 내 수준에는 이해할 수 없는 문제라고 생각해(구글에 뭐라고 검색해야 하는지도 모름) 방법을 바꿨다. private로 정의된 삭제 메소드는 그대로 두고, public로 정의된 삭제 메소드를 건드렸다. 약간의 과정이 중복하여 수행되는 점을 감수하고 private 삭제 메소드를 호출하기 전에 몇 가지 과정을 추가했다. 추가라고 말은 했지만, 순서를 바꾼 것이기도 하다. 자세한 것은 아래 코드로 확인하자.  
+  
+코드가 너무 길어서 링크로 첨부한다.  
+[깃허브에서 보기](https://github.com/dapin1490/satinbower/tree/main/assets/files/code/countBST.cpp)  
+[코드 실행 결과 함께 보기](https://ideone.com/7FMgZ9)  
   
 # 문제 풀기
 
@@ -346,3 +193,4 @@ int main()
 # 참고 자료
 1. 『C++로 쉽게 풀어쓴 자료구조』, 천인국ㆍ최영규 지음, 생능 출판사
 2. 『코딩 테스트를 위한 자료 구조와 알고리즘 with C++』, 존 캐리ㆍ셰리안 도시ㆍ파야스 라잔 지음, 황선규 옮김, 길벗 출판사
+3. [[자료구조] 이진탐색트리 (Binary Search Tree)](https://suyeon96.tistory.com/30)
