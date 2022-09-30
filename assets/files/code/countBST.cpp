@@ -29,9 +29,6 @@ public:
 	void downcnt() { cnt -= 1; }
 	void setData(int d) { data = d; }
 
-	void delLeft() { left = NULL; }
-	void delRight() { right = NULL; }
-
 	bool isLeaf() { return left == nullptr && right == nullptr; }
 };
 
