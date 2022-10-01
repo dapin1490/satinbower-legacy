@@ -61,7 +61,7 @@ private:
 
 	void insert_impl(node* current, int value) { // private 삽입 메소드
 		while (true) {
-			current->upcnt();
+			current->upcnt(); // 노드가 삽입되는 경로를 따라 카운트 증가
 
 			if (value < current->getData()) { // 삽입할 값이 현재 탐색하는 노드보다 작음
 				if (current->getLeft() == nullptr) { // 왼쪽 서브트리 없음
@@ -123,11 +123,6 @@ private:
 				delete start; // 현재 노드를 지움
 				return tmp; // 아까 가져온 왼쪽 서브트리 반환
 			}
-
-			cout << "there are both subtrees. need successor.\n";
-			auto succNode = successor(start); // 후계자 반환 메소드 호출
-			start->setData(succNode->getData()); // 현재 노드의 값을 후계자의 값으로 대체
-			start->setRight(delete_impl(start->getRight(), succNode->getData())); // 아까 가져온 후계자의 원래 노드 삭제
 		}
 
 		return start;
@@ -207,13 +202,19 @@ public:
 
 	void deleteValue(int value) { // 특정 값 삭제
 		node* del_node = find(value); // 삭제할 노드 찾기
+		node* succ;
 
 		if (del_node != NULL) { // 삭제할 노드가 있다면
-			if (del_node->getLeft() != NULL && del_node->getRight() != NULL) { // 후계자 필요 여부 확인
-				del_node = successor(del_node); // 필요시 후계 선정
+			if (del_node->getLeft() != NULL && del_node->getRight() != NULL) { // 후계 필요
+				succ = successor(del_node); // 후계 선정
+				recount(succ); // 노드 삭제를 위해 누적 노드 개수를 수정하는 메소드
+				del_node->setData(succ->getData()); // 삭제할 노드의 데이터를 후계의 데이터로 대체
+				root->setRight(delete_impl(root->getRight(), succ->getData())); // 후계 노드 삭제
 			}
-			recount(del_node); // 노드 삭제를 위해 누적 노드 개수를 수정하는 메소드
-			delete_impl(root, value); // private 삭제 메소드 호출
+			else { // 후계 필요 없음
+				recount(del_node); // 노드 삭제를 위해 누적 노드 개수를 수정하는 메소드
+				root = delete_impl(root, value); // private 삭제 메소드 호출
+			}
 		}
 		else { // 삭제할 노드가 없음
 			cout << "delete error: No value matches " << value << ".\n";
@@ -227,7 +228,7 @@ public:
 
 		while (true) { // 반복 탐색
 			cout << "current value is " << (current != NULL ? to_string(current->getData()) : "NULL") << "\n";
-			
+
 			if (current == NULL) // 더 탐색할 노드가 없음
 				break; // 반복 종료
 
@@ -302,6 +303,7 @@ int main()
 {
 	bst tree;
 	int tmp = 11;
+	int tmp_res;
 
 	tree.insert(12);
 	tree.insert(10);
@@ -314,9 +316,14 @@ int main()
 	tree.insert(4);
 	tree.insert(2);
 	tree.insert(27);
+	cout << "\n";
 
-	cout << "count value greater than " << tmp << " : " << tree.countGreater(tmp) << "\n";
-	cout << "count value lesser than " << tmp << " : " << tree.countLesser(tmp) << "\n";
+	tmp_res = tree.countGreater(tmp);
+	cout << "count value greater than " << tmp << " : " << tmp_res << "\n";
+	cout << "\n";
+	tmp_res = tree.countLesser(tmp);
+	cout << "count value lesser than " << tmp << " : " << tmp_res << "\n";
+	cout << "\n";
 
 	cout << "Inorder Traversal: ";
 	tree.inorder();
@@ -331,6 +338,7 @@ int main()
 		cout << "Value 12 is in the tree.\n";
 	else
 		cout << "Value 12 is not in the tree.\n";
+	cout << "\n";
 
 	tree.deleteValue(11);
 	tree.deleteValue(4);
