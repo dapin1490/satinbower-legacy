@@ -175,7 +175,7 @@ O() 안에 쓰인 식의 계수와 상수항은 전혀 의미가 없고, 무조�
   
 코드가 너무 길어서 링크로 첨부한다.  
 <span><a href="https://github.com/dapin1490/satinbower/tree/main/assets/files/code/countBST.cpp" target="_blank" title="countBST.cpp">깃허브에서 보기</a></span>  
-<span><a href="https://ideone.com/7FMgZ9" target="_blank" title="countBST.cpp 실행 결과 보기">코드 실행 결과 보기</a></span>  
+<span><a href="https://ideone.com/PCGu4u" target="_blank" title="countBST.cpp 실행 결과 보기">코드 실행 결과 보기</a></span>  
   
 # 문제 풀기
 
