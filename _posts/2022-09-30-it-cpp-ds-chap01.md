@@ -79,7 +79,7 @@ render_with_liquid: false
   
 ### 알고리즘의 복잡도 분석 방법
 이 부분에 대해서는 다음 글을 참고하자.  
-&lbrack;자료구조&rbrack; Big-O와 이진 탐색 트리 <a href="https://dapin1490.github.io/satinbower/posts/it-bin-search-tree/" target="_blank">https://dapin1490.github.io/satinbower/posts/it-bin-search-tree/</a>  
+&#91;자료구조&#93; Big-O와 이진 탐색 트리 <a href="https://dapin1490.github.io/satinbower/posts/it-bin-search-tree/" target="_blank">https://dapin1490.github.io/satinbower/posts/it-bin-search-tree/</a>  
   
 ## 1.5 자료구조 표기법
   
