@@ -42,7 +42,10 @@ https://leetcode.com/problems/balanced-binary-tree/
       <li>Rank 메소드</li>
     </ol>
   </li>
-</ol>
+</ol>  
+  
+## 다음 글
+<a href="https://dapin1490.github.io/satinbower/posts/it-avl-tree/" target="_blank">[자료구조] 균형 이진 트리, AVL 트리</a>  
 
 <br>
 <hr>

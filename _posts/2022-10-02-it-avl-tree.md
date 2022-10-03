@@ -69,7 +69,11 @@ AVL 트리에 새 요소를 삽입할 때는 통상의 트리 삽입과 같은 �
 삽입 및 삭제의 과정은 참고자료 <a id="body-cite-02" href="#ref-cite-02" title="AVL Tree | Set 1 (Insertion)">[2]</a>, <a id="body-cite-03" href="#ref-cite-03" title="AVL Tree | Set 2 (Deletion)">[3]</a>을 참고하여 서술했다.  
   
 ## 회전 연산
-AVL 트리에서 사용하는 회전 연산은 네 가지 유형이 있다.
+AVL 트리에서 사용하는 회전 연산은 네 가지 유형이 있다.  
+  
+`----------------------------------------------`  
+
+혹시나 내가 글을 완성하지 못할 때를 대비해 써둡니다. 코로나 의심 증상이 있어서 검사도 받고 하루 쉬느라 글을 완성하지 못했습니다. 이상 변명 끝.  
   
 
 
@@ -79,10 +83,3 @@ AVL 트리에서 사용하는 회전 연산은 네 가지 유형이 있다.
 [<a id="ref-cite-01" href="#body-cite-01">1</a>] 『C++로 쉽게 풀어쓴 자료구조』, 천인국ㆍ최영규 지음, 생능 출판사  
 [<a id="ref-cite-02" href="#body-cite-02" title="">2</a>] AVL Tree &#124; Set 1 (Insertion), <a href="https://www.geeksforgeeks.org/avl-tree-set-1-insertion/">https://www.geeksforgeeks.org/avl-tree-set-1-insertion/</a>  
 [<a id="ref-cite-03" href="#body-cite-03" title="">3</a>] AVL Tree &#124; Set 2 (Deletion), <a href="https://www.geeksforgeeks.org/avl-tree-set-2-deletion/">https://www.geeksforgeeks.org/avl-tree-set-2-deletion/</a>
-
-
-
-
-
-
-<sup><a id="" href="" title=""></a></sup>
