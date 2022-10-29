@@ -527,8 +527,13 @@ layout: null
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://dapin1490.github.io/satinbower/posts/it-info-retrieve/</loc>
+  <loc>https://dapin1490.github.io/satinbower/posts/it-info-retrieve-mid/</loc>
   <lastmod>2022-10-16T20:39:00+09:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://dapin1490.github.io/satinbower/posts/it-dst-project-plan/</loc>
+  <lastmod>2022-10-29T12:38:00+09:00</lastmod>
   <priority>0.64</priority>
 </url>
 
