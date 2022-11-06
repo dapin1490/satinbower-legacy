@@ -264,5 +264,5 @@ void Graph::DFS_by_iteration(int start_key) { // 루트(시작점)에서 시작
 [<a id="" href="" title="">4</a>] C++에서 현재 시간 및 날짜 가져오기, <a href="https://www.techiedelight.com/ko/get-current-time-and-date-in-cpp/" target="_blank">https://www.techiedelight.com/ko/get-current-time-and-date-in-cpp/</a>  
 [<a id="" href="" title="">5</a>] C++ - localtime_s 사용 예, <a href="https://jacking75.github.io/C++_localtime_s/" target="_blank">https://jacking75.github.io/C++_localtime_s/</a>  
 [<a id="" href="" title="">6</a>] #pragma once 가 모든 문제를 해결해주진 않는다, <a href="https://teus.me/819" target="_blank">https://teus.me/819</a>  
-[<a id="" href="" title="">7</a>] [C언어][헤더 파일 중복 방지] #pragma once, #ifndef, <a href="https://blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=white_cap&logNo=221002699804" target="_blank">https://blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=white_cap&logNo=221002699804</a>  
-[<a id="" href="" title="">8</a>] [C, C++] #include <헤더파일>과 #include "헤더파일"의 차이, <a href="https://shjz.tistory.com/97" target="_blank">https://shjz.tistory.com/97</a>  
+[<a id="" href="" title="">7</a>] &#91;C언어&#93;&#91;헤더 파일 중복 방지&#93; #pragma once, #ifndef, <a href="https://blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=white_cap&logNo=221002699804" target="_blank">https://blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=white_cap&logNo=221002699804</a>  
+[<a id="" href="" title="">8</a>] &#91;C, C++&#93; #include &lt;헤더파일&gt;과 #include "헤더파일"의 차이, <a href="https://shjz.tistory.com/97" target="_blank">https://shjz.tistory.com/97</a>  
