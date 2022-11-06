@@ -61,7 +61,7 @@ DFS 관련 문제는 금일 시간 관계 상 다루지 못하였기 때문에 �
 그래프의 예시는 아래와 같다. 이후에 BFS와 DFS를 설명할 때에도 사용할 그래프이니 잘 봐두자.  
 
 <figure id="img-01">
-	<img src="assets/img/categoty-it/221106-1-graph.jpg">
+	<img src="/assets/img/categoty-it/221106-1-graph.jpg">
 	<figcaption>[이미지 1] 그래프 예시</figcaption>
 </figure>
   
@@ -99,7 +99,7 @@ BFS는 Breadth First Search의 약자로 너비 우선 탐색이라고 한다. �
 [<a href="#img-01">이미지 1</a>]의 그래프를 위와 같은 과정으로 탐색하면 방문하는 노드의 순서는 `{ 1, 2, 3, 4, 5, 6, 7, 8, 9 }`이다. 그림으로 그리면 아래와 같다. 노란색, 초록색, 파란색 곡선 내에 있는 정점을 순서대로 방문하고 마지막엔 파란색 곡선 밖에 있는 정점까지 방문한다.  
 
 <figure id="img-02">
-	<img src="assets/img/categoty-it/221106-2-graph.jpg">
+	<img src="/assets/img/categoty-it/221106-2-graph.jpg">
 	<figcaption>[이미지 2] BFS 예시</figcaption>
 </figure>
 
@@ -192,7 +192,7 @@ DFS는 Depth First Search의 약자로 깊이 우선 탐색이라고 한다. 특
 [<a href="#img-01">이미지 1</a>]의 그래프를 위와 같은 과정으로 탐색하면 방문하는 노드의 순서는 `{ 1, 3, 6, 9, 8, 5, 2, 4, 7 }`이다. 그림으로 그리면 아래와 같다. 노란색, 초록색, 파란색, 보라색 영역 내에 있는 정점을 순서대로 방문한다.  
 
 <figure id="img-03">
-	<img src="assets/img/categoty-it/221106-3-graph.jpg">
+	<img src="/assets/img/categoty-it/221106-3-graph.jpg">
 	<figcaption>[이미지 3] DFS 예시</figcaption>
 </figure>
 
