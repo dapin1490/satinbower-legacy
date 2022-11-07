@@ -49,6 +49,7 @@ DFS 관련 문제는 금일 시간 관계 상 다루지 못하였기 때문에 �
 1. 그래프
 2. BFS 알고리즘과 코드
 3. DFS 알고리즘과 코드 - 미완성
+4. BFS와 DFS의 시각적 비교
   
 ## 그래프
 
@@ -257,12 +258,32 @@ void Graph::DFS_by_iteration(int start_key) { // 루트(시작점)에서 시작
 }
 ```
   
+## BFS와 DFS의 시각적 비교
+  
+지금까지 하나의 그래프를 BFS와 DFS로 탐색하며 두 알고리즘의 개념을 익혔다. 그렇지만 아무래도 두 개념은 헷갈리기가 쉽다. 그래서 위에서 사용한 두 알고리즘의 탐색 순서를 색깔로 표현한 이미지를 같이 붙여보았다. 왼쪽이 BFS, 오른쪽이 DFS이다. 그림의 가로 세로 방향보다는, 노란색으로 칠해진 시작점을 기준으로 어떻게 나아가는지를 보면 좋다. 시작점으로부터 짧게 겹겹이 나아가는 것이 BFS, 길고 깊게 나아가는 것이 DFS이다. 두 이미지 모두 탐색은 `노란색 → 초록색 → 파란색 → 보라색` 순서로 진행한다.  
+  
+<div style="text-align:center">
+    <div style="width:50%; float:left">
+        <figure>
+        <img src="/assets/img/categoty-it/221106-2-graph.jpg">
+            <figcaption style="text-align:center">[이미지 2] BFS 예시</figcaption>
+        </figure>
+    </div>
+    <div style="width:50%; float:left">
+        <figure>
+        <img src="/assets/img/categoty-it/221106-3-graph.jpg">
+            <figcaption style="text-align:center">[이미지 3] DFS 예시</figcaption>
+        </figure>
+    </div>
+</div>
+  
+  
 ## 참고 자료
 [<a id="tail-ref-01" href="#body-ref-01">1</a>] 『4차 산업혁명 시대의 이산수학』, 김대수 지음, 생능출판  
 [<a id="tail-ref-02" href="#body-ref-02" title="">2</a>] DFS / BFS 예제 구현해보기 - python, <a href="https://nareunhagae.tistory.com/17" target="_blank">https://nareunhagae.tistory.com/17</a>  
-[<a id="" href="" title="">3</a>] C++ 파일 읽기/쓰기(C++ File Read/Write Example), <a href="https://jdm.kr/blog/170" target="_blank">https://jdm.kr/blog/170</a>  
-[<a id="" href="" title="">4</a>] C++에서 현재 시간 및 날짜 가져오기, <a href="https://www.techiedelight.com/ko/get-current-time-and-date-in-cpp/" target="_blank">https://www.techiedelight.com/ko/get-current-time-and-date-in-cpp/</a>  
-[<a id="" href="" title="">5</a>] C++ - localtime_s 사용 예, <a href="https://jacking75.github.io/C++_localtime_s/" target="_blank">https://jacking75.github.io/C++_localtime_s/</a>  
-[<a id="" href="" title="">6</a>] #pragma once 가 모든 문제를 해결해주진 않는다, <a href="https://teus.me/819" target="_blank">https://teus.me/819</a>  
-[<a id="" href="" title="">7</a>] &#91;C언어&#93;&#91;헤더 파일 중복 방지&#93; #pragma once, #ifndef, <a href="https://blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=white_cap&logNo=221002699804" target="_blank">https://blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=white_cap&logNo=221002699804</a>  
-[<a id="" href="" title="">8</a>] &#91;C, C++&#93; #include &lt;헤더파일&gt;과 #include "헤더파일"의 차이, <a href="https://shjz.tistory.com/97" target="_blank">https://shjz.tistory.com/97</a>  
+&#91;3&#93; C++ 파일 읽기/쓰기(C++ File Read/Write Example), <a href="https://jdm.kr/blog/170" target="_blank">https://jdm.kr/blog/170</a>  
+&#91;4&#93; C++에서 현재 시간 및 날짜 가져오기, <a href="https://www.techiedelight.com/ko/get-current-time-and-date-in-cpp/" target="_blank">https://www.techiedelight.com/ko/get-current-time-and-date-in-cpp/</a>  
+&#91;5&#93; C++ - localtime_s 사용 예, <a href="https://jacking75.github.io/C++_localtime_s/" target="_blank">https://jacking75.github.io/C++_localtime_s/</a>  
+&#91;6&#93; #pragma once 가 모든 문제를 해결해주진 않는다, <a href="https://teus.me/819" target="_blank">https://teus.me/819</a>  
+&#91;7&#93; &#91;C언어&#93;&#91;헤더 파일 중복 방지&#93; #pragma once, #ifndef, <a href="https://blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=white_cap&logNo=221002699804" target="_blank">https://blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=white_cap&logNo=221002699804</a>  
+&#91;8&#93; &#91;C, C++&#93; #include &lt;헤더파일&gt;과 #include "헤더파일"의 차이, <a href="https://shjz.tistory.com/97" target="_blank">https://shjz.tistory.com/97</a>  
