@@ -79,13 +79,13 @@ render_with_liquid: false
 - 척추(33개) : 경추(7), 흉추(12), 요추(5), 천추(5 in 1), 미추(3~4 in 1). 각 뼈는 척추 원판에 의해 분리된다. 목이 아무리 길든 짧든 포유류의 경추는 7개로 일정하다.  
 
     <div style="text-align:center;">
-        <div style="width:40%; float:left; margin: 1em;">
+        <div style="width:35%; float:left; margin: 1em;">
             <figure>
             <img src="/assets/img/category-knowledge/221113-1-vertebral-column.jpg">
                 <figcaption style="text-align:center">[이미지 1] Vertebral Column 척추관</figcaption>
             </figure>
         </div>
-        <div style="width:60%; float:left; margin: 1em;">
+        <div style="width:55%; float:left; margin: 1em;">
             <figure>
             <img src="/assets/img/category-knowledge/221113-2-vertebral-column-2.jpg">
                 <figcaption style="text-align:center">[이미지 2] 아이와 어른의 척추관</figcaption>
@@ -104,13 +104,13 @@ render_with_liquid: false
 - 사지골격  
 
     <div style="text-align:center;">
-        <div style="width:50%; float:left; margin: 1em;">
+        <div style="width:45%; float:left; margin: 1em;">
             <figure>
             <img src="/assets/img/category-knowledge/221113-3-shoulder-girdle.jpg">
                 <figcaption style="text-align:center">[이미지 3] 사지골격 - 상체</figcaption>
             </figure>
         </div>
-        <div style="width:50%; float:left; margin: 1em;">
+        <div style="width:45%; float:left; margin: 1em;">
             <figure>
             <img src="/assets/img/category-knowledge/221113-4-pelvic-girdle.jpg">
                 <figcaption style="text-align:center">[이미지 4] 사지골격 - 하체</figcaption>
@@ -134,7 +134,7 @@ render_with_liquid: false
     관절을 지지하는 인대가 외부 충격에 의해서 늘어나거나 일부 찢어지는 것을 염좌라고 말하며, 근육이 충격에 의해 늘어나거나 일부 찢어지는 것도 염좌라고 말하기도 하나 인대 염좌는 sprain, 근육 염좌는 strain이라고 구분하기도 한다. 인대나 근육의 전체가 끊어지는 경우는 파열이라고 한다.
 
 <figure>
-<img src="\assets\img\category-knowledge\221113-7-foot.jpg">
+<img src="/assets/img/category-knowledge/221113-7-foot.jpg">
     <figcaption style="text-align:center">[이미지 7] 발목뼈</figcaption>
 </figure>
 
