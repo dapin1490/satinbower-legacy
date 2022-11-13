@@ -27,7 +27,7 @@ render_with_liquid: false
 <sup><a id="" href="" target="_blank" title=""></a></sup>
 
 <figure>
-    <img src="\assets\img\categoty-#\#">
+    <img src="/assets/img/categoty-#/#">
     <figcaption style="text-align:center">#</figcaption>
 </figure>
 -->
@@ -78,14 +78,14 @@ render_with_liquid: false
     - 얼굴뼈 : 비골(코뼈), 상악골(위턱뼈), 하악골(아래턱뼈), 관골(광대뼈), 누골(눈물뼈), 구개골(입천장뼈), 아래코선반(2개), 사골(보습뼈)
 - 척추(33개) : 경추(7), 흉추(12), 요추(5), 천추(5 in 1), 미추(3~4 in 1). 각 뼈는 척추 원판에 의해 분리된다. 목이 아무리 길든 짧든 포유류의 경추는 7개로 일정하다.  
 
-    <div style="text-align:center; margin: 1em;">
-        <div style="width:40%; float:left;">
+    <div style="text-align:center;">
+        <div style="width:40%; float:left; margin: 1em;">
             <figure>
             <img src="/assets/img/category-knowledge/221113-1-vertebral-column.jpg">
                 <figcaption style="text-align:center">[이미지 1] Vertebral Column 척추관</figcaption>
             </figure>
         </div>
-        <div style="width:60%; float:left">
+        <div style="width:60%; float:left; margin: 1em;">
             <figure>
             <img src="/assets/img/category-knowledge/221113-2-vertebral-column-2.jpg">
                 <figcaption style="text-align:center">[이미지 2] 아이와 어른의 척추관</figcaption>
@@ -103,16 +103,16 @@ render_with_liquid: false
     - 척추 추간판(척추 사이 원반) : 척추뼈 사이에 존재하며 척추관 전체 길이의 25% 정도를 차지한다. 원반의 중앙부에는 젤라틴 상태의 수액이 있고 주변부는 섬유성 연골로 되어 있다. 강한 관절을 형성하고, 척추의 다양한 움직임을 가능하게 하며 수직으로 가해지는 충격을 흡수한다. 만약 원반의 수액이나 섬유의 일부가 탈출하면 이를 추간판 탈출증, 척추 디스크라고 한다. 요추에서 척추 디스크가 발생하면 신경이 압박되어 허리 통증, 하지 마비, 부종 등이 발생한다. 또한 운동 신경이 마비되면 근력이 저하되고 드물게는 배변 장애가 나타나기도 한다.
 - 사지골격  
 
-    <div style="text-align:center; margin: 1em;">
-        <div style="width:50%; float:left;">
+    <div style="text-align:center;">
+        <div style="width:50%; float:left; margin: 1em;">
             <figure>
-            <img src="\assets\img\category-knowledge\221113-3-shoulder-girdle.jpg">
+            <img src="/assets/img/category-knowledge/221113-3-shoulder-girdle.jpg">
                 <figcaption style="text-align:center">[이미지 3] 사지골격 - 상체</figcaption>
             </figure>
         </div>
-        <div style="width:50%; float:left">
+        <div style="width:50%; float:left; margin: 1em;">
             <figure>
-            <img src="\assets\img\category-knowledge\221113-4-pelvic-girdle.jpg">
+            <img src="/assets/img/category-knowledge/221113-4-pelvic-girdle.jpg">
                 <figcaption style="text-align:center">[이미지 4] 사지골격 - 하체</figcaption>
             </figure>
         </div>
@@ -122,11 +122,11 @@ render_with_liquid: false
 - 골반  
 
 <figure>
-<img src="\assets\img\category-knowledge\221113-5-pelvic-girdle-hip.jpg">
+<img src="/assets/img/category-knowledge/221113-5-pelvic-girdle-hip.jpg">
     <figcaption style="text-align:center">[이미지 5] 골반의 구조</figcaption>
 </figure>
 <figure>
-<img src="\assets\img\category-knowledge\221113-6-fm-hip-comparison.jpg">
+<img src="/assets/img/category-knowledge/221113-6-fm-hip-comparison.jpg">
     <figcaption style="text-align:center">[이미지 6] 여자(좌)와 남자(우)의 골반 비교</figcaption>
 </figure>
 
