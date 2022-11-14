@@ -204,7 +204,7 @@ render_with_liquid: false
         <figcaption>1. 양손을 앞으로 뻗어 모은다.</figcaption>
     </figure>
     <figure>
-        <img src="/assets/img/category-knowledge/221114-22-tubing-press-2.jpg">
+        <img src="/assets/img/category-knowledge/221114-23-tubing-press-2.jpg">
         <figcaption>2. 양손을 뒤쪽으로 움직여 팔을 벌린다.</figcaption>
     </figure>
     <p>위 두 자세를 반복하면 된다. 양손의 밴드가 옆에서 보면 일치하도록 똑같이 움직여야 한다.<br>
@@ -244,7 +244,7 @@ render_with_liquid: false
 ### 자가체중(가슴+어깨+삼두) Bench Dips
 
 <figure>
-    <img src="/assets/img/categoty-knowledge/221114-27-bench-dips.jpg">
+    <img src="/assets/img/category-knowledge/221114-27-bench-dips.jpg">
     <figcaption>참고. 강의자료 이미지</figcaption>
 </figure>
 
@@ -363,7 +363,7 @@ render_with_liquid: false
 ### 대퇴근력 강화 운동
 
 <figure>
-    <img src="/assets/img/categoty-knowledge/221114-44-squat-0.jpg">
+    <img src="/assets/img/category-knowledge/221114-44-squat-0.jpg">
     <figcaption>참고. 대퇴근 이미지</figcaption>
 </figure>
 
@@ -465,14 +465,14 @@ render_with_liquid: false
 </details>
 
 <figure>
-    <img src="/assets/img/categoty-knowledge/221114-60-core-cycle.jpg">
+    <img src="/assets/img/category-knowledge/221114-60-core-cycle.jpg">
     <figcaption>참고. 순환식 코어운동</figcaption>
 </figure>
   
 순환식 코어운동 이미지에서 5번 동작은 코어를 테스트할 때에도 한다. 팔을 뻗은 상태로 흔들림이 없어야 하며, 코어가 약한 사람은 팔을 뻗는 순간 허리가 돌아가거나 자세가 무너진다.  
   
 <figure>
-    <img src="/assets/img/categoty-knowledge/221114-61-core-hard.jpg">
+    <img src="/assets/img/category-knowledge/221114-61-core-hard.jpg">
     <figcaption>참고. 코어 강화 운동, 플랭크 응용 동작</figcaption>
 </figure>
   
