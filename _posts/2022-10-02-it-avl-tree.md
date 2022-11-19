@@ -85,7 +85,7 @@ AVL 트리에서 사용하는 회전 연산은 네 가지 유형이 있고, 특�
 왼쪽으로만 자식이 이어지는 형태로 균형이 깨졌을 때 사용한다. 예를 들어 `6 → 5 → 2` 순서로 노드가 삽입된 경우가 이에 해당하고, 이를 일반화하면 어떤 조상 노드의 왼쪽 서브트리의 왼쪽 서브트리에 자식이 추가된 상황이다. 해당 조상 노드가 그 왼쪽 서브트리의 오른쪽 자식이 되도록 바꾸어 해결할 수 있다. 그림으로 보면 아래와 같다.  
   
 <figure>
-    <img src="/assets/img/categoty-it/221002-1-LL.jpg">
+    <img src="/assets/img/category-it/221002-1-LL.jpg">
     <figcaption>일반적인 경우의 LL 회전</figcaption>
 </figure>  
   
@@ -101,7 +101,7 @@ rotate_LL(A)
 LL 타입과 반대로 오른쪽 서브트리가 오른쪽으로 길어지는 경우이다. 해결할 때에도 LL 타입과 반대 방향으로 회전하면 된다. 그림으로 보면 아래와 같다.  
 
 <figure>
-    <img src="/assets/img/categoty-it/221002-2-RR.jpg">
+    <img src="/assets/img/category-it/221002-2-RR.jpg">
     <figcaption>일반적인 경우의 왼쪽 회전</figcaption>
 </figure>  
   
@@ -117,7 +117,7 @@ rotate_RR(A)
 어떤 노드의 오른쪽 서브트리의 왼쪽 서브트리에 새 노드가 추가되어 균형이 깨지는 경우이다. 이 경우 LL 회전을 한 후 RR 회전을 하면 된다. 그림으로 보면 아래와 같다.  
   
 <figure>
-    <img src="/assets/img/categoty-it/221002-3-RL.jpg">
+    <img src="/assets/img/category-it/221002-3-RL.jpg">
     <figcaption>일반적인 RL 회전</figcaption>
 </figure>  
   
@@ -133,7 +133,7 @@ rotate_RL(A)
 어떤 노드의 왼쪽 서브트리의 오른쪽 서브트리에 새 노드가 추가되어 균형이 깨지는 경우이다. RL 타입과 반대로 RR 회전을 한 후 LL 회전을 하면 된다.  
   
 <figure>
-    <img src="/assets/img/categoty-it/221002-4-LR.jpg">
+    <img src="/assets/img/category-it/221002-4-LR.jpg">
     <figcaption>일반적인 왼쪽-오른쪽 회전</figcaption>
 </figure>  
   

@@ -56,13 +56,13 @@ render_with_liquid: false
 <div style="text-align:center">
     <div style="width:50%; float:left">
         <figure>
-        <img src="/assets/img/categoty-it/220305-1-hist-glass.png">
+        <img src="/assets/img/category-it/220305-1-hist-glass.png">
             <figcaption style="text-align:center">[이미지 1] 유리 분류</figcaption>
         </figure>
     </div>
     <div style="width:50%; float:left">
         <figure>
-        <img src="/assets/img/categoty-it/220305-2-hist-star.png">
+        <img src="/assets/img/category-it/220305-2-hist-star.png">
             <figcaption style="text-align:center">[이미지 2] 별 유형 분류</figcaption>
         </figure>
     </div>

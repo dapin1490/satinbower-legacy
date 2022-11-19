@@ -27,7 +27,7 @@ render_with_liquid: false
 <sup><a id="" href="" target="_blank" title=""></a></sup>
 
 <figure>
-    <img src="/assets/img/categoty-#/#">
+    <img src="/assets/img/category-#/#">
     <figcaption style="text-align:center">#</figcaption>
 </figure>
 -->

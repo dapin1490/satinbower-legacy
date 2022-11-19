@@ -72,7 +72,7 @@ render_with_liquid: false
 순환 신경망은 입력과 출력을 시퀀스(Sequence) 단위로 처리하는 모델이다. 시퀀스 모델은 여러 가지가 있으나 이 글에서는 RNN(Recurrent Neural Network)에 관해 설명하겠다. 이전까지 설명한 신경망 모델들은 모두 입력과 출력이 하나의 방향으로만 진행되었다. 이를 피드 포워드(Feed Forward)라고 한다. 순환 신경망은 이와 달리 자신의 출력을 결과 방향으로 보내는 동시에 노드에 저장해 두었다가 다시 자신의 입력으로 사용한다. 이렇게 자신의 값을 기억하는 노드를 메모리 셀이라고 부르며 기억한 값은 은닉 상태(hidden state)라고 하고 이 때문에 입력값에 대해 한 개, 은닉 상태에 대해 한 개씩 총 두 개의 가중치를 갖는다. 또한 이 모델에서는 그 특성상 시점(t)의 구분이 있다. 이 모델을 나타내는 모식도는 아래와 같다. x는 입력, y는 출력이며 편향은 생략되었다.   
    
 <figure style="text-align:center">
-<img src="/assets/img/categoty-it/211209-1-RNNcell.png">
+<img src="/assets/img/category-it/211209-1-RNNcell.png">
     <figcaption>[그림 1] 순환 신경망 모식도</figcaption>
 </figure>
   
