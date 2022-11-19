@@ -12,6 +12,7 @@ render_with_liquid: false
 	.understand { color: #1380da; }
 	.tab { white-space: pre; }
 	.underline { text-decoration: underline; }
+	.cancle { text-decoration: line-through; }
 	.green { color: forestgreen;}
 	figure { text-align: center; }
 </style>
@@ -22,10 +23,26 @@ render_with_liquid: false
 <span class="tab"></span>
 <span class="underline"></span>
 
-[<a id="" href="">1</a>] #####
-[<a id="" href="" title="">2</a>] #####, <a href="#" target="_blank">#</a>
+[<a id="" href="">1</a>] #
+[<a id="" href="" title="">2</a>] #, <a href="#" target="_blank">#</a>
 <sup><a id="" href="" target="_blank" title=""></a></sup>
+
+<figure>
+    <img src="/assets/img/category-#/#">
+    <figcaption>#</figcaption>
+</figure>
+
+<details>
+    <summary>#</summary>
+    <figure>
+        <img src="/assets/img/category-#/#">
+        <figcaption>#</figcaption>
+    </figure>
+</details>
 -->
+
+## 알림
+모든 이미지의 출처는 "정보 검색" 강의 자료이다.
 
 ## 9주
 주제 : 질의어-문서 계산 빠르게 하는 법  
@@ -53,3 +70,91 @@ render_with_liquid: false
 - Aggregate scores : 여러 방식으로 검색한 결과의 score 합치기. 전문가가 튜닝하거나 기계학습 이용.
 - Vector Space Model vs Boolean Model : 벡터 모델의 인덱스는 불린 모델 검색에도 사용 가능, 역은 불가능
 
+## 10주
+주제 : 정보 검색 시스템 평가하기  
+- 검색 엔진 평가 기준  
+	대부분 요소는 양적 평가 가능
+	- 사용자 만족도 측정 : 일반적으로 만족도 평가는 어려우니 검색 결과와 원하던 결과의 관련성을 평가에 이용함
+		- 웹 : 사용자가 원하는 정보를 찾으면, 사용자는 다음에 또 쓴다. → 재사용 사용자의 비율로 평가 가능
+		- 쇼핑 사이트 : 쇼핑몰 운영자를 만족시켜야 한다(돈 주니까). 구매자가 원하는 물건을 잘 찾을 수 있는지, 구매하기까지 걸리는 시간, 검색자와 구매자의 비율(검색만 하고 가는 사람)
+		- 기업 내부망 검색 엔진 : 회사/정부/학교 등에서 사용, 얼마나 사용자의 생산성을 높일 수 있는지
+	- 연관성 판단 : "원하는 정보"가 제대로 나왔는지.
+- 정보 검색 시스템 평가를 위한 테스트셋  
+	문서 집합과 질의/해당 문서 조합인 테스트셋 필요. 문서의 양에 따라 모든 문서에 정답이 표기되지 않을 수 있음. 여러 개의 테스트 질의로 평균냄.
+	- Cranfield Collection
+	- TREC (Text REtrieval Conference)
+	- GOV2
+	- NTCIR (NII Test Collections for IR systems)
+	- REUTERS-21578 and Reuters-RCV1
+	- 20 Newsgroups
+- 검색 결과에 순서가 없는 모델의 평가 방법
+	- <span class="cancle">정확도</span> : 전체 문서 중 질의와의 관련성을 맞힌 것의 비율. 수많은 문서 중 관련 있는 몇 개만을 검색하기 때문에 '관련 없음 - 관련 없음' 정답이 너무 많아서 정확도가 너무 높게 나옴. 심지어 아무 검색 결과도 안 나와도 정확도는 99.9% 가능.  
+		사람들은 쓰레기가 좀 섞여도 뭔가를 찾아주긴 하는 검색 엔진을 원한다.
+	- || **관련 있음** | **관련 없음**
+		|-|-|-|
+		**검색 됨** | true positive(tp) | false positive(fp)
+		**검색 안 됨** | false negative(fn) | true negative(tn)
+	- 정밀도 : `검색된 관련 있는 문서 / 검색 결과`, P = tp / (tp + fp)
+	- 재현율 : `검색된 관련 있는 문서 / 문서 집합 중 관련 있는 문서`, R = tp / (tp + fn)
+	- 정밀도 vs 재현율 : 검색 결과에서 원하는 답을 빨리 찾고 싶다면(일반인) 정밀도, 딱 원하는 문서가 있기만 하면 된다면(전문가) 재현율이 높아야 한다.
+- 검색 결과에 순서가 있는 모델의 평가 방법
+	1. Interpolated(보간된) Precision : 특정 재현율에서, 재현율을 증가시켰을 때 얻을 수 있는 정밀도의 최댓값을 취함  
+
+		<figure>
+			<img src="/assets/img/category-it/221119-1-interpolated-precision.jpg">
+			<figcaption>[이미지 1] Interpolated Precision</figcaption>
+		</figure>
+
+	2. 11-point Interpolated Average Precision
+		1. 재현율을 0부터 1까지 0.1 단위로 끊어 11개의 점 준비
+		2. 그 11개의 점에 대한 최대 정밀도(interpolated P) 구함
+		3. 위 과정을 각 질의어마다 수행함
+		4. 그 산술평균을 구함
+		- 예를 들어 50개의 질의가 있다면 50번 * 11개 정밀도 구하고 평균
+	3. Mean Average Precision (MAP)  
+		전체 질의 집합 Q에 속하는 어떤 질의 q와, q와 관련된 문서 집합(d1, d2, ..., dm)에 대해  
+		각 문서가 검색 결과에 나오는 경우의 정밀도를 계산(d1이 나올 때 정밀도 ~ dm이 나올 때 정밀도)  
+		그 모든 정밀도의 합을 구하고 관련 문서 집합의 크기(m)로 나눔  
+		이 과정을 Q에 속하는 모든 질의에 대해 반복하고 Q의 크기로 나눔  
+		→ 평균의 평균을 구하는 정밀도  
+
+		<figure>
+			<img src="/assets/img/category-it/221119-2-mean-average-precision.jpg">
+			<figcaption>[이미지 2] Mean Average Precision 식</figcaption>
+		</figure>
+
+		이 방법은 여러 개의 시스템을 서로 비교할 때 주로 사용한다. 하나의 시스템을 평가하는 데에는 별로 적절하지 않다.
+
+	4. R-precision : 주어진 질의와 관련된 문서가 몇 개인지 미리 알고 있어야 사용 가능한 방법  
+		주어진 질의와 관련된 문서의 개수가 검색 결과의 최대 개수가 된다. 예를 들어 10개의 문서가 관련되었다고 한다면 검색 결과를 10개로 제한.  
+		그중 실제로 관련 있는 문서의 비율을 본다(정밀도를 계산한다)  
+		이 정의에 의해, R 정밀도는 재현율과 같다.  
+	5. Precision at k  
+		벡터 모델에서 k개를 검색했을 때 관련 있는 문서가 몇 개 있는지 보는 방법. R 정밀도와 다른 점은 검색 결과의 수인 k를 사용자 마음대로 정한다는 것.  
+		질의에 따라 관련 있는 문서의 수가 다르지만 그것을 무시하므로 그다지 적절한 평가 방법이 아니다.  
+- 다른 평가 방법
+	1. Interjudge Agreement(상호 평가) : 사람이 검색 결과의 적절성을 직접 평가(안 할 수는 없음). 하지만 사람의 평가는 개인차가 크니 두 사람씩 조합해 평균값을 지표로 사용한다.  
+		일정한 테스트셋을 만들어서 매번 재사용한다(시간과 노동력 절약)
+		- Kappa Measure : 두 평가자 사이의 의견이 일치한 정도를 숫자로 표시한다.  
+
+			<details>
+				<summary>Kappa Measure 강의자료 보기</summary>
+				<figure>
+					<img src="../assets/img/category-it/221119-3-kappa-measure-1.jpg">
+					<figcaption>Kappa Measure 강의자료 1</figcaption>
+				</figure>
+				<figure>
+					<img src="../assets/img/category-it/221119-4-kappa-measure-2.jpg">
+					<figcaption>Kappa Measure 강의자료 2</figcaption>
+				</figure>
+				<figure>
+					<img src="../assets/img/category-it/221119-5-kappa-measure-3.jpg">
+					<figcaption>Kappa Measure 강의자료 3</figcaption>
+				</figure>
+			</details>
+
+
+
+
+## 참고
+&#91;1&#93; 마크다운 - 표(테이블) 만들기, <a href="https://inasie.github.io/it%EC%9D%BC%EB%B0%98/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4-%ED%91%9C-%EB%A7%8C%EB%93%A4%EA%B8%B0/">https://inasie.github.io/it일반/마크다운-표-만들기/</a>
