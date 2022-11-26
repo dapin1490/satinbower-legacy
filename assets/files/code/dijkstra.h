@@ -5,6 +5,7 @@
 #include <queue>
 #include <list>
 #include <algorithm>
+#include <limits>
 using namespace std;
 
 enum class _error : int { shut_down, ValueErrorInt, ValueErrorChar, UnknownError };
