@@ -216,6 +216,15 @@ public:
 코드의 길이가 길어 여기에 모든 코드를 올리지는 않고, 내가 구현한 다익스트라 함수의 모든 기능을 포함하는 `dijkstra_fullpath` 함수만 올리겠다.  
 
 ```cpp
+struct cmp { // 다익스트라 우선순위 큐 비교 연산자 : 가중치가 적고 정점 번호가 적은 것을 우선으로 함
+    bool operator()(pair<unsigned, unsigned> a, pair<unsigned, unsigned> b) {
+        if (a.second == b.second)
+            return a.first >= b.first;
+        else
+            return a.second > b.second;
+    }
+};
+
 // 응용 : 다익스트라 경로 탐색 - 모든 경로 표시
 vector<pair<unsigned, list<unsigned>>> dijkstra_fullpath(unsigned s) { // s는 시작점
     vector<pair<unsigned, unsigned>> d(v + 1, make_pair(numeric_limits<unsigned>::max(), s)); // 저장용 거리 벡터. 정점 번호가 1부터 시작함. (최소 비용 거리, 직전 경로 정점)
@@ -239,15 +248,12 @@ vector<pair<unsigned, list<unsigned>>> dijkstra_fullpath(unsigned s) { // s는 �
         }
 
         for (unsigned i = 1; i <= v; i++)
-            next_visit.push(make_pair(i, d[i].first)); // 모든 간선을 우선순위 큐에 추가
+            if (!visited[i])
+                next_visit.push(make_pair(i, d[i].first)); // 방문하지 않은 모든 정점을 우선순위 큐에 추가
 
-        while (!next_visit.empty()) { // 다음 방문 정점 고르기
+        if (!next_visit.empty()) {
             pair<unsigned, unsigned> next = next_visit.top(); // (정점, 거리)
-            next_visit.pop();
-            if (!visited[next.first]) { // 방문하지 않은 정점을 다음 방문지로 정하고 break
-                vert = next.first;
-                break;
-            }
+            vert = next.first;
         }
     }
 
