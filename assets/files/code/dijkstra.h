@@ -4,8 +4,8 @@
 #include <vector>
 #include <queue>
 #include <list>
-#include <algorithm>
 #include <limits>
+#include <algorithm>
 using namespace std;
 
 enum class _error : int { shut_down, ValueErrorInt, ValueErrorChar, UnknownError };
@@ -109,9 +109,10 @@ public:
 	}
 
 	// 기본 : 시작점으로부터의 최소 거리만 구하는 다익스트라
-	vector<unsigned> dijkstra(unsigned s) { // s는 시작점
+	auto dijkstra(unsigned s) { // s는 시작점
 		vector<unsigned> d(v + 1, numeric_limits<unsigned>::max()); // 저장용 거리 벡터. 정점 번호가 1부터 시작함
 		vector<bool> visited(v + 1, false); // 방문 여부 초기화
+
 		unsigned vert = s; // 이제 방문할 정점 : 아직 시작하지 않았으므로 시작점으로 초기화
 		visited[0] = true; // 안 쓰는 인덱스 방문할 일 없게 미리 표시
 		/*
@@ -128,19 +129,19 @@ public:
 			visited[vert] = true; // 정점 방문
 			vector<Edge<T>> v_edge = edges_from(vert); // 지금 방문한 정점에 연결된 간선들 가져오기
 
-			for (auto& e : v_edge)
-				d[e.to] = min(d[e.to], d[vert] + e.w); // 거리 업데이트
+			for (auto& e : v_edge) {
+				if (d[vert] + e.w < d[e.to]) { // 거리를 업데이트할 필요가 있을 때에만
+					d[e.to] = d[vert] + e.w; // 거리 업데이트
+				}
+			}
 
 			for (unsigned i = 1; i <= v; i++)
-				next_visit.push(make_pair(i, d[i])); // 모든 간선을 우선순위 큐에 추가
+				if (!visited[i])
+					next_visit.push(make_pair(i, d[i])); // 방문하지 않은 모든 정점을 우선순위 큐에 추가
 
-			while (!next_visit.empty()) { // 다음 방문 정점 고르기
+			if (!next_visit.empty()) {
 				pair<unsigned, unsigned> next = next_visit.top(); // (정점, 거리)
-				next_visit.pop();
-				if (!visited[next.first]) { // 방문하지 않은 정점을 다음 방문지로 정하고 break
-					vert = next.first;
-					break;
-				}
+				vert = next.first;
 			}
 		}
 
@@ -169,15 +170,12 @@ public:
 			}
 
 			for (unsigned i = 1; i <= v; i++)
-				next_visit.push(make_pair(i, d[i].first)); // 모든 간선을 우선순위 큐에 추가
+				if (!visited[i])
+					next_visit.push(make_pair(i, d[i].first)); // 방문하지 않은 모든 정점을 우선순위 큐에 추가
 
-			while (!next_visit.empty()) { // 다음 방문 정점 고르기
+			if (!next_visit.empty()) {
 				pair<unsigned, unsigned> next = next_visit.top(); // (정점, 거리)
-				next_visit.pop();
-				if (!visited[next.first]) { // 방문하지 않은 정점을 다음 방문지로 정하고 break
-					vert = next.first;
-					break;
-				}
+				vert = next.first;
 			}
 		}
 
@@ -207,15 +205,12 @@ public:
 			}
 
 			for (unsigned i = 1; i <= v; i++)
-				next_visit.push(make_pair(i, d[i].first)); // 모든 간선을 우선순위 큐에 추가
+				if (!visited[i])
+					next_visit.push(make_pair(i, d[i].first)); // 방문하지 않은 모든 정점을 우선순위 큐에 추가
 
-			while (!next_visit.empty()) { // 다음 방문 정점 고르기
+			if (!next_visit.empty()) {
 				pair<unsigned, unsigned> next = next_visit.top(); // (정점, 거리)
-				next_visit.pop();
-				if (!visited[next.first]) { // 방문하지 않은 정점을 다음 방문지로 정하고 break
-					vert = next.first;
-					break;
-				}
+				vert = next.first;
 			}
 		}
 
