@@ -58,7 +58,7 @@ https://www.acmicpc.net/problem/1916
 
 ## 목차
 - 벨만-포드 알고리즘
-- 문제 풀이 - 743 네트워크 딜레이 시간
+- 문제 풀이 - Leet code 743 네트워크 딜레이 시간
 
 ## 벨만-포드 알고리즘
 음수 가중치를 사용할 수 없는 다익스트라와 달리 음수 가중치에도 대응할 수 있는 최단 경로 탐색 알고리즘이다. 전체 정점 수보다 1 적은 수만큼, 매 번의 반복마다 모든 간선을 확인해 최단거리를 구한다. 음수 사이클이 존재할 경우 해를 구할 수 없다.  
@@ -81,33 +81,33 @@ https://www.acmicpc.net/problem/1916
 ```cpp
 // 벨만-포드
 vector<int> route_search::bellman(int s) { // s는 시작점
-	dist.assign(vnum + 1, INT_MAX); // 클래스 멤버, 최단거리 벡터. 정점 번호가 1부터 시작함
-	dist[s] = 0; // 시작점은 거리 0
-	dist[0] = INT_MIN; // 안 쓰는 정점 표시
+  dist.assign(vnum + 1, INT_MAX); // 클래스 멤버, 최단거리 벡터. 정점 번호가 1부터 시작함
+  dist[s] = 0; // 시작점은 거리 0
+  dist[0] = INT_MIN; // 안 쓰는 정점 표시
 
-	// 최단거리 구하기
-	for (int i = 1; i < vnum; i++) { // (정점 수 - 1)만큼 반복
-		for (auto& e : graph) { // 그래프에 존재하는 모든 간선에 대해
-			dist[e.to] = dist[e.to] > dist[e.from] + e.w ? dist[e.from] + e.w : dist[e.to]; // 짧으면 업데이트
-		}
-	}
+  // 최단거리 구하기
+  for (int i = 1; i < vnum; i++) { // (정점 수 - 1)만큼 반복
+    for (auto& e : graph) { // 그래프에 존재하는 모든 간선에 대해
+      dist[e.to] = dist[e.to] > dist[e.from] + e.w ? dist[e.from] + e.w : dist[e.to]; // 짧으면 업데이트
+    }
+  }
 
-	// 음수 사이클 확인 : 위와 같은 과정이지만 업데이트 대신 return
-	for (int i = 1; i < vnum; i++) {
-		for (auto& e : graph) {
-			if (dist[e.to] > dist[e.from] + e.w) {
-				cout << "error_non-parametical: 경로상에 음수 사이클 존재\n";
-				dist.assign(vnum + 1, -1);
-				return dist;
-			}
-		}
-	}
+  // 음수 사이클 확인 : 위와 같은 과정이지만 업데이트 대신 return
+  for (int i = 1; i < vnum; i++) {
+    for (auto& e : graph) {
+      if (dist[e.to] > dist[e.from] + e.w) {
+        cout << "error_non-parametical: 경로상에 음수 사이클 존재\n";
+        dist.assign(vnum + 1, -1);
+        return dist;
+      }
+    }
+  }
 
-	return dist; // 음수 사이클을 통과했다면 정상적으로 최단거리를 구한 벡터 반환
+  return dist; // 음수 사이클을 통과했다면 정상적으로 최단거리를 구한 벡터 반환
 }
 ```
 
-## 문제 풀이 - 743 네트워크 딜레이 시간
+## 문제 풀이 - Leet code 743 네트워크 딜레이 시간
 ### 문제 번역(파파고 번역 후 수정)
 `n`개의 노드로 구성되고 `1`부터 `n`까지 레이블이 지정된 네트워크가 제공된다. 또한 `times[i] = (u`<sub>`i`</sub>`, v`<sub>`i`</sub>`, w`<sub>`i`</sub>`)`와 같은 이동 시간이 지정된 방향 간선 목록이 제공된다. 여기서 `u`<sub>`i`</sub>는 소스 노드, `v`<sub>`i`</sub>는 대상 노드, `w`<sub>`i`</sub>는 신호가 소스에서 대상으로 이동하는 데 걸리는 시간이다.  
   
@@ -127,12 +127,12 @@ vector<int> route_search::bellman(int s) { // s는 시작점
 using namespace std;
 
 struct cmp { // 다익스트라 우선순위 큐 비교 연산자 : 가중치가 적고 정점 번호가 적은 것을 우선으로 함
-	bool operator()(pair<int, int> a, pair<int, int> b) {
-		if (a.second == b.second)
-			return a.first >= b.first;
-		else
-			return a.second > b.second;
-	}
+  bool operator()(pair<int, int> a, pair<int, int> b) {
+    if (a.second == b.second)
+      return a.first >= b.first;
+    else
+      return a.second > b.second;
+  }
 };
 
 class Solution {
