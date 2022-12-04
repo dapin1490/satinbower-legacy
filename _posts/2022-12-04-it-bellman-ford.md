@@ -247,7 +247,7 @@ public:
     }
 
     for (auto& i : dist)
-    max_w = i > max_w ? i : max_w;
+      max_w = i > max_w ? i : max_w;
 
     if (max_w == 100 * 100 * 10)
       return -1;
