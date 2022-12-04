@@ -22,6 +22,7 @@ render_with_liquid: false
 <span class="understand"></span>
 <span class="tab"></span>
 <span class="underline"></span>
+<span class="cancle"></span>
 
 [<a id="" href="">1</a>] #
 [<a id="" href="" title="">2</a>] #, <a href="#" target="_blank">#</a>
@@ -202,11 +203,12 @@ public:
   
 나는 세 가지 다익스트라 함수를 만들었다. 첫 번째는 시작점으로부터 목적지까지 최소 비용만을 계산하고, 두 번째는 첫 번째의 결과에 더해 해당 경로로 가기 위해 직전에 방문해야 할 정점을 같이 구하고, 세 번째는 두 번째에서 구한 정보들을 이용해 시작점부터 모든 정점으로의 완전한 경로를 구한다. 함수의 이름은 각각 `dijkstra`, `dijkstra_path`, `dijkstra_fullpath`이다. 전체 코드는 <a href="https://github.com/dapin1490/satinbower/blob/main/assets/files/code/dijkstra.h" target="_blank">깃허브</a>에서 볼 수 있다.  
   
-그러나 내가 쓴 다익스트라 코드는 한 가지 과정에서 상당히 비효율적으로 동작한다. 다음에 방문할 정점을 고르기 위해서는 거리가 가장 짧으면서 아직 방문하지 않은 정점을 찾아야 하는데, 이 과정을 매번 우선순위 큐에 모든 간선을 넣었다 빼면서 수행하고 있다. 아래 있는 예제는 간단하기 때문에 이런 코드로도 금방 답이 나오지만 데이터의 양이 조금만 커져도 내 코드는 결과를 내기까지 상당히 오랜 시간이 걸릴 것이다. 사실 이 문제는 힙을 좀 더 섬세하게 다루면 금방 해결된다. 이번엔 내가 시간이 부족하고, 이해도 부족해서 그러지 못했을 뿐이다. **요점은 이 코드에는 결함이 있음을 감안하고 봐달라는 말이다.**  
+<span class="cancle">그러나 내가 쓴 다익스트라 코드는 한 가지 과정에서 상당히 비효율적으로 동작한다. 다음에 방문할 정점을 고르기 위해서는 거리가 가장 짧으면서 아직 방문하지 않은 정점을 찾아야 하는데, 이 과정을 매번 우선순위 큐에 모든 간선을 넣었다 빼면서 수행하고 있다. 아래 있는 예제는 간단하기 때문에 이런 코드로도 금방 답이 나오지만 데이터의 양이 조금만 커져도 내 코드는 결과를 내기까지 상당히 오랜 시간이 걸릴 것이다. 사실 이 문제는 힙을 좀 더 섬세하게 다루면 금방 해결된다. 이번엔 내가 시간이 부족하고, 이해도 부족해서 그러지 못했을 뿐이다. **요점은 이 코드에는 결함이 있음을 감안하고 봐달라는 말이다.**</span>  
   
-결함이 있긴 하지만, 남이 쓴 코드를 이해하는 좋은 방법 중 하나는 예시를 보는 것이다. 그래서 예시 그래프도 준비했다.  
+<span class="cancle">결함이 있긴 하지만,</span> 남이 쓴 코드를 이해하는 좋은 방법 중 하나는 예시를 보는 것이다. 그래서 예시 그래프도 준비했다.  
 
-(수정 예정 : 우선순위 큐를 좀 더 효율적으로 쓰는 방법을 이해했다. 곧 코드에 반영할 것.)  
+**22.12.04 수정**  
+다익스트라 함수에 사용된 우선순위 큐의 사용 방법을 약간 바꿨다. 여전히 백준 문제는 통과되지 않는 것을 봐선 어딘가 더 효율적으로 쓸 수 있는 방법이 있는 모양이지만 지금 내가 이해한 선에서 쓸 수 있는 만큼 썼다.  
 
 <figure>
     <img src="/assets/img/category-it/221126-1-graph.jpg">
@@ -231,30 +233,31 @@ struct cmp { // 다익스트라 우선순위 큐 비교 연산자 : 가중치가
 vector<pair<unsigned, list<unsigned>>> dijkstra_fullpath(unsigned s) { // s는 시작점
     vector<pair<unsigned, unsigned>> d(v + 1, make_pair(numeric_limits<unsigned>::max(), s)); // 저장용 거리 벡터. 정점 번호가 1부터 시작함. (최소 비용 거리, 직전 경로 정점)
     vector<bool> visited(v + 1, false); // 방문 여부 초기화
+    priority_queue<pair<unsigned, unsigned>, vector<pair<unsigned, unsigned>>, cmp> next_visit; // 다음에 방문할 정점 : (정점, 거리)
     vector<pair<unsigned, list<unsigned>>> full_path(v + 1); // 모든 경로 표시 벡터 : (거리, 경로)
+
     unsigned vert = s; // 이제 방문할 정점 : 아직 시작하지 않았으므로 시작점으로 초기화
     visited[0] = true; // 안 쓰는 인덱스 방문할 일 없게 미리 표시
     d[s].first = 0; // 시작점은 거리 0
+    next_visit.push(make_pair(s, d[s].first));
 
-    while (find(visited.begin(), visited.end(), false) != visited.end()) { // 아직 방문하지 않은 정점이 남아있는 동안
-        priority_queue<pair<unsigned, unsigned>, vector<pair<unsigned, unsigned>>, cmp> next_visit; // 다음에 방문할 정점 : (정점, 거리)
+    while (!next_visit.empty()) { // 다음 방문 정점 큐가 비어있지 않을 동안
+        if (!visited[vert]) {
+            visited[vert] = true; // 정점 방문
+            vector<Edge<T>> v_edge = edges_from(vert); // 정점에 연결된 간선 가져오기
 
-        visited[vert] = true; // 정점 방문
-        vector<Edge<T>> v_edge = edges_from(vert); // 정점에 연결된 간선 가져오기
-
-        for (auto& e : v_edge) {
-            if (d[vert].first + e.w < d[e.to].first) { // 거리를 업데이트할 필요가 있을 때에만
-                d[e.to].first = d[vert].first + e.w; // 거리 업데이트
-                d[e.to].second = vert; // 직전 방문 정점 업데이트
+            for (auto& e : v_edge) {
+                if (d[vert].first + e.w < d[e.to].first) { // 거리를 업데이트할 필요가 있을 때에만
+                    d[e.to].first = d[vert].first + e.w; // 거리 업데이트
+                    d[e.to].second = vert; // 직전 방문 정점 업데이트
+                    next_visit.push(make_pair(e.to, d[e.to].first));
+                }
             }
         }
 
-        for (unsigned i = 1; i <= v; i++)
-            if (!visited[i])
-                next_visit.push(make_pair(i, d[i].first)); // 방문하지 않은 모든 정점을 우선순위 큐에 추가
-
         if (!next_visit.empty()) {
             pair<unsigned, unsigned> next = next_visit.top(); // (정점, 거리)
+            next_visit.pop();
             vert = next.first;
         }
     }
