@@ -74,7 +74,7 @@ https://www.acmicpc.net/problem/1916
 ```
   
 음수 사이클에 대해 좀 더 생각해 보자. 벨만-포드 알고리즘은 음수도 다룰 수 있다는 것이 장점이지만 사이클을 검사하지 않고, 해를 찾는 과정에서 사이클이 생길 수 있다는 문제가 있다. 모든 가중치가 양수였다면 사이클은 당연히 손해로 판단되어 경로에 포함되지 않겠지만 사이클에 음수가 있다면 사이클을 돌 때마다 비용이 줄어드는 경로가 발견될 수 있다.  
-벨만-포드 알고리즘에서 경로 탐색을 끝낸 후 같은 과정을 다시 한번 수행하는 것은 돌 때마다 비용이 감소하는 음수 사이클의 특징을 이용해 사이클을 찾아내는 것이다. 음수 사이클이 존재한다면 벨만-포드 알고리즘으로는 최단경로를 구할 수 없다. 꼭 구해야 한다면, 모든 가중치에 같은 값을 더해 전부 양수로 만들고 다익스트라를 수행하면 된다.  
+벨만-포드 알고리즘에서 경로 탐색을 끝낸 후 같은 과정을 다시 한번 수행하는 것은 돌 때마다 비용이 감소하는 음수 사이클의 특징을 이용해 사이클을 찾아내는 것이다. **음수 사이클이 존재한다면 벨만-포드 알고리즘으로는 최단경로를 구할 수 없다. 꼭 구해야 한다면, 모든 가중치에 같은 값을 더해 전부 양수로 만들고 다익스트라를 수행하면 된다.**  
   
 벨만-포드 알고리즘을 코드로 구현하면 아래와 같이 쓸 수 있다. 체감상 다익스트라보다 짧고 이해하기 쉽다. 전체 코드는 <a href="https://github.com/dapin1490/satinbower/blob/main/assets/files/code/bellman_ford.h" target="_blank">깃허브</a>에서 확인할 수 있다. 쓰는 김에 다익스트라도 같이 썼는데, 그건 덤이다.  
 
@@ -114,7 +114,7 @@ vector<int> route_search::bellman(int s) { // s는 시작점
 우리는 주어진 노드 `k`에서 신호를 보낼 것이다. `n`개의 모든 노드가 신호를 수신하는 데 걸리는 최소 시간을 반환하라. `n`개의 노드가 모두 신호를 수신할 수 없는 경우 `-1`을 반환한다.  
 
 ### 다익스트라 풀이
-원래 처음에는 `<climits>` 헤더를 포함해서 거리 벡터의 초기값을 INT_MAX로 두고 제출했었는데, 이전 거리와 새 거리를 비교하여 업데이트하는 부분에서 int 오버플로우가 나서 문제에서 주어진 범위에 맞춰 충분히 큰 숫자로 바꿨다. `100 * 100 * 10`은 `정점 수 * 가중치 최댓값 * 여분의 10`이다.  
+원래 처음에는 `<climits>` 헤더를 포함해서 거리 벡터의 초기값을 `INT_MAX`로 두고 제출했었는데, 이전 거리와 새 거리를 비교하여 업데이트하는 부분에서 int 오버플로우가 나서 문제에서 주어진 범위에 맞춰 충분히 큰 숫자로 바꿨다. `100 * 100 * 10`은 `정점 수 * 가중치 최댓값 * 여분의 10`이다.  
   
 정의된 함수의 앞부분부터 `while`까지는 다익스트라 알고리즘의 과정을 그대로 따르고, 마지막엔 알고리즘으로 찾은 거리 중 최댓값을 찾아 반환한다. 이때 찾아낸 최댓값이 거리 벡터를 초기화할 때 입력한 값과 같다면 연결되지 않은 정점이 존재하는 것이므로 `-1`을 반환하게 한다.  
   
@@ -140,8 +140,8 @@ public:
   int networkDelayTime(vector<vector<int>>& times, int n, int k) {
     // times는 간선들, n은 정점 개수, k는 시작점
     // dijkstra solution
-    int from, to, w, vert;
-    int max_w = INT_MIN;
+    int from, to, w, vert; // w는 가중치, vert는 매번의 반복마다 방문하는 정점
+    int max_w = INT_MIN; // 최댓값을 구해야 하기 때문에 최대한 작은 값으로 초기화
     vector<int> dist(n + 1, 100 * 100 * 10); // 정점 번호가 1부터 시작하는 거리 벡터
     vector<bool> visited(n + 1, false); // 방문 여부 초기화
     priority_queue<pair<int, int>, vector<pair<int, int>>, cmp> next_visit; // 다음에 방문할 정점 : (정점, 거리)
@@ -151,7 +151,7 @@ public:
     
     dist[k] = 0; // 시작점은 거리 0
     dist[0] = INT_MIN; // 안 쓰는 정점 표시
-    next_visit.push(make_pair(k, dist[k]));
+    next_visit.push(make_pair(k, dist[k])); // 시작점을 큐에 넣고 시작해야 반복문이 시작할 수 있다
     
     // 1. 시작점 방문
     // 2. 거리 파악
@@ -159,7 +159,7 @@ public:
     // 4. 반복
     
     while (true) {
-      if (!visited[vert]) {
+      if (!visited[vert]) { // 이제 새로 방문하는 정점에 대해서만 수행 : 방문 표시를 중복하여 하지 않게 한다
         visited[vert] = true; // 정점 방문
         
         for (int x = 0; x < times.size(); x++) {
@@ -167,7 +167,7 @@ public:
           to = times[x][1];
           w = times[x][2];
           
-          if (from != vert)
+          if (from != vert) // 지금 방문한 정점에서 출발하는 간선이 아니면 계산하지 않는다
             continue;
           
           if (dist[vert] + w < dist[to]) { // 거리를 업데이트할 필요가 있을 때에만
@@ -177,19 +177,20 @@ public:
         }
       }
 
-      if (!next_visit.empty()) {
+      if (!next_visit.empty()) { // 비어있는데 꺼내면 오류 난다
+      // 모든 정점을 다 방문하고 나서도 큐가 빌 때까지 pop하기 때문에 오류 방지 필요
         pair<int, int> next = next_visit.top(); // (정점, 거리)
-        next_visit.pop();
+        next_visit.pop(); // pop 안 하면 무한반복으로 프로그램이 끝나지 않는다 : 자주 이거 빼먹어서 메모함
         vert = next.first;
       }
       else // 다음 방문 정점 큐가 비어있다면 종료
         break;
     }
 
-    for (auto& i : dist)
+    for (auto& i : dist) // 계산한 거리 중 최댓값 찾기
       max_w = i > max_w ? i : max_w;
 
-    if (max_w == 100 * 100 * 10)
+    if (max_w == 100 * 100 * 10) // 찾은 최댓값이 처음에 설정한 초기값과 같다면 연결되지 않거나 경로가 없는 정점이 있음
       return -1;
     return max_w;
   }
@@ -217,19 +218,20 @@ public:
   int networkDelayTime(vector<vector<int>>& times, int n, int k) {
     // times는 간선들, n은 정점 개수, k는 시작점
     // bellman solution
-    int from, to, w;
-    int max_w = INT_MIN;
+    int from, to, w; // w는 가중치, vert는 매번의 반복마다 방문하는 정점
+    int max_w = INT_MIN; // 최댓값을 구해야 하기 때문에 최대한 작은 값으로 초기화
     vector<int> dist(n + 1, 100 * 100 * 10); // 정점 번호가 1부터 시작하는 거리 벡터
     dist[k] = 0; // 시작점은 거리 0
     dist[0] = INT_MIN; // 안 쓰는 정점 표시
 
     // 최단거리 구하기
-    for (int i = 1; i < n; i++) {
-      for (int x = 0; x < times.size(); x++) {
+    for (int i = 1; i < n; i++) { // (정점 수 - 1)만큼 반복
+      for (int x = 0; x < times.size(); x++) { // 모든 간선에 대해 수행
         from = times[x][0];
         to = times[x][1];
         w = times[x][2];
-        
+
+        // 항상 최선의 값으로 업데이트한다
         dist[to] = dist[to] > dist[from] + w ? dist[from] + w : dist[to];
       }
     }
@@ -240,16 +242,17 @@ public:
         from = times[x][0];
         to = times[x][1];
         w = times[x][2];
-        
+
+        // 같은 과정을 수행해서 업데이트가 생기면 음수 사이클 존재
         if (dist[to] > dist[from] + w)
           return -1;
       }
     }
 
-    for (auto& i : dist)
+    for (auto& i : dist) // 계산한 거리 중 최댓값 찾기
       max_w = i > max_w ? i : max_w;
 
-    if (max_w == 100 * 100 * 10)
+    if (max_w == 100 * 100 * 10) // 찾은 거리 중 초기값이 있다면 경로가 없는 정점이 있음
       return -1;
     return max_w;
   }
