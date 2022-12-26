@@ -2,7 +2,7 @@
 title: "[SLR] 차량 인터페이스 관련 논문 읽기(1)"
 author: dapin1490
 date: 2022-12-26T20:47:00+09:00
-categories: [chatGPT]
+categories: [지식, IT]
 tags: [지식, IT, 차량 인터페이스, 논문, 프로젝트]
 render_with_liquid: false
 ---
@@ -41,7 +41,7 @@ render_with_liquid: false
 </details>
 -->
 
-\* 노란 글씨 : 잘 이해하지 못한 부분, 확실하지 않은 서술
+\* <span class="x-understand">노란 글씨</span> : 잘 이해하지 못한 부분, 확실하지 않은 서술
 
 ## Table of Contents
 - [고속 통신 기반 신규 커넥티드 서비스 디자인을 위한 차량 특화 인터페이스에 관한 분석](#고속-통신-기반-신규-커넥티드-서비스-디자인을-위한-차량-특화-인터페이스에-관한-분석)
