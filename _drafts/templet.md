@@ -2,7 +2,7 @@
 title: "title"
 author: dapin1490
 date: 2023-00-00T00:00:00+09:00
-categories: [지식, IT]
+categories: [IT]
 tags: [지식, IT]
 render_with_liquid: false
 ---
