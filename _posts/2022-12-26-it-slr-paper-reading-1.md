@@ -2,7 +2,7 @@
 title: "[SLR] 차량 인터페이스 관련 논문 읽기(1)"
 author: dapin1490
 date: 2022-12-26T20:47:00+09:00
-categories: [지식, IT]
+categories: [IT, 기타]
 tags: [지식, IT, 차량 인터페이스, 논문, 프로젝트]
 render_with_liquid: false
 ---

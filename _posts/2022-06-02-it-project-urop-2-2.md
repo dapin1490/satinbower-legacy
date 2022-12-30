@@ -2,7 +2,7 @@
 title: "[UROP] 2주 - 2. 다양한 regression"
 author: dapin1490
 date: 2022-06-02T00:00:00+09:00
-categories: [지식, IT]
+categories: [IT, Machine Learning]
 tags: [프로젝트, 지식, IT, 회귀, regression]
 render_with_liquid: false
 ---

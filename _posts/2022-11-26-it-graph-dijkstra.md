@@ -2,7 +2,7 @@
 title: "[자료구조] 그래프와 다익스트라"
 author: dapin1490
 date: 2022-11-26T11:15:00+09:00
-categories: [지식, IT]
+categories: [IT, Algorithm]
 tags: [지식, IT, 과제, 자료구조, 그래프, 다익스트라, dijkstra, 알고리즘]
 render_with_liquid: false
 ---

@@ -2,7 +2,7 @@
 title: "[자료구조] 이진 탐색 트리 Rank"
 author: dapin1490
 date: 2022-09-29T23:55:00+09:00
-categories: [지식, IT]
+categories: [IT, Data Structure]
 tags: [지식, IT, 자료구조, 이진 탐색 트리, 과제]
 render_with_liquid: false
 ---

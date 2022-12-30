@@ -2,7 +2,7 @@
 title: "근골격계에 대한 이해와 인체 움직임의 원리"
 author: dapin1490
 date: 2022-11-13T21:01:00+09:00
-categories: [지식, 기타]
+categories: [기타 지식]
 tags: [지식, 근골격계]
 render_with_liquid: false
 ---

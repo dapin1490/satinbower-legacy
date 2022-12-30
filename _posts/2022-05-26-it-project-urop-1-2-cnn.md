@@ -2,7 +2,7 @@
 title: "[UROP] 1주 - 2. CNN 스터디"
 author: dapin1490
 date: 2022-05-26T00:00:00+09:00
-categories: [지식, IT]
+categories: [IT, Machine Learning]
 tags: [프로젝트, 지식, IT, CNN, 딥러닝, 과학]
 render_with_liquid: false
 ---

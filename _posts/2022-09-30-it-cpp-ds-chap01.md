@@ -2,7 +2,7 @@
 title: "[자료구조] 자료구조와 알고리즘"
 author: dapin1490
 date: 2022-09-30T21:00:00+09:00
-categories: [지식, IT]
+categories: [IT, Data Structure]
 tags: [지식, IT, 자료구조, 알고리즘]
 render_with_liquid: false
 ---

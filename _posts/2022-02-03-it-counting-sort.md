@@ -2,7 +2,7 @@
 title: 카운팅 정렬(+ 선택 정렬)
 author: dapin1490
 date: 2022-01-29T00:00:00+09:00
-categories: [지식, IT]
+categories: [IT, Algorithm]
 tags: [지식, IT, 정렬, 알고리즘, 카운팅정렬]
 render_with_liquid: false
 ---

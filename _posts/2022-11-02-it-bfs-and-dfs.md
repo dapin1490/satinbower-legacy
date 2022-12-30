@@ -2,7 +2,7 @@
 title: "[자료구조] BFS와 DFS"
 author: dapin1490
 date: 2022-11-07T00:22:00+09:00
-categories: [지식, IT]
+categories: [IT, Algorithm]
 tags: [지식, IT, 과제, BFS, DFS, 탐색, 그래프, 자료구조, 알고리즘]
 render_with_liquid: false
 ---

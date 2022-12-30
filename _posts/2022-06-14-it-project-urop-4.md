@@ -2,7 +2,7 @@
 title: "[UROP] 4주 - 영화 흥행 예측 관련 논문 스터디(1)"
 author: dapin1490
 date: 2022-06-14T00:00:00+09:00
-categories: [지식, IT]
+categories: [IT, Machine Learning]
 tags: [지식, IT, 프로젝트, 크롤링, 논문]
 render_with_liquid: false
 ---

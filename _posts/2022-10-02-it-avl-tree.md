@@ -2,7 +2,7 @@
 title: "[자료구조] 균형 이진 트리, AVL 트리"
 author: dapin1490
 date: 2022-10-02T22:03:00+09:00
-categories: [지식, IT]
+categories: [IT, Data Structure]
 tags: [지식, IT, 자료구조, 균형 이진 트리, AVL 트리, 과제]
 render_with_liquid: false
 ---

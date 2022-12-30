@@ -2,7 +2,7 @@
 title: "정보 검색 중간고사"
 author: dapin1490
 date: 2022-10-16T20:39:00+09:00
-categories: [지식, IT]
+categories: [IT, 기타]
 tags: [지식, IT, 정보 검색, 필기]
 render_with_liquid: false
 ---

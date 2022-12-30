@@ -2,7 +2,7 @@
 title: "[UROP] 2주 - 1. Linear Regression 스터디"
 author: dapin1490
 date: 2022-05-30T00:00:00+09:00
-categories: [지식, IT]
+categories: [IT, Machine Learning]
 tags: [프로젝트, 지식, IT, 선형회귀, 딥러닝, 과학]
 render_with_liquid: false
 ---

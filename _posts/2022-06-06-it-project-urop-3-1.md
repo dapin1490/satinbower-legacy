@@ -2,7 +2,7 @@
 title: "[UROP] 3주 - 1. 복습, 데이터 결측치와 원 핫 인코딩"
 author: dapin1490
 date: 2022-06-06T00:00:00+09:00
-categories: [지식, IT]
+categories: [IT, Machine Learning]
 tags: [프로젝트, 지식, IT, 결측치, 원핫인코딩]
 render_with_liquid: false
 ---

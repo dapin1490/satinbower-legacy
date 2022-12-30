@@ -2,7 +2,7 @@
 title: "[UROP] 3주 - 2. 특수 데이터 처리"
 author: dapin1490
 date: 2022-06-10T00:00:00+09:00
-categories: [지식, IT]
+categories: [IT, Machine Learning]
 tags: [지식, IT, 프로젝트, 데이터, 머신러닝, 데이터 전처리]
 render_with_liquid: false
 ---

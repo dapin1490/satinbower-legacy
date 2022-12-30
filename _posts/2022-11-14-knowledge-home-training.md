@@ -2,7 +2,7 @@
 title: "튜빙밴드와 자가체중을 이용한 홈트운동"
 author: dapin1490
 date: 2022-11-14T20:44:00+09:00
-categories: [지식, 기타]
+categories: [기타 지식]
 tags: [지식, 근골격계]
 render_with_liquid: false
 ---

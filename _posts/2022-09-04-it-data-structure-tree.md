@@ -2,7 +2,7 @@
 title: "[자료구조] 트리"
 author: dapin1490
 date: 2022-09-04T20:05:00+09:00
-categories: [지식, IT]
+categories: [IT, Data Structure]
 tags: [지식, IT, 자료구조, 트리]
 render_with_liquid: false
 ---

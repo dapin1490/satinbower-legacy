@@ -2,7 +2,7 @@
 title: "[자료구조] Big-O와 이진 탐색 트리"
 author: dapin1490
 date: 2022-09-23T22:35:00+09:00
-categories: [지식, IT]
+categories: [IT, Data Structure]
 tags: [지식, IT, 자료구조, 이진 탐색 트리, 시간복잡도, Big-O, 과제]
 render_with_liquid: false
 ---

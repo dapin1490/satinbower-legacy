@@ -2,7 +2,7 @@
 title: "[하천 쓰레기 프로젝트] 프로젝트 마무리"
 author: dapin1490
 date: 2022-12-03T23:20:00+09:00
-categories: [지식, IT]
+categories: [IT, Data Structure]
 tags: [지식, IT, 자료구조, 과제, 프로젝트]
 render_with_liquid: false
 ---

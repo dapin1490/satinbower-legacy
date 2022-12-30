@@ -2,7 +2,7 @@
 title: "[자료구조] 우선순위 큐와 힙"
 author: dapin1490
 date: 2022-09-14T21:13:00+09:00
-categories: [지식, IT]
+categories: [IT, Data Structure]
 tags: [지식, IT, 자료구조, 우선순위 큐, 힙, 과제]
 render_with_liquid: false
 ---

@@ -2,7 +2,7 @@
 title: "[자료구조] 벨만-포드 알고리즘"
 author: dapin1490
 date: 2022-12-04T23:20:00+09:00
-categories: [지식, IT]
+categories: [IT, Algorithm]
 tags: [지식, IT, 자료구조, 과제, 벨만-포드, 알고리즘]
 render_with_liquid: false
 ---

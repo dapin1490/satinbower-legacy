@@ -2,7 +2,7 @@
 title: 웨어러블 디바이스, 스마트 워치만 있나?
 author: dapin1490
 date: 2021-11-17T00:00:00+09:00
-categories: [지식, IT]
+categories: [IT, 기타]
 tags: [지식, IT]
 render_with_liquid: false
 ---
