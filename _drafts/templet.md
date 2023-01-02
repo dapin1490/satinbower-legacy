@@ -22,21 +22,28 @@ render_with_liquid: false
 <span class="understand"></span>
 <span class="tab"></span>
 <span class="underline"></span>
+<span class="cancle"></span>
+<span class="green"></span>
 
-[<a id="" href="">1</a>] #
-[<a id="" href="" title="">2</a>] #, <a href="#" target="_blank">#</a>
+[<a id="" href="">1</a>] 참고자료1
+[<a id="" href="" title="">2</a>] 참고자료2, <a href="링크" target="_blank">링크</a>
 <sup><a id="" href="" target="_blank" title=""></a></sup>
 
 <figure>
   <img src="/assets/img/category-#/#">
-  <figcaption>#</figcaption>
+  <figcaption>이미지 이름</figcaption>
 </figure>
 
 <details>
-  <summary>#</summary>
+  <summary>더보기</summary>
   <figure>
     <img src="/assets/img/category-#/#">
-    <figcaption>#</figcaption>
+    <figcaption>이미지 이름</figcaption>
   </figure>
+</details>
+
+<details>
+  <summary>더보기</summary>
+  <p></p>
 </details>
 -->
