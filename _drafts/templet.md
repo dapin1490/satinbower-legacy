@@ -25,6 +25,8 @@ render_with_liquid: false
 <span class="cancle"></span>
 <span class="green"></span>
 
+<code class="language-plaintext highlighter-rouge"></code>
+
 [<a id="" href="">1</a>] 참고자료1
 [<a id="" href="" title="">2</a>] 참고자료2, <a href="링크" target="_blank">링크</a>
 <sup><a id="" href="" target="_blank" title=""></a></sup>
