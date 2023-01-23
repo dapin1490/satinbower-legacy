@@ -8,6 +8,12 @@ layout: null
         xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
+        <loc>https://dapin1490.github.io/posts/it-leetcode-230123/</loc>
+        <lastmod>2023-01-23T23:13:00+09:00</lastmod>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
         <loc>https://dapin1490.github.io/posts/it-leetcode-230112/</loc>
         <lastmod>2023-01-12T16:55:00+09:00</lastmod>
         <priority>0.5</priority>
