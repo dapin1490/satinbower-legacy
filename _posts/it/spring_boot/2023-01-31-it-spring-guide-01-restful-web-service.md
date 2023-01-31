@@ -186,7 +186,7 @@ public class GreetingController {
 
 메서드 본문의 구현은 `counter`의 다음 값을 기반으로 `id` 및 `content` 속성을 가진 새로운 `Greeting` 객체를 생성하고 반환하며 `template`을 사용하여 주어진 `name`을 포맷한다(format).  
 
-기존 MVC 컨트롤러와 앞에서 설명한 RESTful 웹 서비스 컨트롤러의 주요 차이점은 HTTP 응답 본문이 생성되는 방식이다. 이 RESTful 웹 서비스 컨트롤러는 뷰 기술을 사용하여 인사말 데이터를 HTML로 렌더링하는 대신 `Greeting` 객체를 채워서 반환한다. 객체 데이터는 HTTP 응답에 JSON으로 직접 기록된다.  
+기존 MVC 컨트롤러와 앞에서 설명한 RESTful 웹 서비스 컨트롤러의 주요 차이점은 HTTP 응답 본문이 생성되는 방식이다. 이 RESTful 웹 서비스 컨트롤러는 뷰 기술을 사용하여 데이터를 HTML로 렌더링하는 대신 `Greeting` 객체를 채워서 반환한다. 객체 데이터는 HTTP 응답에 JSON으로 직접 기록된다.  
 
 이 코드는 Spring `@RestController` 주석을 사용하는데, 이 주석은 클래스를 '모든 메서드가 뷰 대신 도메인 객체를 반환하는 컨트롤러'로 표시한다. 이는 `@Controller`와 `@ResponseBody`를 모두 포함하는 줄임말이다.  
 
