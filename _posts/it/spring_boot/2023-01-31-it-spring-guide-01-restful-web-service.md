@@ -226,7 +226,7 @@ java -jar target/gs-rest-service-0.1.0.jar
 
 1. 빌드를 하기 전에 프로젝트 내에 `build/` 폴더를 미리 만들어 둔다. (처음부터 만들고 한 거라 안 하면 어떻게 되는지는 모른다)
 2. cmd에 `cd 프로젝트경로`를 입력해 프로젝트 폴더로(정확히는 `gradlew` 파일이 있는 위치로) 이동한다.
-3. `gradgrew build`를 입력하면 바로 빌드가 생긴다.
+3. `gradlew build`를 입력하면 바로 빌드가 생긴다.
 4. 빌드 후 생성된 jar 파일의 이름을 알아야 한다. 아까 만들어둔 `build/` 폴더의 `build/libs/` 폴더에 들어가서 직접 jar 파일의 이름을 확인해도 되고, `build.gradle` 파일과 `settings.gradle` 파일에서 버전명(`version`)과 프로젝트명(`rootProject.name`)을 확인하고 조합해도 된다. 조합 방식은 `build/libs/프로젝트명-버전.jar`이다. 언더바(`_`)와 하이픈(`-`)을 구분한다.
 5. 4번에서 확인한 jar 파일 이름으로 실행 명령어를 쓴다. `java -jar build/libs/프로젝트명-버전.jar`이다.
 6. Spring 아스키 아트가 뜨면 성공한 것이다. 이대로 cmd를 켜둔 채 다음 과정을 진행하면 된다.
