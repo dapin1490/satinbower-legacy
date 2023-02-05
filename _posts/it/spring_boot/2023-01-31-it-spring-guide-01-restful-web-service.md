@@ -1,9 +1,9 @@
 ---
-title: "[Spring GUIDE] Building a RESTful Web Service"
+title: "[Spring TUTORIAL] Building a RESTful Web Service"
 author: dapin1490
 date: 2023-01-31T00:00:00+09:00
 categories: [IT, Spring Boot]
-tags: [지식, IT, Spring, Spring Boot, Gradle, Guide]
+tags: [지식, IT, Spring, Spring Boot, Gradle, Tutorial]
 render_with_liquid: false
 ---
 
