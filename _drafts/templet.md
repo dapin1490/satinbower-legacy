@@ -9,11 +9,11 @@ render_with_liquid: false
 
 <style>
   .x-understand { color: #ccb833; }
-  .understand { color: #1380da; }
+  .understand { color: #0099FF; }
   .tab { white-space: pre; }
   .underline { text-decoration: underline; }
   .cancle { text-decoration: line-through; }
-  .green { color: forestgreen;}
+  .green { color: #339966; }
   figure { text-align: center; }
 </style>
 
