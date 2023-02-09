@@ -8,6 +8,12 @@ layout: null
         xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
+        <loc>https://dapin1490.github.io/posts/it-spring-guide-02-build-rest-service-01/</loc>
+        <lastmod>2023-02-10T00:09:00+09:00</lastmod>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
         <loc>https://dapin1490.github.io/posts/it-spring-guide-01-restful-web-service/</loc>
         <lastmod>2023-01-31T00:00:00+09:00</lastmod>
         <priority>0.5</priority>

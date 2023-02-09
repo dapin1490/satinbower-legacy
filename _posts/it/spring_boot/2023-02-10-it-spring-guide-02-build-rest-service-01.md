@@ -1,21 +1,11 @@
 ---
-title: "[Spring TUTORIAL] Building REST services with Spring"
+title: "[Spring TUTORIAL] Building REST services with Spring (1)"
 author: dapin1490
-date: 2023-02-03T00:00:00+09:00
+date: 2023-02-10T00:09:00+09:00
 categories: [IT, Spring Boot]
 tags: [지식, IT, Spring, Spring Boot, Gradle, Tutorial]
 render_with_liquid: false
 ---
-
-<style>
-  .x-understand { color: #ccb833; }
-  .understand { color: #0099FF; }
-  .tab { white-space: pre; }
-  .underline { text-decoration: underline; }
-  .cancle { text-decoration: line-through; }
-  .green { color: #339966; }
-  figure { text-align: center; }
-</style>
 
 ## Table of Contents
 - [관련 글 보기](#관련-글-보기)
@@ -23,11 +13,6 @@ render_with_liquid: false
   - [Getting Started](#getting-started)
   - [The Story so Far...](#the-story-so-far)
   - [HTTP is the Platform](#http-is-the-platform)
-  - [What makes something RESTful?](#what-makes-something-restful)
-  - [Simplifying Link Creation](#simplifying-link-creation)
-  - [Evolving REST APIs](#evolving-rest-apis)
-  - [Building links into your REST API](#building-links-into-your-rest-api)
-  - [Summary](#summary)
 
 \* 일부 번역기를 사용한 부분이 있음
 
@@ -36,11 +21,11 @@ render_with_liquid: false
 
 # Building REST services with Spring
 원문 보기: <https://spring.io/guides/tutorials/rest/>  
-깃허브에서 보기: <https://github.com/spring-guides/tut-rest>
+깃허브에서 보기: <https://github.com/spring-guides/tut-rest>  
 
-REST는 구축하기 쉽고 사용하기 쉽기 때문에 웹에서 웹 서비스를 구축하는 실질적인<sup>de-facto</sup> 표준이 되었다.  
+REST는 구축하기 쉽고 사용하기 쉽기 때문에 웹에서 웹 서비스를 구축하는 사실상의<sup>de-facto</sup> 표준이 되었다.  
 
-마이크로서비스 분야에서 REST가 어떻게 적합한지에 대해 훨씬 더 많은 논의가 필요하지만, 이 튜토리얼에서는 RESTful 서비스 구축에 대해 살펴보겠다.  
+마이크로서비스의 세계에서 REST가 어떻게 적합한지에 대해서는 훨씬 더 많은 논의가 필요하지만, 이 자습서에서는 RESTful 서비스 구축에 대해서만 살펴보기로 한다.  
 
 왜 REST일까? REST는 아키텍처, 이점<sup>benefits</sup> 및 기타 모든 것을 포함하여 웹의 수칙<sup>the precepts of the web</sup>을 수용한다. 이는 저자 Roy Fielding이 웹이 작동하는 방식을 지배하는 십여 가지 사양<sup>specs</sup>에 관여했다는 점을 고려하면 놀라운 일이 아니다.  
 
@@ -63,16 +48,16 @@ HTTP 위에 구축함으로써, REST API는 다음을 구축할 수 있는 수�
 - 보안 서비스
 - 상태 비저장 서비스부터 상태 저장 서비스까지
 
-중요한 것은 REST가 아무리 유비쿼터스일지라도 그 자체가 표준이 아니라 웹 스케일 시스템을 구축하는 데 도움이 될 수 있는 접근 방식, 스타일, 아키텍처의 제약 조건 집합이라는 것이다. 이 튜토리얼에서는 스프링 포트폴리오를 사용하여 REST의 스택리스 기능을 활용하면서 RESTful 서비스를 구축할 것이다.
+중요한 것은 REST가 아무리 유비쿼터스일지라도 그 자체가 표준이 아니라 웹 스케일 시스템을 구축하는 데 도움이 될 수 있는 접근 방식, 스타일, 아키텍처의 제약 조건 집합이라는 것이다. 이 자습서에서는 스프링 포트폴리오를 사용하여 REST의 스택리스 기능을 활용하면서 RESTful 서비스를 구축할 것이다.
 
 ## Getting Started
-이 튜토리얼은 [Spring Boot](https://spring.io/projects/spring-boot)를 사용한다. [Spring Initializr](https://start.spring.io/)로 이동하여 프로젝트에 다음 종속성을 추가한다.
+이 자습서는 [Spring Boot](https://spring.io/projects/spring-boot)를 사용한다. [Spring Initializr](https://start.spring.io/)로 이동하여 프로젝트에 다음 종속성을 추가한다.
 
 - Web
 - JPA
 - H2
 
-이름을 "Payroll"로 변경한 후 "Generate Project"를 선택하고 `.zip`이 다운로드된다. 압축을 푼다. 내부에는 `pom.xml` 빌드 파일을 포함한 Maven 기반의 간단한 프로젝트가 있다(참고: Gradle을 *사용할 수 있다*. 이 튜토리얼의 예는 Maven 기반이다.)
+이름을 "Payroll"로 변경한 후 "Generate Project"를 선택하고 `.zip`이 다운로드된다. 압축을 푼다. 내부에는 `pom.xml` 빌드 파일을 포함한 Maven 기반의 간단한 프로젝트가 있다(참고: Gradle을 *사용할 수 있다*. 이 자습서의 예는 Maven 기반이다.)
 
 Spring Boot는 모든 IDE와 함께 작동할 수 있다. Eclipse, IntelliJ IDEA, Netbeans 등을 사용할 수 있다. [Spring Tool Suite](https://spring.io/tools/)(STS)는 이클립스의 Java EE 배포판의 상위 집합을 제공하는 오픈 소스 Eclipse 기반 IDE 배포판이다. Spring 애플리케이션을 훨씬 더 쉽게 사용할 수 있는 기능이 포함되어 있지만 STS가 필수는 아니다. 하지만 키 입력을 위한 추가 **공간<sup>oomph</sup>**을 원한다면 고려해 보라. 다음은 STS와 Spring Boot를 시작하는 방법을 보여주는 비디오이다. 이것은 도구에 익숙해지기 위한 일반적인 소개이다.
 
@@ -84,6 +69,7 @@ Spring Boot는 모든 IDE와 함께 작동할 수 있다. Eclipse, IntelliJ IDEA
 개요<sup>Big picture</sup>: 회사의 직원들을 관리하는 간단한 급여 서비스를 만들 것이다. 직원 개체를 메모리 내 H2 데이터베이스에 저장하고 JPA라고 불리는 것을 통해 액세스한다. 그런 다음 인터넷을 통해 액세스할 수 있는 기능(Spring MVC 계층이라고 함)으로 포장한다.
 
 다음 코드는 시스템에서 직원을 정의한다.
+
 `nonrest/src/main/java/payroll/Employee.java`
 
 ```java
@@ -168,7 +154,7 @@ class Employee {
 
 Spring Data JPA repository는 백엔드 데이터 저장소에 대한 레코드 생성, 읽기, 업데이트, 삭제를 지원하는 메서드를 갖는 인터페이스이다. 일부 repository는 적절한 경우 데이터 페이징과 정렬도 지원한다. Spring Data는 인터페이스의 메서드 명명에서 발견된 규칙을 기반으로 구현<sup>implementation</sup>을 합성한다<sup>synthesize</sup>.
 
-\* JPA 외에도 여러 개의 repository 구현이 있다. Spring Data MongoDB, Spring Data GemFire, Spring Data Cassandra 등을 사용할 수 있다. 이 튜토리얼은 JPA로 진행한다.
+\* JPA 외에도 여러 개의 repository 구현이 있다. Spring Data MongoDB, Spring Data GemFire, Spring Data Cassandra 등을 사용할 수 있다. 이 자습서는 JPA로 진행한다.
 
 Spring을 사용하면 데이터에 쉽게 액세스할 수 있다. 다음과 같은 `EmployeeRepository` 인터페이스를 선언하기만 하면 자동으로 다음과 같은 것들이 가능해진다:
 
@@ -213,9 +199,9 @@ public class PayrollApplication {
 }
 ```
 
-`@SpringBootApplication` is a meta-annotation that pulls in **component scanning**, **autoconfiguration**, and **property support**. We won’t dive into the details of Spring Boot in this tutorial, but in essence, it will fire up a servlet container and serve up our service.
+`@SpringBootApplication`은 **구성 요소 검색**, **자동 구성**, **속성 지원**을 적용하는 메타 주석<sup>meta-annotation</sup>이다. 이 자습서에서는 Spring Boot에 대한 자세한 내용을 자세히 설명하지는 않겠지만 본질적으로 서블릿 컨테이너<sup>servlet container</sup>가 작동하고 서비스가 제공된다.
 
-Nevertheless, an application with no data isn’t very interesting, so let’s preload it. The following class will get loaded automatically by Spring:
+그래도 데이터가 없는 애플리케이션은 별로 흥미롭지 않으니 미리 로드해보자. 다음 클래스는 Spring에 의해 자동으로 로드된다:
 
 `nonrest/src/main/java/payroll/LoadDatabase.java`
 
@@ -244,15 +230,15 @@ class LoadDatabase {
 }
 ```
 
-What happens when it gets loaded?
+로드할 때 무슨 일이 일어날까?
 
-- Spring Boot will run ALL `CommandLineRunner` beans once the application context is loaded.
-- This runner will request a copy of the `EmployeeRepository` you just created.
-- Using it, it will create two entities and store them.
+- 일단 애플리케이션의 context가 로드되면 Spring Boot가 모든 `CommandLineRunner` bean을 실행할 것이다.
+- 이 실행자<sup>runner</sup>는 당신이 방금 만든 `EmployeeRepository`의 사본을 요청할 것이다.
+- 이를 이용해, 그것은 두 객체<sup>entities</sup>를 만들고 저장한다.
 
-Right-click and **Run** `PayRollApplication`, and this is what you get:
+우클릭을 하고 `PayRollApplication`을 **실행하면** 다음과 같은 결과를 얻을 수 있다:
 
-Fragment of console output showing preloading of data
+데이터를 미리 로드하는 중 보이는 콘솔 출력문의 일부이다.
 
 ```txt
 ...
@@ -261,10 +247,10 @@ Fragment of console output showing preloading of data
 ...
 ```
 
-This isn’t the **whole** log, but just the key bits of preloading data. (Indeed, check out the whole console. It’s glorious.)
+이것은 **전체** 로그가 아니라 데이터 사전 로드의 주요 부분일 뿐이다. (실제로 전체 콘솔을 확인하라. 멋질 것이다.)
 
 ## HTTP is the Platform
-To wrap your repository with a web layer, you must turn to Spring MVC. Thanks to Spring Boot, there is little in infrastructure to code. Instead, we can focus on actions:
+웹 계층으로 repository를 감싸려면 Spring MVC로 전환해야 한다. Spring Boot 덕분에 코딩할 인프라가 거의 없다. 대신, 우리는 다음과 같은 조치에 집중할 수 있다:
 
 `nonrest/src/main/java/payroll/EmployeeController.java`
 
@@ -335,10 +321,10 @@ class EmployeeController {
 }
 ```
 
-- `@RestController` indicates that the data returned by each method will be written straight into the response body instead of rendering a template.
-- An `EmployeeRepository` is injected by constructor into the controller.
-- We have routes for each operation (`@GetMapping`, `@PostMapping`, `@PutMapping` and `@DeleteMapping`, corresponding to HTTP `GET`, `POST`, `PUT`, and `DELETE` calls). (NOTE: It’s useful to read each method and understand what they do.)
-- `EmployeeNotFoundException` is an exception used to indicate when an employee is looked up but not found.
+- `@RestController`는 각 메서드에서 반환되는 데이터가 템플릿을 렌더링하는 대신 응답 본문에 직접 기록됨을 나타낸다.
+- `EmployeeRepository`는 생성자에 의해 컨트롤러에 주입된다<sup>injected</sup>.
+- 각 작업(HTTP `GET`, `POST`, `PUT`, `DELETE` 호출에 해당하는 `@GetMapping`, `@PostMapping`, `@PutMapping`, `@DeleteMapping`)에 대한 경로가 있다. (참고: 각 방법을 읽고 그것이 무엇을 하는지 이해하는 것이 유용하다.)
+- `EmployeeNotFoundException`은 직원을 조회했지만 찾을 수 없는 경우를 나타내는 예외이다.
 
 `nonrest/src/main/java/payroll/EmployeeNotFoundException.java`
 
@@ -353,7 +339,7 @@ class EmployeeNotFoundException extends RuntimeException {
 }
 ```
 
-When an `EmployeeNotFoundException` is thrown, this extra tidbit of Spring MVC configuration is used to render an **HTTP 404**:
+`EmployeeNotFoundException`이 발생하면, 다음 Spring MVC 구성의 추가 tidbit이 **HTTP 404**를 렌더링하는 데 사용된다:
 
 `nonrest/src/main/java/payroll/EmployeeNotFoundAdvice.java`
 
@@ -378,32 +364,32 @@ class EmployeeNotFoundAdvice {
 }
 ```
 
-- `@ResponseBody` signals that this advice is rendered straight into the response body.
-- `@ExceptionHandler` configures the advice to only respond if an `EmployeeNotFoundException` is thrown.
-- `@ResponseStatus` says to issue an `HttpStatus.NOT_FOUND`, i.e. an **HTTP 404**.
-- The body of the advice generates the content. In this case, it gives the message of the exception.
+- `@ResponseBody`는 이 조언<sup>advice</sup>이 응답 본문으로 바로 렌더링된다는 신호를 보낸다.
+- `@ExceptionHandler`는 `EmployeeNotFoundException`이 발생했을 때만 응답하도록 조언<sup>advice</sup>을 구성한다.
+- `@ResponseStatus`는 `HttpStatus.NOT_FOUND`, 즉 **HTTP 404**를 발행<sup>issue</sup>하도록 지시한다.
+- 조언<sup>advice</sup>의 본문은 콘텐츠를 생성한다. 이 경우 예외에 대한 메시지를 제공한다.
 
-To launch the application, either right-click the `public static void main` in `PayRollApplication` and select **Run** from your IDE, or:
+애플리케이션을 시작하려면 `PayRollApplication`에서 `public static void main`을 마우스 오른쪽 버튼으로 클릭하고 IDE에서 **실행**을 선택하거나, 아래와 같이 시도할 수 있다.
 
-Spring Initializr uses maven wrapper so type this:
+Spring Initializr는 maven wrapper를 사용하므로 다음과 같이 입력한다:
 
 ```shell
 $ ./mvnw clean spring-boot:run
 ```
 
-Alternatively using your installed maven version type this:
+또는 설치된 maven 버전을 사용하여 다음과 같이 입력한다:
 
 ```shell
 $ mvn clean spring-boot:run
 ```
 
-When the app starts, we can immediately interrogate it.
+앱이 시작되면 즉시 질의할<sup>interrogate</sup> 수 있다.
 
 ```shell
 $ curl -v localhost:8080/employees
 ```
 
-This will yield:
+결과는 다음과 같을 것이다:
 
 ```txt
 *   Trying ::1...
@@ -423,15 +409,15 @@ This will yield:
 [{"id":1,"name":"Bilbo Baggins","role":"burglar"},{"id":2,"name":"Frodo Baggins","role":"thief"}]
 ```
 
-Here you can see the pre-loaded data, in a compacted format.
+여기에서 미리 로드된 데이터를 압축된 형식으로 볼 수 있다.
 
-If you try and query a user that doesn’t exist...
+존재하지 않는 사용자를 쿼리하려고 하면...
 
 ```shell
 $ curl -v localhost:8080/employees/99
 ```
 
-You get...
+결과는...
 
 ```txt
 *   Trying ::1...
@@ -451,96 +437,57 @@ You get...
 Could not find employee 99
 ```
 
-This message nicely shows an **HTTP 404** error with the custom message **Could not find employee 99**.
+이 메시지는 **employee 99를 찾을 수 없습니다**라는 사용자 지정 메시지와 함께 **HTTP 404** 오류를 멋지게 표시한다.
 
-It's not hard to show the currently coded interactions...
+현재 코딩된 상호작용을 보여주는 것은 어렵지 않다...
 
-\* If you are using Windows Command Prompt to issue cURL commands, chances are the below command won’t work properly. You must either pick a terminal that support single quoted arguments, or use double quotes and then escape the ones inside the JSON.
+\* Windows 명령 프롬프트를 사용하여 cURL 명령을 실행하는 경우 아래 명령이 제대로 작동하지 않을 수 있다. 작은따옴표로 묶인 인수를 지원하는 터미널을 선택하거나 큰따옴표를 사용한 다음 JSON 내부의 인수를 이스케이프 처리해야 한다.
 
-To create a new `Employee` record we use the following command in a terminal—the `$` at the beginning signifies that what follows it is a terminal command:
+터미널에서 다음 명령을 사용하여 새 `Employee` 레코드를 생성한다. 시작 부분의 `$`는 그 뒤에 오는 명령이 터미널 명령임을 나타낸다:
 
 ```shell
 $ curl -X POST localhost:8080/employees -H 'Content-type:application/json' -d '{"name": "Samwise Gamgee", "role": "gardener"}'
+
+# for Window
+$ curl -X POST localhost:8080/employees -H "Content-type:application/json" -d "{\"name\": \"Samwise Gamgee\", \"role\": \"gardener\"}"
 ```
 
-Then it stores newly created employee and sends it back to us:
+그런 다음 새로 생성된 직원을 저장하고 우리에게 다시 보낸다:
 
 ```txt
 {"id":3,"name":"Samwise Gamgee","role":"gardener"}
 ```
 
-You can update the user. Let’s change his role.
+사용자를 업데이트할 수 있다. 그의 역할을 변경해 보겠다.
 
 ```shell
 $ curl -X PUT localhost:8080/employees/3 -H 'Content-type:application/json' -d '{"name": "Samwise Gamgee", "role": "ring bearer"}'
+
+# for Window
+$ curl -X PUT localhost:8080/employees/3 -H "Content-type:application/json" -d "{\"name\": \"Samwise Gamgee\", \"role\": \"ring bearer\"}"
 ```
 
-And we can see the change reflected in the output.
+그리고 출력에 반영된 변경 사항을 확인할 수 있다.
 
 ```txt
 {"id":3,"name":"Samwise Gamgee","role":"ring bearer"}
 ```
 
-\* The way you construct your service can have significant impacts. In this situation, we said **update**, but **replace** is a better description. For example, if the name was NOT provided, it would instead get nulled out.
+\* 서비스를 구성하는 방식은 상당한 영향력을 갖는다. 이 상황에서는 **업데이트**라고 했지만 **교체**라고 하는 것이 더 나은 설명이다. 예를 들어, 이름이 제공되지 *않으면* 대신 무효화된다<sup>nulled out</sup>.
 
-Finally, you can delete users like this:
+마지막으로 다음과 같이 사용자를 삭제할 수 있다:
 
 ```shell
 $ curl -X DELETE localhost:8080/employees/3
 
 # Now if we look again, it's gone
+# 다시 검색하면 사라져있다
 $ curl localhost:8080/employees/3
 Could not find employee 3
 ```
 
-This is all well and good, but do we have a RESTful service yet? (If you didn’t catch the hint, the answer is no.)
+다 좋은데, RESTful 서비스는 아직인가? (잘 모르겠다면, 대답은 '아직이다'이다.)
 
-What’s missing?
+뭐가 빠졌을까?
 
-## What makes something RESTful?
-
-
-## Simplifying Link Creation
-
-
-## Evolving REST APIs
-
-
-## Building links into your REST API
-
-
-## Summary
-
-
-<!--
-<span class="x-understand"></span>
-<span class="understand"></span>
-<span class="tab"></span>
-<span class="underline"></span>
-<span class="cancle"></span>
-<span class="green"></span>
-
-<code class="language-plaintext highlighter-rouge"></code>
-
-[<a id="" href="">1</a>] 참고자료1
-[<a id="" href="" title="">2</a>] 참고자료2, <a href="링크" target="_blank">링크</a>
-<sup><a id="" href="" target="_blank" title=""></a></sup>
-
-<figure>
-  <img src="/assets/img/category-#/#">
-  <figcaption>이미지 이름</figcaption>
-</figure>
-
-<details>
-  <summary>더보기</summary>
-  <figure>
-    <img src="/assets/img/category-#/#">
-    <figcaption>이미지 이름</figcaption>
-  </figure>
-</details>
-
-<details>
-  <summary>더보기</summary>
-  <p></p>
-</details>
--->
+이후의 내용은 다음 글에서 확인해보자. 분량이 너무 길어서 몇 개의 글로 나누어 올릴 생각이다.

@@ -8,6 +8,7 @@ render_with_liquid: false
 ---
 
 ## Table of Contents
+- [관련 글 보기](#관련-글-보기)
 - [사전 지식](#사전-지식)
   - [REST](#rest)
   - [Gradle](#gradle)
@@ -29,6 +30,9 @@ render_with_liquid: false
 
 *\* 일부 문단에서 번역기 사용함*  
 *\* 일부 문단에 직접 해결했던 오류나 추가로 찾아봤던 내용을 같이 기록함(한글 소제목으로 된 문단)*
+
+# 관련 글 보기
+- [[Spring TUTORIAL] Building REST services with Spring (1)](https://dapin1490.github.io/posts/it-spring-guide-02-build-rest-service-01/)
 
 # 사전 지식
 
