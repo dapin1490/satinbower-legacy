@@ -22,9 +22,6 @@ render_with_liquid: false
 - [Building REST services with Spring](#building-rest-services-with-spring)
   - [What makes something RESTful?](#what-makes-something-restful)
   - [Simplifying Link Creation](#simplifying-link-creation)
-  - [Evolving REST APIs](#evolving-rest-apis)
-  - [Building links into your REST API](#building-links-into-your-rest-api)
-  - [Summary](#summary)
 
 \* 일부 번역기를 사용한 부분이 있음
 
@@ -234,15 +231,103 @@ And each individual member of the collection has their information as well as re
 What is the point of adding all these links? It makes it possible to evolve REST services over time. Existing links can be maintained while new links can be added in the future. Newer clients may take advantage of the new links, while legacy clients can sustain themselves on the old links. This is especially helpful if services get relocated and moved around. As long as the link structure is maintained, clients can STILL find and interact with things.
 
 ## Simplifying Link Creation
+In the code earlier, did you notice the repetition in single employee link creation? The code to provide a single link to an employee, as well as to create an "employees" link to the aggregate root, was shown twice. If that raised your concern, good! There’s a solution.
 
+Simply put, you need to define a function that converts `Employee` objects to `EntityModel<Employee>` objects. While you could easily code this method yourself, there are benefits down the road of implementing Spring HATEOAS’s `RepresentationModelAssembler` interface—which will do the work for you.
 
-## Evolving REST APIs
+`evolution/src/main/java/payroll/EmployeeModelAssembler.java`
 
+```java
+package payroll;
 
-## Building links into your REST API
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.RepresentationModelAssembler;
+import org.springframework.stereotype.Component;
 
-## Summary
+@Component
+class EmployeeModelAssembler implements RepresentationModelAssembler<Employee, EntityModel<Employee>> {
+
+  @Override
+  public EntityModel<Employee> toModel(Employee employee) {
+
+    return EntityModel.of(employee, //
+        linkTo(methodOn(EmployeeController.class).one(employee.getId())).withSelfRel(),
+        linkTo(methodOn(EmployeeController.class).all()).withRel("employees"));
+  }
+}
+```
+
+This simple interface has one method: `toModel()`. It is based on converting a non-model object (`Employee`) into a model-based object (`EntityModel<Employee>`).
+
+All the code you saw earlier in the controller can be moved into this class. And by applying Spring Framework’s `@Component` annotation, the assembler will be automatically created when the app starts.
+
+\* Spring HATEOAS’s abstract base class for all models is `RepresentationModel`. But for simplicity, I recommend using `EntityModel<T>` as your mechanism to easily wrap all POJOs as models.
+
+To leverage this assembler, you only have to alter the `EmployeeController` by injecting the assembler in the constructor.
+
+Injecting EmployeeModelAssembler into the controller
+
+```java
+@RestController
+class EmployeeController {
+
+  private final EmployeeRepository repository;
+
+  private final EmployeeModelAssembler assembler;
+
+  EmployeeController(EmployeeRepository repository, EmployeeModelAssembler assembler) {
+
+    this.repository = repository;
+    this.assembler = assembler;
+  }
+
+  ...
+
+}
+```
+
+From here, you can use that assembler in the single-item employee method:
+
+Getting single item resource using the assembler
+
+```java
+@GetMapping("/employees/{id}")
+EntityModel<Employee> one(@PathVariable Long id) {
+
+  Employee employee = repository.findById(id) //
+      .orElseThrow(() -> new EmployeeNotFoundException(id));
+
+  return assembler.toModel(employee);
+}
+```
+
+This code is almost the same, except instead of creating the `EntityModel<Employee>` instance here, you delegate it to the assembler. Maybe that doesn’t look like much.
+
+Applying the same thing in the aggregate root controller method is more impressive:
+
+Getting aggregate root resource using the assembler
+
+```java
+@GetMapping("/employees")
+CollectionModel<EntityModel<Employee>> all() {
+
+  List<EntityModel<Employee>> employees = repository.findAll().stream() //
+      .map(assembler::toModel) //
+      .collect(Collectors.toList());
+
+  return CollectionModel.of(employees, linkTo(methodOn(EmployeeController.class).all()).withSelfRel());
+}
+```
+
+The code is, again, almost the same, however you get to replace all that `EntityModel<Employee>` creation logic with `map(assembler::toModel)`. Thanks to Java 8 method references, it’s super easy to plug it in and simplify your controller.
+
+\* A key design goal of Spring HATEOAS is to make it easier to do The Right Thing™. In this scenario: adding hypermedia to your service without hard coding a thing.
+
+At this stage, you’ve created a Spring MVC REST controller that actually produces hypermedia-powered content! Clients that don’t speak HAL can ignore the extra bits while consuming the pure data. Clients that DO speak HAL can navigate your empowered API.
+
+But that is not the only thing needed to build a truly RESTful service with Spring.
 
 
 <!--
