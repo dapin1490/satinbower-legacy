@@ -1,7 +1,7 @@
 ---
 title: "[Spring TUTORIAL] Building REST services with Spring (2)"
 author: dapin1490
-date: 2023-02-03T00:00:00+09:00
+date: 2023-02-19T17:33:00+09:00
 categories: [IT, Spring Boot]
 tags: [지식, IT, Spring, Spring Boot, Gradle, Tutorial]
 render_with_liquid: false
@@ -34,28 +34,28 @@ render_with_liquid: false
 깃허브에서 보기: <https://github.com/spring-guides/tut-rest>
 
 ## What makes something RESTful?
-So far, you have a web-based service that handles the core operations involving employee data. But that’s not enough to make things "RESTful".
+지금까지는 직원 데이터와 관련된 핵심 작업을 처리하는 웹 기반 서비스를 만들었다. 하지만 이것만으로는 "RESTful"을 구현하기에 충분하지 않다.
 
-- Pretty URLs like `/employees/3` aren't REST.
-- Merely using `GET`, `POST`, etc. isn't REST.
-- Having all the CRUD operations laid out isn't REST.
+- `/employees/3`과 같은 예쁜 URL은 REST가 아니다.
+- 단순히 `GET`, `POST` 등을 사용하는 것은 REST가 아니다.
+- 모든 CRUD 작업이 배치되어 있는 것이 REST는 아니다.
 
-In fact, what we have built so far is better described as **RPC** (**Remote Procedure Call**). That’s because there is no way to know how to interact with this service. If you published this today, you’d also have to write a document or host a developer’s portal somewhere with all the details.
+사실 지금까지 구축한 것은 **RPC**(**원격 프로시저 호출**)로 더 잘 설명할 수 있다. 왜냐하면 이 서비스와 상호 작용하는 방법을 알 수 있는 방법이 없기 때문이다. 만약 오늘 이 내용을 공개한다면, 모든 세부 사항이 담긴 문서를 작성하거나 개발자 포털을 어딘가에 호스팅해야 할 것이다.
 
-This statement of Roy Fielding’s may further lend a clue to the difference between **REST** and **RPC**:
+Roy Fielding의 이 말<sup>statement</sup>은 **REST**와 **RPC**의 차이점에 대한 실마리를 제공할 수 있다:
 
-I am getting frustrated by the number of people calling any HTTP-based interface a REST API. Today’s example is the SocialSite REST API. That is RPC. It screams RPC. There is so much coupling on display that it should be given an X rating.
+HTTP 기반 인터페이스를 REST API라고 부르는 사람들이 너무 많아서 답답합니다. 오늘의 예는 SocialSite REST API입니다. 바로 RPC입니다. RPC라고 외칩니다. 너무 많은 커플링이 표시되어 있어 X 등급을 부여해야 합니다(원문: There is so much coupling on display that it should be given an X rating).
 
-What needs to be done to make the REST architectural style clear on the notion that hypertext is a constraint? In other words, if the engine of application state (and hence the API) is not being driven by hypertext, then it cannot be RESTful and cannot be a REST API. Period. Is there some broken manual somewhere that needs to be fixed?
+하이퍼텍스트가 제약 조건이라는 개념에 대해 REST 아키텍처 스타일을 명확히 하려면 어떻게 해야 할까요? 다시 말해, 애플리케이션 상태 엔진(따라서 API)이 하이퍼텍스트에 의해 구동되지 않는다면 RESTful이 될 수 없으며 REST API가 될 수 없습니다. 끝입니다<sup>Period</sup>. 어딘가에 수정해야 할 잘못된 매뉴얼이 있나요?
 
 — Roy Fielding  
 <i><a href="https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven">https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven</a></i>
 
-The side effect of NOT including hypermedia in our representations is that clients MUST hard code URIs to navigate the API. This leads to the same brittle nature that predated the rise of e-commerce on the web. It’s a signal that our JSON output needs a little help.
+하이퍼미디어<sup>hypermedia</sup>를 표현<sup>representations</sup>에 포함하지 않을 경우의 부작용은 클라이언트가 API를 탐색하기 위해 URI를 하드 코딩해야 한다는 것이다. 이는 웹에서 e-commerce가 등장하기 전과 같은 취약한 특성으로 이어진다. 이는 JSON 출력에 약간의 도움이 필요하다는 신호이다.
 
-Introducing [Spring HATEOAS](https://spring.io/projects/spring-hateoas), a Spring project aimed at helping you write hypermedia-driven outputs. To upgrade your service to being RESTful, add this to your build:
+하이퍼미디어 기반 출력물을 작성할 수 있도록 도와주는 Spring 프로젝트인 [Spring HATEOAS](https://spring.io/projects/spring-hateoas)를 소개한다. 서비스를 RESTful로 업그레이드하려면 빌드에 추가하라:
 
-Adding Spring HATEOAS to `dependencies` section of `pom.xml`
+[ `pom.xml`의 `dependencies` 섹션에 Spring HATEOAS 추가하기 ]
 
 ```xml
 <dependency>
@@ -64,19 +64,17 @@ Adding Spring HATEOAS to `dependencies` section of `pom.xml`
 </dependency>
 ```
 
+Gradle은 `build.gradle` 파일 안의 `dependencies`에 아래를 추가해주면 된다. (<a href="https://jeonghoon.netlify.app/Spring/SpringBoot13-hateoas/" target="_blank" title="Spring boot) Hateoas로 REST API 처리하기">출처</a>)
 
-```
-Gradle의 경우 build.gradle 파일 안의 디펜던시에 아래를 추가해주면 된다.
-https://jeonghoon.netlify.app/Spring/SpringBoot13-hateoas/
-
+```gradle
 implementation 'org.springframework.boot:spring-boot-starter-hateoas'
 ```
 
-This tiny library will give us the constructs to define a RESTful service and then render it in an acceptable format for client consumption.
+이 작은 라이브러리는 RESTful 서비스를 정의한 다음 클라이언트가 사용할 수 있는 형식으로 렌더링할 수 있는 구성을 제공한다.
 
-A critical ingredient to any RESTful service is adding links to relevant operations. To make your controller more RESTful, add links like this:
+모든 RESTful 서비스의 핵심 요소는 관련 작업에 대한 링크를 추가하는 것이다. 컨트롤러를 더욱 RESTful하게 만들려면 다음과 같은 링크를 추가하라:
 
-Getting a single item resource
+[ 단일 항목 리소스 가져오기 ]
 
 ```java
 @GetMapping("/employees/{id}")
@@ -91,31 +89,36 @@ EntityModel<Employee> one(@PathVariable Long id) {
 }
 ```
 
-\* This tutorial is based on Spring MVC and uses the static helper methods from `WebMvcLinkBuilder` to build these links. If you are using Spring WebFlux in your project, you must instead use `WebFluxLinkBuilder`.
+\* 이 자습서는 Spring MVC를 기반으로 하며, `WebMvcLinkBuilder`의 정적 헬퍼 메서드를 사용하여 이러한 링크를 빌드한다. 프로젝트에서 Spring WebFlux를 사용하는 경우, 대신 `WebFluxLinkBuilder`를 사용해야 한다.
 
-This is very similar to what we had before, but a few things have changed:
+이전 버전과 매우 유사하지만 몇 가지 사항이 변경되었다:
 
-- The return type of the method has changed from `Employee` to `EntityModel<Employee>`. `EntityModel<T>` is a generic container from Spring HATEOAS that includes not only the data but a collection of links.
-- `linkTo(methodOn(EmployeeController.class).one(id)).withSelfRel()` asks that Spring HATEOAS build a link to the `EmployeeController`'s `one()` method, and flag it as a [self](https://www.iana.org/assignments/link-relations/link-relations.xhtml) link.
-- `linkTo(methodOn(EmployeeController.class).all()).withRel("employees")` asks Spring HATEOAS to build a link to the aggregate root, `all()`, and call it "employees".
+- 메서드의 반환 유형이 `Employee`에서 `EntityModel<Employee>`로 변경되었다. `EntityModel<T>`는 데이터뿐만 아니라 링크 컬렉션을 포함하는 Spring HATEOAS의 일반 컨테이너이다.
+- `linkTo(methodOn(EmployeeController.class).one(id)).withSelfRel()`은 Spring HATEOAS가 `EmployeeController`의 `one()` 메서드에 대한 링크를 빌드하고 이를 [self](https://www.iana.org/assignments/link-relations/link-relations.xhtml) 링크로 플래그를 지정하도록 요청한다.
+- `linkTo(methodOn(EmployeeController.class).all()).withRel("employees")`는 Spring HATEOAS에 집계 루트<sup>aggregate root</sup>인 `all()`에 대한 링크를 생성하고 이를 "employees"라고 호출하도록 요청한다.
 
-What do we mean by "build a link"? One of Spring HATEOAS’s core types is `Link`. It includes a **URI** and a **rel** (relation). Links are what empower the web. Before the World Wide Web, other document systems would render information or links, but it was the linking of documents WITH this kind of relationship metadata that stitched the web together.
+"링크 구축"이 무슨 말일까? Spring HATEOAS의 핵심 타입 중 하나는 `Link`이다. 여기에는 **URI**와 **rel**(relation, 관계)이 포함된다. 링크는 웹을 강화하는 요소이다. 월드와이드웹 이전에는 다른 문서 시스템에서도 정보나 링크를 렌더링했지만, 웹을 하나로 이어주는 것은 바로 이런 관계 메타데이터로 문서와 문서를 연결하는 것이었다.
 
-Roy Fielding encourages building APIs with the same techniques that made the web successful, and links are one of them.
+Roy Fielding은 웹을 성공으로 이끈 것과 동일한 기술로 API를 구축할 것을 권장하며, 링크는 그 중 하나이다.
 
-If you restart the application and query the employee record of *Bilbo*, you’ll get a slightly different response than earlier:
+애플리케이션을 다시 시작하고 *Bilbo*의 직원 기록을 쿼리하면 이전과 약간 다른 응답이 표시된다:
 
-**<span class="green">Curling prettier</span>**
+**<span class="green">더 보기 좋은 curl</span>**
 
-When your curl output gets more complex it can become hard to read. Use this or [other tips](https://stackoverflow.com/q/27238411/5432315) to prettify the json returned by curl:
+curl 출력이 더 복잡해지면 읽기 어려워질 수 있다. 아래 명령어 또는 [다른 팁](https://stackoverflow.com/q/27238411/5432315)을 사용하여 curl이 반환하는 json을 예쁘게 정리하라:
 
 ```txt
 # The indicated part pipes the output to json_pp and asks it to make your JSON pretty. (Or use whatever tool you like!)
+# 표시된 부분은 출력을 json_pp로 파이프하고 JSON을 예쁘게 만들도록 요청한다. (또는 원하는 도구를 사용하라!)
 #                                  v------------------v
 curl -v localhost:8080/employees/1 | json_pp
+
+# 윈도우10, command line으로 위 명령을 실행해봤는데, json_pp가 사용 불가한 명령어라 하여 실패했다. 찾아보니 json_pp는 리눅스 환경에서만 사용 가능한 명령이고 윈도우에서 같은 결과를 보려면 jq를 설치해서 json_pp 대신 jq 명령어를 써야 한다고는 하던데, 설치가 번거로워보여서 관뒀다... 설치를 하면 삭제할 줄도 알아야 하는데 설치 방법도 제대로 이해를 못해서는 삭제할 수가 없다.
+# 대신 파이썬을 사용해볼 수 있다. 당연히 파이썬이 설치되어 있어야 할 것이다.
+curl -v localhost:8080/employees/1 | python -m json.tool
 ```
 
-RESTful representation of a single employee
+[ 단일 직원에 대한 RESTful 표현 ]
 
 ```json
 {
@@ -133,15 +136,15 @@ RESTful representation of a single employee
 }
 ```
 
-This decompressed output shows not only the data elements you saw earlier (`id`, `name` and `role`), but also a `_links` entry containing two URIs. This entire document is formatted using [HAL](http://stateless.co/hal_specification.html).
+이 압축 해제된 출력에는 앞에서 본 데이터 요소(`id`, `name`, `role`)뿐만 아니라 두 개의 URI가 포함된 `_links` 항목도 표시된다. 이 전체 문서의 형식은 [HAL](http://stateless.co/hal_specification.html)을 사용한다.
 
-HAL is a lightweight [mediatype](https://tools.ietf.org/html/draft-kelly-json-hal-08) that allows encoding not just data but also hypermedia controls, alerting consumers to other parts of the API they can navigate toward. In this case, there is a "self" link (kind of like a `this` statement in code) along with a link back to the **[aggregate root](https://www.google.com/search?q=What+is+an+aggregate+root)**.
+HAL은 데이터뿐만 아니라 하이퍼미디어 컨트롤도 인코딩할 수 있는 경량 [mediatype](https://tools.ietf.org/html/draft-kelly-json-hal-08)으로, 소비자에게 API의 다른 부분으로 이동할 수 있음을 알린다. 이 경우, **[집계 루트](https://www.google.com/search?q=What+is+an+aggregate+root)**<strong><sup>aggregate root</sup></strong>로 돌아가는 링크와 함께 "자체<sup>self</sup>" 링크(코드의 `this` 문과 같은 종류)가 있다.
 
-To make the aggregate root ALSO more RESTful, you want to include top level links while ALSO including any RESTful components within.
+집계 루트를 *더욱* RESTful하게 만들려면 최상위 링크를 포함*하면서* 그 안에 RESTful 컴포넌트도 포함해야 한다.
 
-So we turn this
+그래서 이것을
 
-Getting an aggregate root
+[ 집계 루트 가져오기 ]
 
 ```java
 @GetMapping("/employees")
@@ -150,9 +153,9 @@ List<Employee> all() {
 }
 ```
 
-into this
+이렇게 바꾼다
 
-Getting an aggregate root resource
+[ 집계 루트 리소스 가져오기 ]
 
 ```java
 @GetMapping("/employees")
@@ -168,21 +171,22 @@ CollectionModel<EntityModel<Employee>> all() {
 }
 ```
 
-Wow! That method, which used to just be `repository.findAll()`, is all grown up! Not to worry. Let’s unpack it.
+Wow! `repository.findAll()`에 불과했던 메서드가 이렇게 길어졌다! 걱정하지 말고 포장을 풀어보자.
 
-`CollectionModel<>` is another Spring HATEOAS container; it’s aimed at encapsulating collections of resources—instead of a single resource entity, like `EntityModel<>` from earlier. `CollectionModel<>`, too, lets you include links.
+`CollectionModel<>`은 또 다른 Spring HATEOAS 컨테이너로, 앞서 보았던 `EntityModel<>`처럼 단일 리소스 엔티티 대신 리소스 컬렉션을 캡슐화하는 데 목적이 있다. `CollectionModel<>` 역시 링크를 포함할 수 있다.
 
-Don’t let that first statement slip by. What does "encapsulating collections" mean? Collections of employees?
+첫 문장을 놓치지 말라. "컬렉션을 캡슐화"한다는 것은 무슨 말일까? 직원들의 컬렉션?
 
-Not quite.
+그건 아니다.
 
+REST에 대해 이야기하고 있으므로 **직원 리소스**의 컬렉션을 캡슐화해야 한다.
 Since we’re talking REST, it should encapsulate collections of **employee resources**.
 
-That’s why you fetch all the employees, but then transform them into a list of `EntityModel<Employee>` objects. (Thanks Java 8 Streams!)
+그렇기 때문에 모든 직원을 가져온 다음 `EntityModel<Employee>` 객체 목록으로 변환한다. (Java 8 Streams 덕분이다!)
 
-If you restart the application and fetch the aggregate root, you can see what it looks like now.
+애플리케이션을 다시 시작하고 집계 루트를 fetch하면 현재 어떤 모습인지 확인할 수 있다.
 
-RESTful representation of a collection of employee resources
+[ 직원 리소스 컬렉션의 RESTful 표현 ]
 
 ```json
 {
@@ -224,16 +228,16 @@ RESTful representation of a collection of employee resources
 }
 ```
 
-For this aggregate root, which serves up a collection of employee resources, there is a top-level "**self**" link. The "**collection**" is listed underneath the "**_embedded**" section; this is how HAL represents collections.
+직원 리소스 컬렉션을 제공하는 이 집계 루트의 경우 최상위 수준인 "**self**" 링크가 있다. "**collection**"은 "**_embedded**" 섹션 아래에 나열되며, 이것이 HAL이 컬렉션을 나타내는 방식이다.
 
-And each individual member of the collection has their information as well as related links.
+또한 컬렉션의 각 개별 멤버는 자신의 정보와 관련 링크를 가지고 있습니다.
 
-What is the point of adding all these links? It makes it possible to evolve REST services over time. Existing links can be maintained while new links can be added in the future. Newer clients may take advantage of the new links, while legacy clients can sustain themselves on the old links. This is especially helpful if services get relocated and moved around. As long as the link structure is maintained, clients can STILL find and interact with things.
+왜 이 모든 링크를 다 추가하는 것일까? 시간이 지남에 따라 REST 서비스를 발전시킬 수 있기 때문이다. 기존 링크를 유지하면서 향후에 새로운 링크를 추가할 수 있다. 신규 클라이언트는 새로운 링크를 활용할 수 있고, 구버전<sup>legacy</sup> 클라이언트는 기존 링크를 유지할 수 있다. 이는 서비스가 이전되거나 이동하는 경우에 특히 유용하다. 링크 구조가 유지되는 한 클라이언트는 여전히 사물을 찾고 상호 작용할 수 있다.
 
 ## Simplifying Link Creation
-In the code earlier, did you notice the repetition in single employee link creation? The code to provide a single link to an employee, as well as to create an "employees" link to the aggregate root, was shown twice. If that raised your concern, good! There’s a solution.
+앞의 코드에서 단일 직원 링크 생성이 반복되는 것을 보았는가? 직원에 대한 단일 링크를 제공하는 코드와 집계 루트에 대한 "employees" 링크를 생성하는 코드가 두 번 표시되었다. 이 때문에 걱정이 되었다면 다행이다! 해결책이 있다.
 
-Simply put, you need to define a function that converts `Employee` objects to `EntityModel<Employee>` objects. While you could easily code this method yourself, there are benefits down the road of implementing Spring HATEOAS’s `RepresentationModelAssembler` interface—which will do the work for you.
+간단히 말해, `Employee` 객체를 `EntityModel<Employee>` 객체로 변환하는 함수를 정의해야 한다. 이 메서드를 직접 코딩할 수도 있지만, 이 작업을 대신 수행해줄 Spring HATEOAS의 `RepresentationModelAssembler` 인터페이스를 구현하면 이점이 있다.
 
 `evolution/src/main/java/payroll/EmployeeModelAssembler.java`
 
@@ -259,15 +263,15 @@ class EmployeeModelAssembler implements RepresentationModelAssembler<Employee, E
 }
 ```
 
-This simple interface has one method: `toModel()`. It is based on converting a non-model object (`Employee`) into a model-based object (`EntityModel<Employee>`).
+이 간단한 인터페이스에는 `toModel()`이라는 하나의 메서드가 있다. 이 메서드는 모델이 아닌 객체(`Employee`)를 모델 기반 객체(`EntityModel<Employee>`)로 변환하는 것을 바탕으로 한다.
 
-All the code you saw earlier in the controller can be moved into this class. And by applying Spring Framework’s `@Component` annotation, the assembler will be automatically created when the app starts.
+앞서 컨트롤러에서 보았던 모든 코드를 이 클래스로 옮길 수 있다. 그리고 Spring 프레임워크의 `@Component` 어노테이션을 적용하면 앱이 시작될 때 어셈블러가 자동으로 생성된다.
 
-\* Spring HATEOAS’s abstract base class for all models is `RepresentationModel`. But for simplicity, I recommend using `EntityModel<T>` as your mechanism to easily wrap all POJOs as models.
+\* 모든 모델에 대한 Spring HATEOAS의 추상 베이스 클래스는 `RepresentationModel`입니다. 그러나 단순화를 위해 모든 POJO를 모델로 쉽게 래핑하는 메커니즘으로 `EntityModel<T>`를 사용하는 것이 좋습니다.
 
-To leverage this assembler, you only have to alter the `EmployeeController` by injecting the assembler in the constructor.
+이 어셈블러를 활용하려면 생성자에 어셈블러를 주입하여 `EmployeeController`를 변경하기만 하면 된다.
 
-Injecting EmployeeModelAssembler into the controller
+[ EmployeeModelAssembler를 컨트롤러에 주입하기 ]
 
 ```java
 @RestController
@@ -288,9 +292,9 @@ class EmployeeController {
 }
 ```
 
-From here, you can use that assembler in the single-item employee method:
+여기에서, 단일 항목 직원 메서드에서 해당 어셈블러를 사용할 수 있다:
 
-Getting single item resource using the assembler
+[ 어셈블러를 사용하여 단일 항목 리소스 가져오기 ]
 
 ```java
 @GetMapping("/employees/{id}")
@@ -303,11 +307,11 @@ EntityModel<Employee> one(@PathVariable Long id) {
 }
 ```
 
-This code is almost the same, except instead of creating the `EntityModel<Employee>` instance here, you delegate it to the assembler. Maybe that doesn’t look like much.
+이 코드는 이전 것과 거의 동일하지만 여기서 `EntityModel<Employee>` 인스턴스를 생성하는 대신 어셈블러에 위임한다는 점이 다르다. 별 차이가 없어 보일 수도 있다.
 
-Applying the same thing in the aggregate root controller method is more impressive:
+집계 루트 컨트롤러 메서드에 동일한 내용을 적용하는 것이 더 인상적이다:
 
-Getting aggregate root resource using the assembler
+[ 어셈블러를 사용하여 집계 루트 리소스 가져오기 ]
 
 ```java
 @GetMapping("/employees")
@@ -321,44 +325,10 @@ CollectionModel<EntityModel<Employee>> all() {
 }
 ```
 
-The code is, again, almost the same, however you get to replace all that `EntityModel<Employee>` creation logic with `map(assembler::toModel)`. Thanks to Java 8 method references, it’s super easy to plug it in and simplify your controller.
+코드는 거의 동일하지만, `EntityModel<Employee>` 생성 로직을 모두 `map(assembler::toModel)`로 대체할 수 있다. Java 8 메서드 참조 덕분에 매우 쉽게 플러그인하여 컨트롤러를 단순화할 수 있다.
 
-\* A key design goal of Spring HATEOAS is to make it easier to do The Right Thing™. In this scenario: adding hypermedia to your service without hard coding a thing.
+\* Spring HATEOAS의 핵심 설계 목표는 올바른 일을 더 쉽게 할 수 있도록 하는 것이다. 이 시나리오에서는 하드 코딩 없이 하이퍼미디어를 서비스에 추가하는 것이다.
 
-At this stage, you’ve created a Spring MVC REST controller that actually produces hypermedia-powered content! Clients that don’t speak HAL can ignore the extra bits while consuming the pure data. Clients that DO speak HAL can navigate your empowered API.
+이 단계에서는 실제로 하이퍼미디어 기반 콘텐츠를 생성하는 Spring MVC REST 컨트롤러를 만들었다! HAL을 사용하지 않는 클라이언트는 순수한 데이터를 소비하면서 추가 비트를 무시할 수 있습니다. HAL을 사용하는 클라이언트는 권한이 부여된 API를 탐색할 수 있다.
 
-But that is not the only thing needed to build a truly RESTful service with Spring.
-
-
-<!--
-<span class="x-understand"></span>
-<span class="understand"></span>
-<span class="tab"></span>
-<span class="underline"></span>
-<span class="cancle"></span>
-<span class="green"></span>
-
-<code class="language-plaintext highlighter-rouge"></code>
-
-[<a id="" href="">1</a>] 참고자료1
-[<a id="" href="" title="">2</a>] 참고자료2, <a href="링크" target="_blank">링크</a>
-<sup><a id="" href="" target="_blank" title=""></a></sup>
-
-<figure>
-  <img src="/assets/img/category-#/#">
-  <figcaption>이미지 이름</figcaption>
-</figure>
-
-<details>
-  <summary>더보기</summary>
-  <figure>
-    <img src="/assets/img/category-#/#">
-    <figcaption>이미지 이름</figcaption>
-  </figure>
-</details>
-
-<details>
-  <summary>더보기</summary>
-  <p></p>
-</details>
--->
+하지만 Spring으로 진정한 RESTful 서비스를 구축하는 데 필요한 것은 이것만이 아니다. 그것은 다음에 이어서 알아보도록 하자. 이번에도 글이 길어서 나누었다.
