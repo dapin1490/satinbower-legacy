@@ -8,16 +8,19 @@ render_with_liquid: false
 ---
 
 <style>
+  figure { text-align: center; }
+</style>
+
+<!--
+<style> // _layouts\post.html에 지정된 스타일
   .x-understand { color: #ccb833; }
   .understand { color: #0099FF; }
   .tab { white-space: pre; }
   .underline { text-decoration: underline; }
   .cancle { text-decoration: line-through; }
   .green { color: #339966; }
-  figure { text-align: center; }
 </style>
 
-<!--
 <span class="x-understand"></span>
 <span class="understand"></span>
 <span class="tab"></span>
