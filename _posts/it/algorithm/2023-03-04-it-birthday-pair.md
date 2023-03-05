@@ -25,6 +25,7 @@ render_with_liquid: false
     - [의사 코드](#의사-코드)
     - [코드 작성](#코드-작성)
   - [알고리즘 개선](#알고리즘-개선)
+    - [수정한 알고리즘](#수정한-알고리즘)
 - [번외: 랜덤한 생일 생성해서 쓰기](#번외-랜덤한-생일-생성해서-쓰기)
 - [추가 궁금한 점](#추가-궁금한-점)
 - [참고 자료](#참고-자료)
@@ -205,9 +206,45 @@ for _ in range(0, 10):  # 데이터를 무작위로 섞어 10번 반복
     \* 나중에 GPT가 써준 개선 코드 예시를 봤는데, 결과를 출력하는 부분에서 `None`이 반환되었을 경우 `일치하는 쌍이 없습니다` 같은 문구를 대신 출력하게 만들라는 뜻이었던 것 같다. 이 코드는 확인만 하면 되는 코드라 굳이 그렇게까지 쓰지는 않았었다.
 6. 샘플링 코드를 함수 외부로 이동하라. 데이터를 샘플링하고 함수를 호출하는 코드를 함수 외부로 이동하여 함수의 모듈화 및 재사용성을 높일 수 있다.  
     \* 이건 뭘 말하는 건지 모르겠다. 데이터를 섞기 위한 샘플링 코드를 말하는 거라면 이미 함수 밖에 있다.  
-    \* 개선 코드 예시를 봤는데 `if __name__ == '__main__':`가 추가된 것 이외엔 별 다를 게 없었다. 정말로 어떻게 바꾸라는 건지 모르겠다.
+    \* 개선 코드 예시를 봤는데 `if __name__ == '__main__':`이 추가된 것 이외엔 별 다를 게 없었다. 정말로 어떻게 바꾸라는 건지 모르겠다.
 
 GPT의 예시 코드는 생략하겠다. 그걸 그대로 가져다 쓸 마음은 없다. 바꿔도 내 맛대로 바꿔야 내 코드지.
+
+### 수정한 알고리즘
+chatGPT의 제안을 반영했다.
+
+1. 주석을 더 자세히 썼다.
+2. 대충 지은 변수명을 제대로 개명했다.
+3. 생일 쌍을 찾는 함수 내에서 테이블에 데이터가 존재하는지 확인하는 부분을 `if-else`에서 `try-except`로 바꿨다.
+4. 생일 쌍이 데이터에 존재하지 않았을 경우 `None` 대신 "No pair"를 출력한다.
+
+* `if __name__ == '__main__':`은 필요성을 느끼지 못해 추가하지 않았다. 이 함수를 모듈로 쓸 생각이라면 추가하는 게 맞지만 현재로서는 이 함수를 모듈로 사용할 생각이 없다.
+
+```py
+file_route = r'algorithm\homework\week01\Algorithms - Birthday Data edited.csv'
+
+data = pd.read_csv(file_route, header=0, encoding='utf-8')
+data.dropna(inplace=True)  # 수강생 중 생일을 제공하지 않은 데이터는 제외
+
+print(data.info())
+
+def find_birthday_pair(_data):  # 생일 쌍 찾기
+    table = {}  # <class 'dict'>
+
+    for i in _data.index:  # 데이터를 인덱스대로 순회
+        person = _data.iloc[i]  # 데이터 하나씩 가져오기
+        try:  # 테이블에 데이터가 존재한다면 다음 코드가 실행됨
+            return (table[person['Birthday']], person['Number'], person['Birthday'])  # 생일 쌍 반환
+        except KeyError:  # 테이블에 데이터가 존재하지 않았음
+            table[person['Birthday']] = person['Number']  # 테이블에 추가
+
+    return None  # 반복을 다 해도 반환할 게 없었다면 None 반환
+
+for _ in range(0, 10):  # 데이터를 무작위로 섞어 10번 반복
+    data = data.sample(frac=1).reset_index(drop=True)  # 데이터 섞기
+    result = find_B_pair(data)
+    print(f'{result if result is not None else "No pair"}')  # 생일 쌍 찾기 결과 출력
+```
 
 # 번외: 랜덤한 생일 생성해서 쓰기
 원래 이것까지 할 마음은 없었는데, 위에서 쓴 코드가 생각보다 싱겁게 끝나서 좀 더 썼다.  
