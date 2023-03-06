@@ -26,7 +26,7 @@ render_with_liquid: false
     - [코드 작성](#코드-작성)
   - [알고리즘 개선](#알고리즘-개선)
     - [수정한 알고리즘](#수정한-알고리즘)
-- [번외: 랜덤한 생일 생성해서 쓰기](#번외-랜덤한-생일-생성해서-쓰기)
+- [진짜 이론대로 나오는지 실험하기](#진짜-이론대로-나오는지-실험하기)
 - [추가 궁금한 점](#추가-궁금한-점)
 - [참고 자료](#참고-자료)
 
@@ -246,9 +246,15 @@ for _ in range(0, 10):  # 데이터를 무작위로 섞어 10번 반복
     print(f'{result if result is not None else "No pair"}')  # 생일 쌍 찾기 결과 출력
 ```
 
-# 번외: 랜덤한 생일 생성해서 쓰기
-원래 이것까지 할 마음은 없었는데, 위에서 쓴 코드가 생각보다 싱겁게 끝나서 좀 더 썼다.  
-`find_B_pair()` 함수는 위에서 정의한 것과 같다.
+# 진짜 이론대로 나오는지 실험하기
+- `find_birthday_pair()` 함수는 위에서 정의한 것과 같다.
+- 1 ~ 365 중 하나를 뽑고 이를 월과 일로 환산하는 방식으로 랜덤한 생일을 생성한다. 굳이 환산하는 이유는 [추가 궁금한 점](#추가-궁금한-점) 문단을 보면 알 수 있다.
+- `n`에 직접 숫자를 대입하여 사람 수를 정할 수 있다.
+- `total`로 총 실행 횟수를 정할 수 있다.
+- 자세한 사항은 주석으로 써두었다.
+
+`n`을 23으로 설정하고 코드를 실행하면 실제로 50% 이상의 확률이 나온다. 아래 코드를 **응용**해 실험한 결과는 다음 링크에서 확인할 수 있다.  
+<https://www.kaggle.com/code/dapin1490/birthday-problem/>
 
 ```py
 import pandas as pd
@@ -271,9 +277,9 @@ n = random.randrange(0, 100+1)  # 사람 수
 total = 500  # 총 실행 수
 
 for i in range(0, total):
-    print(f'\niterate {i+1}: n = {n}')
+    print(f'\niterate {i+1}')
     random_data = pd.DataFrame(generate_days(n))  # 임의의 생일 데이터 생성
-    b_pair = find_B_pair(random_data)  # 생일 쌍 찾기
+    b_pair = find_birthday_pair(random_data)  # 생일 쌍 찾기
     if b_pair is not None:  # 생일 쌍이 존재할 경우 카운트 증가
         cnt += 1
     print(b_pair)  # 찾아낸 생일 쌍 출력(None이어도 출력)
