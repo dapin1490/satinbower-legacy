@@ -19,6 +19,7 @@ render_with_liquid: false
   .underline { text-decoration: underline; }
   .cancle { text-decoration: line-through; }
   .green { color: #339966; }
+  code.language-plaintext.highlighter-rouge { color: #1aaac7; }
 </style>
 
 <span class="x-understand"></span>
