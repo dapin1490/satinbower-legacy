@@ -8,6 +8,12 @@ layout: null
         xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
+        <loc>https://dapin1490.github.io/satinbower/posts/it-algorithm-dijkstra/</loc>
+        <lastmod>2023-04-02T00:00:00+09:00</lastmod>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
         <loc>https://dapin1490.github.io/satinbower/posts/it-hash-and-sort/</loc>
         <lastmod>2023-04-02T00:00:00+09:00</lastmod>
         <priority>0.5</priority>
