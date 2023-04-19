@@ -454,6 +454,24 @@ img[data-src] {
   overflow-wrap: break-word;
   word-wrap: break-word;
 
+  /* customs begin */
+  h1, h2, h3, h4, h5 {
+    color: #669966;
+  }
+
+  .x-understand { color: #ccb833; }
+  .understand { color: #0099FF; }
+  .tab { white-space: pre; }
+  .underline { text-decoration: underline; }
+  .cancle { text-decoration: line-through; }
+  .green { color: #339966; }
+
+  code.language-plaintext.highlighter-rouge {
+    color: #1aaac7;
+    font-family: 'Nanum Gothic Coding', 'Nanum Gothic', 'Source Sans Pro', 'Microsoft Yahei', sans-serif;
+  }
+  /* customs end */
+
   a {
     &:not(.img-link) {
       @extend %link-underline;
