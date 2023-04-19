@@ -33,7 +33,7 @@ body {
   background: var(--body-bg);
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
-  font-family: 'Nanum Gothic', 'Nanum Gothic Coding', 'Source Sans Pro', 'Microsoft Yahei', sans-serif;
+  font-family: 'Nanum Gothic', 'Source Sans Pro', 'Microsoft Yahei', sans-serif;
 }
 
 /* --- Typography --- */
@@ -468,7 +468,7 @@ img[data-src] {
 
   code.language-plaintext.highlighter-rouge {
     color: #1aaac7;
-    font-family: 'Roboto Mono', 'Nanum Gothic Coding', 'Nanum Gothic', 'Source Sans Pro', 'Microsoft Yahei', sans-serif;
+    font-family: 'Roboto Mono', 'Nanum Gothic Coding', 'Microsoft Yahei', monospace;
   }
   /* customs end */
 
