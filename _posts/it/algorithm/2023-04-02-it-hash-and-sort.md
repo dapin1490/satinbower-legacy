@@ -15,6 +15,12 @@ render_with_liquid: false
 - [할 일](#할-일)
 - [선형 중앙값 찾기](#선형-중앙값-찾기)
   - [덤 - pivot 잘 고르기](#덤---pivot-잘-고르기)
+- [해싱할 때 0을 곱하면 안 되는 이유](#해싱할-때-0을-곱하면-안-되는-이유)
+- [다양한 정렬](#다양한-정렬)
+  - [Basic quick sort](#basic-quick-sort)
+  - [Intelligent quick sort](#intelligent-quick-sort)
+  - [Paranoid quick sort](#paranoid-quick-sort)
+  - [Tuple sort](#tuple-sort)
 - [참고 자료](#참고-자료)
 
 # 할 일
@@ -68,6 +74,8 @@ render_with_liquid: false
 
 위 과정대로 하면 pivot을 잘 골랐다고 할 때, 크기가 n인 배열에 대해 매 반복마다 대략 n/2으로 길이가 줄어들기 때문에 O(log n), 부분 배열의 요소를 전부 확인하기 때문에 O(n), 합쳐서 O(n log n) 시간으로 중앙값을 찾을 수 있고, 만약 pivot이 항상 남은 배열 중 최댓값 혹은 최솟값이라서 모든 요소를 확인할 수밖에 없었다고 한다면 O(n²)이다.
 
+여기서 좀 더 개선이 가능하다. 배열의 요소를 최소 5개 이상의 개수로 묶어 중앙값의 중앙값을 찾아 그것을 pivot으로 고르면 선형 시간 내에 중앙값을 찾을 수 있다고 한다.
+
 지금은 중앙값에 대해서만 얘기했지만, 위 방법을 응용하면 특정 인덱스의 값을 찾는 것도 가능하다.
 
 ## 덤 - pivot 잘 고르기
@@ -75,51 +83,70 @@ render_with_liquid: false
 
 pivot을 잘 고른다는 게 무슨 말일까? pivot을 잘 고르면 어떻게 될까? 잘못 고른 pivot은 배열을 균등하게 나누지 못하고 한쪽에 너무 많은 요소가 치우치게 만든다. 반대로 말하면 잘 고른 pivot은 배열을 균등하게 나눌 수 있고, 한쪽에 너무 많은 요소가 치우치지 않게 만든다고 볼 수 있다.
 
+*여기서부터는 수업 내용을 기억하는 대로 쓰는 거라 틀린 부분이 있을 수 있다.(사유: 필기할 정신이 없을 정도로 설명이 빨랐음)*
+
+pivot을 잘 고르기 전에 먼저 전제되어야 할 것이 있다. pivot을 랜덤하게 선택할 건데, 배열의 모든 요소가 pivot으로 선택될 확률이 동일해야 한다. 그리고 잘 고른 pivot이란, 배열을 파티션했을 때 작은 쪽 부분배열의 크기가 적어도 전체 배열의 1/4보다는 크거나 같게 되고, 큰 쪽 부분배열의 크기가 3/4보다는 작거나 같게 되는 것을 말한다.
+
+위의 전제들을 바탕으로 생각해 보자. 알고리즘의 답안에 해당하는 정렬된 배열을 기준으로, 적어도 작은 쪽이 1/4 이상은 남게 배열을 분할해야 하기 때문에 좋은 pivot은 배열의 앞에서부터 1/4 ~ 3/4 사이에 있는 pivot이다. 전체 배열의 비율로 치면 1/2이다. 배열의 모든 요소가 pivot으로 선택될 확률이 동일하기 때문에, 좋은 pivot이 선택될 확률은 전체 배열의 비율과 똑같이 1/2이다.
+
+좋은 pivot이 선택될 확률이 1/2이라는 것은, 나쁜 pivot이 선택될 확률도 1/2이라는 말이다. 그러므로 1/2이라는 확률만 믿고 처음 랜덤하게 고른 pivot을 그대로 쓰긴 좀 그렇고, 적어도 한 번은 파티션을 해봐야 한다. 랜덤한 pivot을 골라 파티션을 한번 해보고 배열이 잘 분할되었으면 그대로 진행, 그렇지 않다면 pivot을 다시 뽑는다.
+
+자세한 과정은 기억나지 않지만 확률적으로 pivot을 2번만 뽑아보면 무조건 좋은 pivot을 찾을 수 있다고 한다. 최악의 경우 `O(n²)`이 되는 것보다는 `O(n)`을 2번 써서 `O(n log n)`을 확실하게 챙기는 게 낫다고 한다.
+
+# 해싱할 때 0을 곱하면 안 되는 이유
+문제: 해싱 함수에서 계수 a가 0이 아니어야 하는 이유는 무엇입니까?
+
+해시 함수 h는 다음과 같이 쓴다.  
+`h_ab(k) = ((ak + b) mod p) mod m`  
+여기서 a가 0이 되면 원래의 값인 k가 사라지기 때문에 a는 0이 아니어야 한다.
+
+# 다양한 정렬
+할 일:
+
+* 생일 데이터 집합을 사용하여 다음을 수행합니다:
+    1. unsorted array using set 사용하여 정렬되지 않은 배열에 넣습니다.
+    2. 생일을 기준으로 정렬합니다. 다음 알고리즘을 고려해야 합니다.
+        * Basic quick sort  
+          피벗 X = A[0] 또는 A[n-1]
+        * Intelligent quick sort  
+          피벗 X = A의 중앙값
+        * Paranoid quick sort  
+          피벗 X = E(좋은 선택)
+        * Tuple sort  
+            1. 월이 첫 번째, 날짜가 두 번째
+            2. 날짜가 먼저 오고 월이 두 번째
+    3. 정렬 알고리즘 비교
+
+## Basic quick sort
+기본적인 퀵정렬. 일정한 위치에 있는 피벗을 기준으로 값을 분류한다. 피벗은 주로 배열의 첫 번째 요소이거나, 마지막 요소이다.
+
+이미 정렬된 배열일 경우가 최악의 경우이고, O(n^2)이다.  
+정렬되지 않은 배열에 대해 O(n log n)으로 정렬이 가능하다.
+
+시간복잡도 O(n log n)
+
+## Intelligent quick sort
+O(n)을 소비해 배열의 중앙값을 피벗으로 선택함으로써 균형 잡힌 파티션을 보장한다. 파티션이란, 피벗을 기준으로 분류된 배열을 의미한다. 중앙값을 찾는 알고리즘에 대한 설명은 [# 선형 중앙값 찾기](#선형-중앙값-찾기) 문단에서 볼 수 있다.
+
+균형 잡힌 파티션이 보장되는 건 좋지만 코드가 많이 지저분해진다고 한다.
+
+시간복잡도 O(n) + O(n log n)
+
+## Paranoid quick sort
+배열에서 피벗을 무작위로 선택하되, 좋은 것으로 고른다. 좋은 피벗은 파티션을 분할한 후 두 파티션의 크기가 모두 원래 배열의 1/4 이상, 3/4 이하가 되도록 하는 피벗이다. [# 덤 - pivot 잘 고르기](#덤---pivot-잘-고르기) 문단에서의 계산에 의해, 피벗을 2번만 골라보면 반드시 좋은 피벗을 고를 수 있다. 이후는 보통 퀵정렬과 같다.
+
+시간복잡도 O(n) + O(n log n)
+
+## Tuple sort
+정렬해야 할 값을 일정한 기준에 따라 몇 개의 요소로 이루어진 튜플로 만들어 정렬한다. 퀵정렬의 변종이 아니다.
+
+예를 들어 생일을 정렬한다면, (월, 일)의 튜플로 만들어 월별 정렬과 일별 정렬을 모두 수행하는 방식이다. 영향력이 작은 값을 기준으로 먼저 정렬해야 제대로 된 결과가 나온다. 정수를 정렬한다면 임의의 숫자로 나눈 몫과 나머지를 (몫, 나머지) 튜플로 만들어 정렬할 수 있다. 마찬가지로 영향력이 적은 나머지를 기준으로 먼저 정렬해야 제대로 정렬된다.
+
+굳이 따진다면 멀쩡한 배열을 몇 배로 늘려서 정렬하는 꼴이니 시간복잡도는 별로라고 한다.
+
+하지만 카운팅 정렬과 결합해서 정렬한다면 썩 괜찮은 방법이 될 수 있지 않을까? (몫, 나머지) 튜플을 예로 생각해보자. 정렬해야 할 요소들의 범위를 알고 있다면 몫의 범위도 미리 알 수 있다. 그리고 나머지는 나누는 수에 따라 달라지기 때문에 당연히 범위를 알고 있다. 카운팅 정렬은 범위를 미리 알고 있다면 선형 시간 내에 정렬할 수 있으니, 나머지로 한 번 정렬하고 몫으로 다시 정렬해봐야 2n이고, 즉 `O(n)`이다. 물론 값의 범위를 미리 알아야 한다는 전제가 있고, 카운팅 정렬의 단점도 감수해야 하니 한계가 있는 방법이다.
 
 # 참고 자료
 1. 선형 시간에 중간값 구하기 (Quick-Select & Median-of-Medians), <a href="https://gazelle-and-cs.tistory.com/58" target="_blank">https://gazelle-and-cs.tistory.com/58</a>
-
-
-<!--
-<style> // _layouts\post.html에 지정된 스타일
-  .x-understand { color: #ccb833; }
-  .understand { color: #0099FF; }
-  .tab { white-space: pre; }
-  .underline { text-decoration: underline; }
-  .cancle { text-decoration: line-through; }
-  .green { color: #339966; }
-</style>
-
-<a href="" target="_blank"></a>
-
-<span class="x-understand"></span>
-<span class="understand"></span>
-<span class="tab"></span>
-<span class="underline"></span>
-<span class="cancle"></span>
-<span class="green"></span>
-
-<code class="language-plaintext highlighter-rouge"></code>
-
-[<a id="" href="">1</a>] 참고자료1
-[<a id="" href="" title="">2</a>] 참고자료2, <a href="링크" target="_blank">링크</a>
-<sup><a id="" href="" target="_blank" title=""></a></sup>
-
-<figure>
-  <img src="/assets/img/category-#/#">
-  <figcaption>이미지 이름</figcaption>
-</figure>
-
-<details>
-  <summary>더보기</summary>
-  <figure>
-    <img src="/assets/img/category-#/#">
-    <figcaption>이미지 이름</figcaption>
-  </figure>
-</details>
-
-<details>
-  <summary>더보기</summary>
-  <p></p>
-</details>
--->
+2. 선형 시간 안에 중간값 선택하기, <a href="https://umbum.dev/671" target="_blank">https://umbum.dev/671</a>
+3. 퀵 정렬(Quick Sort)과 최악의 경우(O(N^2))를 방지하기 위한 방법들, <a href="https://blog.naver.com/ljy9378/221508655059" target="_blank">https://blog.naver.com/ljy9378/221508655059</a>
