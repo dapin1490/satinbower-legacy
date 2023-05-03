@@ -12,14 +12,23 @@ render_with_liquid: false
 </style>
 
 <!--
-<style> // _layouts\post.html에 지정된 스타일
+<style> // _sass\addon\commons.scss에 지정된 스타일
+  h1, h2, h3, h4, h5 {
+    color: #669966;
+  }
+
   .x-understand { color: #ccb833; }
   .understand { color: #0099FF; }
   .tab { white-space: pre; }
   .underline { text-decoration: underline; }
   .cancle { text-decoration: line-through; }
   .green { color: #339966; }
-  code.language-plaintext.highlighter-rouge { color: #1aaac7; }
+  .grey { color: #7f7f7f; }
+
+  code.language-plaintext.highlighter-rouge {
+    color: #1aaac7;
+    font-family: 'Roboto Mono', 'Nanum Gothic Coding', 'Microsoft Yahei', monospace;
+  }
 </style>
 
 <span class="x-understand"></span>
