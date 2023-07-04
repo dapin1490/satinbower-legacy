@@ -33,7 +33,7 @@ body {
   background: var(--body-bg);
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
-  font-family: 'Consolas', 'Nanum Gothic', 'Source Sans Pro', 'Microsoft Yahei', sans-serif; // custom
+  font-family: 'Console', 'Nanum Gothic', 'Source Sans Pro', 'Microsoft Yahei', sans-serif; // custom
 }
 
 /* --- Typography --- */
@@ -457,8 +457,9 @@ img[data-src] {
   word-wrap: break-word;
 
   /* customs begin */
-  h1, h2, h3, h4, h5 {
+  h1, h2, h3, h4, h5, h6 {
     color: #669966;
+    font-family: 'Console', 'Nanum Gothic';
   }
 
   .x-understand { color: #ccb833; }

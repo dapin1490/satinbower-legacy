@@ -18,11 +18,11 @@ $tab-count: {{ site.tabs | size | plus: 1 }}; // plus 1 for home tab
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 
 @font-face {
-  font-family: 'Consolas';
+  font-family: 'Console';
   src: url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 }
 @font-face {
-  font-family: 'Consolas';
+  font-family: 'Console';
   src: url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
   unicode-range: U+0041-005A, U+0061-007A, U+0030-0039;
 }
