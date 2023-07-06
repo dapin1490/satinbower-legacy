@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dapin1490.github.io/satinbower/sitemap.xml

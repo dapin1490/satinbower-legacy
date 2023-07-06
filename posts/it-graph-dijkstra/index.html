@@ -1,0 +1,310 @@
+<!DOCTYPE html><html lang="ko-KR" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><meta name="prefer-datetime-locale" content="ko"><meta name="generator" content="Jekyll v4.3.2" /><meta property="og:title" content="[자료구조] 그래프와 다익스트라" /><meta name="author" content="dapin1490" /><meta property="og:locale" content="ko_KR" /><meta name="description" content="Trust me I’m a talking potato" /><meta property="og:description" content="Trust me I’m a talking potato" /><link rel="canonical" href="https://dapin1490.github.io/satinbower-legacy/posts/it-graph-dijkstra/" /><meta property="og:url" content="https://dapin1490.github.io/satinbower-legacy/posts/it-graph-dijkstra/" /><meta property="og:site_name" content="새틴바우어" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2022-11-26T11:15:00+09:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="[자료구조] 그래프와 다익스트라" /><meta name="twitter:site" content="@dapin1490" /><meta name="twitter:creator" content="@dapin1490" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"dapin1490"},"dateModified":"2022-11-26T11:15:00+09:00","datePublished":"2022-11-26T11:15:00+09:00","description":"Trust me I’m a talking potato","headline":"[자료구조] 그래프와 다익스트라","mainEntityOfPage":{"@type":"WebPage","@id":"https://dapin1490.github.io/satinbower-legacy/posts/it-graph-dijkstra/"},"url":"https://dapin1490.github.io/satinbower-legacy/posts/it-graph-dijkstra/"}</script><title>[자료구조] 그래프와 다익스트라 | 새틴바우어</title><link rel="apple-touch-icon" sizes="180x180" href="/satinbower-legacy/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/satinbower-legacy/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/satinbower-legacy/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/satinbower-legacy/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/satinbower-legacy/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="새틴바우어"><meta name="application-name" content="새틴바우어"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/satinbower-legacy/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.11.2/css/all.min.css"><link rel="stylesheet" href="/satinbower-legacy/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1/dist/magnific-popup.min.css"> <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return "mode"; } static get MODE_ATTR() { return "data-mode"; } static get DARK_MODE() { return "dark"; } static get LIGHT_MODE() { return "light"; } static get ID() { return "mode-toggle"; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener("change", () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia("(prefers-color-scheme: dark)"); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { $('html').removeAttr(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage({ direction: ModeToggle.ID, message: this.modeStatus }, "*"); } } /* ModeToggle */ const toggle = new ModeToggle(); function flipMode() { if (toggle.hasMode) { if (toggle.isSysDarkPrefer) { if (toggle.isLightMode) { toggle.clearMode(); } else { toggle.setLight(); } } else { if (toggle.isDarkMode) { toggle.clearMode(); } else { toggle.setDark(); } } } else { if (toggle.isSysDarkPrefer) { toggle.setLight(); } else { toggle.setDark(); } } toggle.notify(); } /* flipMode() */ </script><body data-spy="scroll" data-target="#toc" data-topbar-visible="true"><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper text-center"><div id="avatar"> <a href="/satinbower-legacy/" class="mx-auto"> <img src="/satinbower-legacy/assets/img/profile_image.png" alt="avatar" onerror="this.style.display='none'"> </a></div><div class="site-title mt-3"> <a href="/satinbower-legacy/">새틴바우어</a></div><div class="site-subtitle font-italic">dapin1490's hand-made study blog</div></div><ul class="w-100"><li class="nav-item"> <a href="/satinbower-legacy/" class="nav-link"> <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i> <span>홈</span> </a><li class="nav-item"> <a href="/satinbower-legacy/categories/" class="nav-link"> <i class="fa-fw fas fa-stream ml-xl-3 mr-xl-3 unloaded"></i> <span>카테고리</span> </a><li class="nav-item"> <a href="/satinbower-legacy/tags/" class="nav-link"> <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i> <span>태그</span> </a><li class="nav-item"> <a href="/satinbower-legacy/archives/" class="nav-link"> <i class="fa-fw fas fa-archive ml-xl-3 mr-xl-3 unloaded"></i> <span>아카이브</span> </a><li class="nav-item"> <a href="/satinbower-legacy/about/" class="nav-link"> <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i> <span>정보</span> </a></ul><div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/dapin1490" aria-label="github" target="_blank" rel="noopener"> <i class="fab fa-github"></i> </a> <a href="https://twitter.com/dapin1490" aria-label="twitter" target="_blank" rel="noopener"> <i class="fab fa-twitter"></i> </a> <a href=" javascript:location.href = 'mailto:' + ['dapin1490','gmail.com'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a> <a href="/satinbower-legacy/feed.xml" aria-label="rss" > <i class="fas fa-rss"></i> </a></div></div><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100 pl-3 pr-3 pl-md-4 pr-md-4"> <span id="breadcrumb"> <span> <a href="/satinbower-legacy/"> 홈 </a> </span> <span>[자료구조] 그래프와 다익스트라</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> 포스트</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="검색..."> </span> <span id="search-cancel" >취소</span></div></div><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container pl-xl-4 pr-xl-4"><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pr-xl-4 pb-5"><div class="post pl-1 pr-1 pl-md-2 pr-md-2"><h1 data-toc-skip>[자료구조] 그래프와 다익스트라</h1><div class="post-meta text-muted"> <span> 게시 <em class="" data-ts="1669428900" data-df="YYYY-MM-DD" data-toggle="tooltip" data-placement="bottom"> 2022-11-26 </em> </span><div class="d-flex justify-content-between"> <span> By <em> dapin1490 </em> </span><div> <span class="readtime" data-toggle="tooltip" data-placement="bottom" title="4072 단어"> <em>22 분</em>읽는 시간</span></div></div></div><div class="post-content"><style> .x-understand { color: #ccb833; } .understand { color: #1380da; } .tab { white-space: pre; } .underline { text-decoration: underline; } .cancle { text-decoration: line-through; } .green { color: forestgreen;} figure { text-align: center; }</style><h2 id="할-일"><span class="mr-2">할 일</span><a href="#할-일" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><pre><code class="language-txt">[과제]
+이번 숙제는 다음 내용을 포함합니다.
+1. 그래프 표현 방법(코드 중심)으로 설명합니다. (O)
+2. 다익스트라 알고리즘을 설명하고, 코드를 구현합니다. (O)
+3. (옵션) 백준 알고리즘 다음 문제를 풀어봅니다. (X)
+- 1753 최단경로 : 시간초과
+- 1238 파티
+- 1504 특정 최단 경로
+- 1177 최소비용 구하기
+4. (옵션) BFS 관련 문제를 풀어 봅니다. (X)
+
+[메모]
+다익스트라 알고리즘은 이 알고리즘을 수행하는 그래프가 연결 그래프일 것을 전제하나?
+: 그럴 것 같긴 한데. 기본적으로 한 정점에서 다른 모든 정점으로 가는 경로가 있음을 전제하고 있다. 그래프가 연결되지 않아 경로가 없는 경우를 고려하지 않는다.
+추가) 연결되지 않은 경우는 거리를 무한으로 냅두면 된다.
+</code></pre><h2 id="목차"><span class="mr-2">목차</span><a href="#목차" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><ol><li>그래프 구현하기<li>다익스트라</ol><h2 id="그래프-구현하기"><span class="mr-2">그래프 구현하기</span><a href="#그래프-구현하기" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>그래프에 대한 이론적인 설명은 <a href="https://dapin1490.github.io/satinbower/posts/it-bfs-and-dfs/#%EA%B7%B8%EB%9E%98%ED%94%84" target="_blank">여기</a>에서 볼 수 있다. 이 글에서는 가중치 그래프를 중점으로 다룬다.</p><p>가중치 그래프는 정점과 간선, 가중치로 구성된다. 이 구성 요소는 그래프를 코드로 구현할 때에도 거의 같다. 각각의 정점이 어떠한 정보를 가져야 한다면 정점을 중심으로 구조체를 구상하면 되고, 정점이 특별한 정보를 갖지 않는다면 간선을 중심으로 구조체를 만드는 방법도 있다. 지난 글인 <a href="https://dapin1490.github.io/satinbower/posts/it-bfs-and-dfs/" target="_blank">[자료구조] BFS와 DFS</a>에서는 각 정점이 특정 station으로부터의 거리 값을 갖도록 했기 때문에 정점을 중심으로 구조체를 만들었다. 이번에는 정점이 아무런 정보도 갖지 않는다는 전제로 간선을 중심으로 그래프를 구현하고자 한다.</p><p>가장 기본 단위가 될 간선 구조체부터 생각해 보자. 무방향 그래프와 방향 그래프의 간선 구조체를 따로 만들기보다는, 기본 단위인 만큼 두 그래프에 모두 사용할 수 있도록 방향이 있는 간선을 만드는 게 좋을 것 같다. 방향 그래프에는 그대로 사용할 수 있고, 무방향 그래프를 만들 때는 서로 반대 방향의 간선 2개를 한번에 추가하면 된다. 따라서 이 구조체가 가져야 할 정보는 시작점과 종점, 가중치이다.</p><p>시작점과 종점, 다시 말해 각 정점은 간단하게 양수인 정수형의 ID로 구분한다고 하자. 가중치는 지금까지 정수로 사용해오긴 했지만, 때에 따라 실수를 사용하고 싶을 수도 있을 것이다. 혹은 사용자가 정의한 새로운 자료형을 사용할 수도 있다. 이럴 때 필요한 것이 템플릿이다(템플릿에 대해 새로 배웠기 때문에 같이 활용할 목적일 뿐이다). 정리하자면 방향이 있는 간선 구조체를 만들고, 간선의 시작점과 종점은 <code class="language-plaintext highlighter-rouge">unsigned int</code>로, 가중치는 템플릿으로 만들 것이다.</p><p>아래는 간선 구조체 코드이다.</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="복사되었습니다!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
+<span class="k">struct</span> <span class="nc">Edge</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="n">w</span><span class="p">;</span> <span class="c1">// 가중치</span>
+    <span class="kt">unsigned</span> <span class="n">from</span><span class="p">;</span> <span class="c1">// 시작점</span>
+    <span class="kt">unsigned</span> <span class="n">to</span><span class="p">;</span> <span class="c1">// 종점</span>
+<span class="p">};</span>
+</pre></table></code></div></div><p>다음은 저 간선을 이용한 그래프를 만들어야 한다. 그래프는 간선의 모임으로 만들어지며, 몇 가지 연산이 필요하다. 지금은 아주 기본적인 연산만 만들 것이다. 방향이 있는 간선과 방향이 없는 간선을 추가하는 연산이다. 위에서 만든 간선 구조체에 템플릿이 사용되었기 때문에 그래프 클래스도 템플릿을 사용해야 한다.</p><p>간선 구조체가 방향이 있기 때문에 그래프에 방향이 있는 간선을 추가하는 연산은 1개의 간선 구조체를 추가하면 되고, 방향이 없는 간선을 추가할 때는 서로 반대 방향의 간선 2개를 추가하면 된다.</p><p>그래프 클래스 코드는 아래에 있다. 교수님의 코드를 참고하여 작성했다.</p><p>코드를 보기에 앞서 유의할 점은 이 그래프 클래스는 정점의 수가 제한되어 있다는 것이다. 처음부터 정점의 총 개수를 알고 그리는 그래프이다. <code class="language-plaintext highlighter-rouge">TGraph::print()</code>에서 정점마다 연결된 다른 정점을 출력하는 반복문을 실행하기 위해 정점의 개수를 알고 있어야 한다. 그리고 모르는 정점이 추가되지 않도록 하기 위해 간선을 추가하는 연산에서 정점의 ID를 확인한다.</p><p>사실 이 그래프 클래스는 이후에 다익스트라 알고리즘에 사용하는 것이 목적이기 때문에 그래프를 구성하는 모든 정점이 최소 하나 이상의 간선으로 연결되어 있을 것을 전제한다. 그런 의미에서도 정점의 수를 제한하는 것으로 보인다. 다익스트라 알고리즘을 사용하지 않고 그래프라는 개념 자체를 구현하고자 한다면 정점의 수가 아니라 정점의 ID 최댓값을 저장하면 된다.</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="복사되었습니다!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+</pre><td class="rouge-code"><pre><span class="k">enum</span> <span class="k">class</span> <span class="nc">_error</span> <span class="o">:</span> <span class="kt">int</span> <span class="p">{</span> <span class="n">shut_down</span><span class="p">,</span> <span class="n">ValueErrorInt</span><span class="p">,</span> <span class="n">ValueErrorChar</span><span class="p">,</span> <span class="n">UnknownError</span> <span class="p">};</span>
+
+<span class="c1">// C++ 에러 메시지 참고 : https://learn.microsoft.com/ko-kr/cpp/error-messages/compiler-errors-1/c-cpp-build-errors?view=msvc-170</span>
+<span class="kt">void</span> <span class="nf">error</span><span class="p">(</span><span class="n">_error</span> <span class="n">code</span><span class="p">,</span> <span class="n">string</span> <span class="n">message</span><span class="o">=</span><span class="s">""</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">message</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"error: "</span> <span class="o">&lt;&lt;</span> <span class="n">message</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+
+    <span class="k">switch</span> <span class="p">(</span><span class="n">code</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">_error</span><span class="o">::</span><span class="n">shut_down</span><span class="p">:</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"프로그램 비정상 종료</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="n">_error</span><span class="o">::</span><span class="n">ValueErrorInt</span><span class="p">:</span> <span class="c1">// 잘못된 입력 - int</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"ValueErrorInt: int 값이 입력되어야 합니다.</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="n">_error</span><span class="o">::</span><span class="n">ValueErrorChar</span><span class="p">:</span> <span class="c1">// 잘못된 입력 - char</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"ValueErrorChar: char 값이 입력되어야 합니다.</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="nl">default:</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"UnknownError: 알 수 없는 오류</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// 프로그램 비정상 종료</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
+<span class="k">class</span> <span class="nc">TGraph</span> <span class="p">{</span>
+<span class="nl">private:</span>
+    <span class="kt">unsigned</span> <span class="n">v</span><span class="p">;</span> <span class="c1">// 정점 수</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">edges</span><span class="p">;</span> <span class="c1">// 그래프가 갖는 간선들</span>
+
+<span class="nl">public:</span>
+    <span class="c1">// 생성자</span>
+    <span class="n">TGraph</span><span class="p">()</span> <span class="p">{</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">v</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">TGraph</span><span class="p">(</span><span class="kt">unsigned</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">v</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="c1">// 함수 정의에 쓰인 const : 이 함수 안에서 쓰는 값들을 변경할 수 없다</span>
+    <span class="kt">unsigned</span> <span class="n">size</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">v</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// 그래프가 갖는 정점의 수를 반환</span>
+    <span class="k">auto</span><span class="o">&amp;</span> <span class="n">edges_from</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">edges</span><span class="p">;</span> <span class="p">}</span> <span class="c1">// 그래프가 갖는 간선들을 반환</span>
+    <span class="c1">// 특정 정점에 연결된 간선들만 반환</span>
+    <span class="k">auto</span> <span class="n">edges_from</span><span class="p">(</span><span class="kt">unsigned</span> <span class="n">i</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="c1">// 여기에 &amp; 쓰면 결과가 제대로 반환이 안 됨. 근데 이유는 모름..</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">edge_from_i</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="n">e</span> <span class="o">:</span> <span class="n">edges</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">from</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span>
+                <span class="n">edge_from_i</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="cm">/*for (int idx = 0; idx &lt; this-&gt;edges.size(); idx++) {
+            if (this-&gt;edges[idx].from == i)
+                edge_from_i.push_back(edges[idx]);
+        }*/</span>
+        <span class="k">return</span> <span class="n">edge_from_i</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="n">Edge</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 방향 간선 추가</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">from</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">.</span><span class="n">from</span> <span class="o">&lt;=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">v</span> <span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">.</span><span class="n">to</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">.</span><span class="n">to</span> <span class="o">&lt;=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">v</span><span class="p">)</span>
+            <span class="k">this</span><span class="o">-&gt;</span><span class="n">edges</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+        <span class="k">else</span>
+            <span class="n">error</span><span class="p">(</span><span class="n">_error</span><span class="o">::</span><span class="n">shut_down</span><span class="p">,</span> <span class="s">"정점 범위 초과"</span><span class="p">);</span>
+
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="nf">add_undir</span><span class="p">(</span><span class="n">Edge</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 무방향 간선 추가</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">from</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">.</span><span class="n">from</span> <span class="o">&lt;=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">v</span> <span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">.</span><span class="n">to</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">.</span><span class="n">to</span> <span class="o">&lt;=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">v</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="o">-&gt;</span><span class="n">edges</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+            <span class="k">this</span><span class="o">-&gt;</span><span class="n">edges</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Edge</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span><span class="n">e</span><span class="p">.</span><span class="n">w</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">to</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">from</span><span class="p">});</span>
+        <span class="p">}</span>
+        <span class="k">else</span>
+            <span class="nf">error</span><span class="p">(</span><span class="n">_error</span><span class="o">::</span><span class="n">shut_down</span><span class="p">,</span> <span class="s">"정점 범위 초과"</span><span class="p">);</span>
+
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="nf">print</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// 그래프 출력</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">v</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"# "</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">" : "</span><span class="p">;</span>
+            <span class="n">vector</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">edge</span> <span class="o">=</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">TGraph</span><span class="o">::</span><span class="n">edges_from</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="n">e</span> <span class="o">:</span> <span class="n">edge</span><span class="p">)</span>
+                <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"("</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">to</span> <span class="o">&lt;&lt;</span> <span class="s">", "</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">w</span> <span class="o">&lt;&lt;</span> <span class="s">")  "</span><span class="p">;</span>
+            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></table></code></div></div><h2 id="다익스트라"><span class="mr-2">다익스트라</span><a href="#다익스트라" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>다익스트라 알고리즘은 주어진 연결 그래프에서 최단경로를 찾는 것이 목적인 알고리즘이다. 하나의 시작점을 기준으로 하며, 그 점으로부터 다른 모든 점까지 도달하는 비용의 최솟값을 구한다. 시작점에서 가장 가까운 곳부터 시작해 정점을 하나씩 방문하며 알아낸 비용의 최솟값을 이용해 또다른 정점으로의 최소 비용을 알아내는 방식이다. 모든 경로에는 사이클이 없어야 한다지만 자동으로 사이클이 생기지 않는 경로를 찾게 되니 굳이 검사할 필요는 없다.</p><p>다시 한 번 자세히 알고리즘 수행 과정을 보자.<br /> 필요한 것은 시작점과 시작점으로부터의 거리를 저장할 선형 자료구조(배열, 벡터 등 종류 상관 없음)이다.</p><ol><li>시작점을 방문하여 시작한다. 시작점에서 나머지 모든 정점까지의 거리를 계산하되, 간선이 직접 연결된 경우에만 거리를 계산하고, 간선이 직접 연결되지 않은 정점은 거리를 무한으로 간주한다.<li>계산된 거리 중(무한 포함)에서, 그리고 아직 방문하지 않은 정점 중에서 가장 가까운 곳으로 이동한다.<li>해당 정점에서 다시 거리를 계산해야 한다. 지금 방문한 정점에서 갈 수 있는 모든 정점에 대해, 앞서 1번에서 계산했던 값과, 지금 방문한 정점을 거쳐 그곳으로 가는 거리를 비교해 더 작은 쪽으로 업데이트한다.<li>업데이트된 거리 중에서, 그리고 아직 방문하지 않은 정점 중에서 가장 가까운 곳으로 이동한다.<li>이후 모든 정점을 방문할 때까지 3번과 4번을 반복한다.</ol><ul><li>일반화 : n번째 방문한 정점에서 갈 수 있는 다른 모든 정점에 대해, n-1번째 방문한 정점에서 계산한 거리와 현재 정점에서 해당 정점으로 가는 거리를 비교하여 더 작은 쪽을 적용한다. 시작점에서 시작할 때는(n=1) n-1번째 정점이 없으므로 모든 거리를 무한으로 간주한다.</ul><p>나는 세 가지 다익스트라 함수를 만들었다. 첫 번째는 시작점으로부터 목적지까지 최소 비용만을 계산하고, 두 번째는 첫 번째의 결과에 더해 해당 경로로 가기 위해 직전에 방문해야 할 정점을 같이 구하고, 세 번째는 두 번째에서 구한 정보들을 이용해 시작점부터 모든 정점으로의 완전한 경로를 구한다. 함수의 이름은 각각 <code class="language-plaintext highlighter-rouge">dijkstra</code>, <code class="language-plaintext highlighter-rouge">dijkstra_path</code>, <code class="language-plaintext highlighter-rouge">dijkstra_fullpath</code>이다. 전체 코드는 <a href="https://github.com/dapin1490/satinbower/blob/main/assets/files/code/dijkstra.h" target="_blank">깃허브</a>에서 볼 수 있다.</p><p><span class="cancle">그러나 내가 쓴 다익스트라 코드는 한 가지 과정에서 상당히 비효율적으로 동작한다. 다음에 방문할 정점을 고르기 위해서는 거리가 가장 짧으면서 아직 방문하지 않은 정점을 찾아야 하는데, 이 과정을 매번 우선순위 큐에 모든 간선을 넣었다 빼면서 수행하고 있다. 아래 있는 예제는 간단하기 때문에 이런 코드로도 금방 답이 나오지만 데이터의 양이 조금만 커져도 내 코드는 결과를 내기까지 상당히 오랜 시간이 걸릴 것이다. 사실 이 문제는 힙을 좀 더 섬세하게 다루면 금방 해결된다. 이번엔 내가 시간이 부족하고, 이해도 부족해서 그러지 못했을 뿐이다. <strong>요점은 이 코드에는 결함이 있음을 감안하고 봐달라는 말이다.</strong></span></p><p><span class="cancle">결함이 있긴 하지만,</span> 남이 쓴 코드를 이해하는 좋은 방법 중 하나는 예시를 보는 것이다. 그래서 예시 그래프도 준비했다.</p><p><strong>22.12.04 수정</strong><br /> 다익스트라 함수에 사용된 우선순위 큐의 사용 방법을 약간 바꿨다. 여전히 백준 문제는 통과되지 않는 것을 봐선 어딘가 더 효율적으로 쓸 수 있는 방법이 있는 모양이지만 지금 내가 이해한 선에서 쓸 수 있는 만큼 썼다.</p><figure> <img data-src="/satinbower-legacy/assets/img/category-it/221126-1-graph.jpg" data-proofer-ignore><figcaption>[이미지 1] 다익스트라 예시 그래프</figcaption></figure><p>위 그래프를 이용하여 세 가지 다익스트라 함수를 실행한 결과는 <a href="https://ideone.com/boz68k" target="_blank">이 링크</a>에서 볼 수 있다.</p><p>코드의 길이가 길어 여기에 모든 코드를 올리지는 않고, 내가 구현한 다익스트라 함수의 모든 기능을 포함하는 <code class="language-plaintext highlighter-rouge">dijkstra_fullpath</code> 함수만 올리겠다.</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code small"></i></span> <button aria-label="copy" data-title-succeed="복사되었습니다!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+</pre><td class="rouge-code"><pre><span class="k">struct</span> <span class="nc">cmp</span> <span class="p">{</span> <span class="c1">// 다익스트라 우선순위 큐 비교 연산자 : 가중치가 적고 정점 번호가 적은 것을 우선으로 함</span>
+    <span class="kt">bool</span> <span class="k">operator</span><span class="p">()(</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="p">,</span> <span class="kt">unsigned</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">,</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="p">,</span> <span class="kt">unsigned</span><span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">second</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">second</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">first</span> <span class="o">&gt;=</span> <span class="n">b</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+        <span class="k">else</span>
+            <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">second</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="c1">// 응용 : 다익스트라 경로 탐색 - 모든 경로 표시</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="p">,</span> <span class="n">list</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="o">&gt;&gt;&gt;</span> <span class="n">dijkstra_fullpath</span><span class="p">(</span><span class="kt">unsigned</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// s는 시작점</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="p">,</span> <span class="kt">unsigned</span><span class="o">&gt;&gt;</span> <span class="n">d</span><span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">make_pair</span><span class="p">(</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">(),</span> <span class="n">s</span><span class="p">));</span> <span class="c1">// 저장용 거리 벡터. 정점 번호가 1부터 시작함. (최소 비용 거리, 직전 경로 정점)</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">visited</span><span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span> <span class="c1">// 방문 여부 초기화</span>
+    <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="p">,</span> <span class="kt">unsigned</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="p">,</span> <span class="kt">unsigned</span><span class="o">&gt;&gt;</span><span class="p">,</span> <span class="n">cmp</span><span class="o">&gt;</span> <span class="n">next_visit</span><span class="p">;</span> <span class="c1">// 다음에 방문할 정점 : (정점, 거리)</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="p">,</span> <span class="n">list</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="o">&gt;&gt;&gt;</span> <span class="n">full_path</span><span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// 모든 경로 표시 벡터 : (거리, 경로)</span>
+
+    <span class="kt">unsigned</span> <span class="n">vert</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span> <span class="c1">// 이제 방문할 정점 : 아직 시작하지 않았으므로 시작점으로 초기화</span>
+    <span class="n">visited</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// 안 쓰는 인덱스 방문할 일 없게 미리 표시</span>
+    <span class="n">d</span><span class="p">[</span><span class="n">s</span><span class="p">].</span><span class="n">first</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 시작점은 거리 0</span>
+    <span class="n">next_visit</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="n">s</span><span class="p">].</span><span class="n">first</span><span class="p">));</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">next_visit</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span> <span class="c1">// 다음 방문 정점 큐가 비어있지 않을 동안</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">visited</span><span class="p">[</span><span class="n">vert</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">visited</span><span class="p">[</span><span class="n">vert</span><span class="p">]</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// 정점 방문</span>
+            <span class="n">vector</span><span class="o">&lt;</span><span class="n">Edge</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">v_edge</span> <span class="o">=</span> <span class="n">edges_from</span><span class="p">(</span><span class="n">vert</span><span class="p">);</span> <span class="c1">// 정점에 연결된 간선 가져오기</span>
+
+            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="n">e</span> <span class="o">:</span> <span class="n">v_edge</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">vert</span><span class="p">].</span><span class="n">first</span> <span class="o">+</span> <span class="n">e</span><span class="p">.</span><span class="n">w</span> <span class="o">&lt;</span> <span class="n">d</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">to</span><span class="p">].</span><span class="n">first</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 거리를 업데이트할 필요가 있을 때에만</span>
+                    <span class="n">d</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">to</span><span class="p">].</span><span class="n">first</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">vert</span><span class="p">].</span><span class="n">first</span> <span class="o">+</span> <span class="n">e</span><span class="p">.</span><span class="n">w</span><span class="p">;</span> <span class="c1">// 거리 업데이트</span>
+                    <span class="n">d</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">to</span><span class="p">].</span><span class="n">second</span> <span class="o">=</span> <span class="n">vert</span><span class="p">;</span> <span class="c1">// 직전 방문 정점 업데이트</span>
+                    <span class="n">next_visit</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">make_pair</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">to</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">to</span><span class="p">].</span><span class="n">first</span><span class="p">));</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">next_visit</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">pair</span><span class="o">&lt;</span><span class="kt">unsigned</span><span class="p">,</span> <span class="kt">unsigned</span><span class="o">&gt;</span> <span class="n">next</span> <span class="o">=</span> <span class="n">next_visit</span><span class="p">.</span><span class="n">top</span><span class="p">();</span> <span class="c1">// (정점, 거리)</span>
+            <span class="n">next_visit</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+            <span class="n">vert</span> <span class="o">=</span> <span class="n">next</span><span class="p">.</span><span class="n">first</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 위에서 알아낸 최소 비용 거리와 직전 방문 정점을 이용해 모든 경로 찾기</span>
+    <span class="c1">// 도착점인 i로부터 시작점인 s까지 거슬러 올라가는 방식으로 탐색</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">v</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">unsigned</span> <span class="n">dest</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">;</span> <span class="c1">// 시작점 s에서 정점 i를 찾아가는 경로상에서, i를 방문하기 직전의 정점</span>
+        <span class="n">full_path</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">first</span><span class="p">;</span> <span class="c1">// s에서 i로 가는 최소 비용</span>
+        <span class="n">full_path</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="n">i</span><span class="p">);</span> <span class="c1">// 도착점 i 먼저 리스트에 추가</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">dest</span> <span class="o">!=</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 시작점 s에 도달하면 종료</span>
+            <span class="n">full_path</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="n">dest</span><span class="p">);</span> <span class="c1">// 지금 방문하는 점을 경로 맨 앞에 추가</span>
+            <span class="n">dest</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">dest</span><span class="p">].</span><span class="n">second</span><span class="p">;</span> <span class="c1">// 시작점에서 지금 방문한 점으로 오기까지, 직전 방문 정점을 다음 방문지로 지정</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">!=</span> <span class="n">s</span><span class="p">)</span> <span class="c1">// 위의 반복문은 시작점 s를 다음 방문지로 지정하면 종료되기 때문에 경로에 추가되지 않으므로, 현재 도착점이 시작점과 다르다면 경로에 추가해야 함</span>
+            <span class="n">full_path</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">second</span><span class="p">.</span><span class="n">push_front</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">full_path</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div></div><div class="post-tail-wrapper text-muted"><div class="post-meta mb-3"> <i class="far fa-folder-open fa-fw mr-1"></i> <a href='/satinbower-legacy/categories/it/'>IT</a>, <a href='/satinbower-legacy/categories/algorithm/'>Algorithm</a></div><div class="post-tags"> <i class="fa fa-tags fa-fw mr-1"></i> <a href="/satinbower-legacy/tags/%EC%A7%80%EC%8B%9D/" class="post-tag no-text-decoration" >지식</a> <a href="/satinbower-legacy/tags/it/" class="post-tag no-text-decoration" >IT</a> <a href="/satinbower-legacy/tags/%EA%B3%BC%EC%A0%9C/" class="post-tag no-text-decoration" >과제</a> <a href="/satinbower-legacy/tags/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/" class="post-tag no-text-decoration" >자료구조</a> <a href="/satinbower-legacy/tags/%EA%B7%B8%EB%9E%98%ED%94%84/" class="post-tag no-text-decoration" >그래프</a> <a href="/satinbower-legacy/tags/%EB%8B%A4%EC%9D%B5%EC%8A%A4%ED%8A%B8%EB%9D%BC/" class="post-tag no-text-decoration" >다익스트라</a> <a href="/satinbower-legacy/tags/dijkstra/" class="post-tag no-text-decoration" >dijkstra</a> <a href="/satinbower-legacy/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/" class="post-tag no-text-decoration" >알고리즘</a></div><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"> 이 기사는 저작권자의 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.ko"> CC BY-NC-ND 4.0 </a> 라이센스를 따릅니다.</div><div class="share-wrapper"> <span class="share-label text-muted mr-1">공유하기</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=%5B%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0%5D+%EA%B7%B8%EB%9E%98%ED%94%84%EC%99%80+%EB%8B%A4%EC%9D%B5%EC%8A%A4%ED%8A%B8%EB%9D%BC+-+%EC%83%88%ED%8B%B4%EB%B0%94%EC%9A%B0%EC%96%B4&url=https%3A%2F%2Fdapin1490.github.io%2Fsatinbower-legacy%2Fposts%2Fit-graph-dijkstra%2F" data-toggle="tooltip" data-placement="top" title="Twitter" target="_blank" rel="noopener" aria-label="Twitter"> <i class="fa-fw fab fa-twitter"></i> </a> <i id="copy-link" class="fa-fw fas fa-link small" data-toggle="tooltip" data-placement="top" title="링크 복사하기" data-title-succeed="링크가 복사되었습니다!"> </i> </span></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 pl-2 text-muted"><div class="access"><div id="access-lastmod" class="post"><div class="panel-heading">최근 업데이트</div><ul class="post-content pl-0 pb-1 ml-1 mt-2"><li><a href="/satinbower-legacy/posts/backend-internet-230704/">[Backend] 인터넷이 뭔데</a><li><a href="/satinbower-legacy/posts/it-boj-1254/">[python] 백준 1254 팰린드롬 만들기</a><li><a href="/satinbower-legacy/posts/py-exe-release/">[python] GUI 프로그램 exe 만들고 배포하기, 소멸자와 로깅</a><li><a href="/satinbower-legacy/posts/daily-230617/">23년 1학기 14주 수업</a><li><a href="/satinbower-legacy/posts/chatgpt-230103/">Unity vs Unreal Engine</a></ul></div><div id="access-tags"><div class="panel-heading">인기 태그</div><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/satinbower-legacy/tags/%EC%A7%80%EC%8B%9D/">지식</a> <a class="post-tag" href="/satinbower-legacy/tags/it/">IT</a> <a class="post-tag" href="/satinbower-legacy/tags/%EB%82%B4%EA%B0%80-%ED%95%B4%EB%83%84/">내가 해냄</a> <a class="post-tag" href="/satinbower-legacy/tags/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/">자료구조</a> <a class="post-tag" href="/satinbower-legacy/tags/%EB%AC%B8%EC%A0%9C%ED%92%80%EC%9D%B4/">문제풀이</a> <a class="post-tag" href="/satinbower-legacy/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/">알고리즘</a> <a class="post-tag" href="/satinbower-legacy/tags/%EA%B3%BC%EC%A0%9C/">과제</a> <a class="post-tag" href="/satinbower-legacy/tags/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/">프로젝트</a> <a class="post-tag" href="/satinbower-legacy/tags/leetcode/">LeetCode</a> <a class="post-tag" href="/satinbower-legacy/tags/%EB%94%A5%EB%9F%AC%EB%8B%9D/">딥러닝</a></div></div></div><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@1.0.1/dist/bootstrap-toc.min.js"></script><div id="toc-wrapper" class="pl-0 pr-4 mb-5"><div class="panel-heading pl-3 pt-2 mb-2">바로가기</div><nav id="toc" data-toggle="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 pl-3 pr-3 pr-xl-4"><div id="related-posts" class="mb-2 mb-sm-4"><h3 class="pt-2 mb-4 ml-1" data-toc-skip>관련된 글</h3><div class="card-deck mb-4"><div class="card"> <a href="/satinbower-legacy/posts/it-bfs-and-dfs/"><div class="card-body"> <em class="small" data-ts="1667748120" data-df="YYYY-MM-DD" > 2022-11-07 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>[자료구조] BFS와 DFS</h3><div class="text-muted small"><p> 할 일 이번 숙제는 다음 내용을 포함합니다. 1. 그래프 예시를 직접 만듭니다. (O) 2. BFS와 DFS 알고리즘을 바탕으로 그래프 탐색 과정을 그립니다. (O) 3. 본인이 편하게 사용할 수 있는 BFS와 DFS 코드를 작성합니다. (O) 4. (옵션) BFS 관련 문제를 풀어 봅니다. (X) DFS 관련 문제는 금일 시간 관계 상 다...</p></div></div></a></div><div class="card"> <a href="/satinbower-legacy/posts/it-bellman-ford/"><div class="card-body"> <em class="small" data-ts="1670163600" data-df="YYYY-MM-DD" > 2022-12-04 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>[자료구조] 벨만-포드 알고리즘</h3><div class="text-muted small"><p> 할 일 아래 내용을 포함하는 포트폴리오를 작성하고, 웹페이지 주소를 제출합니다. 1. 벨만포드 알고리즘 정리 (O) 2. Leet code 문제 풀이 : 743번 네트워크 딜레이 시간 (O) https://leetcode.com/problems/network-delay-time/ 2.1. 다익스트라를 이용한 풀이 (O) 2.2. 벨만포드를 이용한...</p></div></div></a></div><div class="card"> <a href="/satinbower-legacy/posts/it-algorithm-dijkstra/"><div class="card-body"> <em class="small" data-ts="1680966000" data-df="YYYY-MM-DD" > 2023-04-09 </em><h3 class="pt-0 mt-1 mb-3" data-toc-skip>[알고리즘] 다익스트라</h3><div class="text-muted small"><p> Table of Contents 할 일 문제 풀이 양방향 다익스트라 양방향 다익스트라 개선 할 일 Read chapters 7.1 – 7.7. (X) Solve the exercise problem 14 of the chapter 7. Show that the time complexity for th...</p></div></div></a></div></div></div><div class="post-navigation d-flex justify-content-between"> <a href="/satinbower-legacy/posts/knowledge-home-training/" class="btn btn-outline-primary" prompt="이전 글"><p>튜빙밴드와 자가체중을 이용한 홈트운동</p></a> <a href="/satinbower-legacy/posts/it-dst-project-end/" class="btn btn-outline-primary" prompt="다음 글"><p>[하천 쓰레기 프로젝트] 프로젝트 마무리</p></a></div></div></div><footer class="row pl-3 pr-3"><div class="col-12 d-flex justify-content-between align-items-center text-muted pl-0 pr-0"><div class="footer-left"><p class="mb-0"> © 2023 <a href="https://github.com/dapin1490">dapin1490</a>. <span data-toggle="tooltip" data-placement="top" title="명시되지 않는 한 이 사이트의 블로그 게시물은 작성자의 Creative Commons Attribution 4.0 International(CC BY-NC-ND 4.0) 라이선스에 따라 사용이 허가되었습니다.">일부 권리 보유</span></p></div><div class="footer-right"><p class="mb-0"> Powered by <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> with <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a> theme.</p></div></div></footer></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-12 col-sm-11 post-content"><div id="search-hints"><div id="access-tags"><div class="panel-heading">인기 태그</div><div class="d-flex flex-wrap mt-3 mb-1 mr-3"> <a class="post-tag" href="/satinbower-legacy/tags/%EC%A7%80%EC%8B%9D/">지식</a> <a class="post-tag" href="/satinbower-legacy/tags/it/">IT</a> <a class="post-tag" href="/satinbower-legacy/tags/%EB%82%B4%EA%B0%80-%ED%95%B4%EB%83%84/">내가 해냄</a> <a class="post-tag" href="/satinbower-legacy/tags/%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0/">자료구조</a> <a class="post-tag" href="/satinbower-legacy/tags/%EB%AC%B8%EC%A0%9C%ED%92%80%EC%9D%B4/">문제풀이</a> <a class="post-tag" href="/satinbower-legacy/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/">알고리즘</a> <a class="post-tag" href="/satinbower-legacy/tags/%EA%B3%BC%EC%A0%9C/">과제</a> <a class="post-tag" href="/satinbower-legacy/tags/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8/">프로젝트</a> <a class="post-tag" href="/satinbower-legacy/tags/leetcode/">LeetCode</a> <a class="post-tag" href="/satinbower-legacy/tags/%EB%94%A5%EB%9F%AC%EB%8B%9D/">딥러닝</a></div></div></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><div id="mask"></div><a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button"> <i class="fas fa-angle-up"></i> </a><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-animation="true" data-autohide="false"><div class="toast-header"> <button type="button" class="ml-2 ml-auto close" data-dismiss="toast" aria-label="Close"> <span aria-hidden="true">&times;</span> </button></div><div class="toast-body text-center pt-0"><p class="pl-2 pr-2 mb-3">새 버전의 콘텐츠를 사용할 수 있습니다.</p><button type="button" class="btn btn-primary" aria-label="Update"> 업데이트 </button></div></div><script src="https://cdn.jsdelivr.net/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js"></script> <script> SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/satinbower-legacy/assets/js/data/search.json', searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0"> <a href="{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5">검색 결과가 없습니다.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script> <script src="https://cdn.jsdelivr.net/combine/npm/magnific-popup@1/dist/jquery.magnific-popup.min.js,npm/lozad/dist/lozad.min.js,npm/clipboard@2/dist/clipboard.min.js"></script> <script src="https://cdn.jsdelivr.net/combine/npm/dayjs@1/dayjs.min.js,npm/dayjs@1/locale/ko.min.js,npm/dayjs@1/plugin/relativeTime.min.js,npm/dayjs@1/plugin/localizedFormat.min.js"></script> <script defer src="/satinbower-legacy/assets/js/dist/post.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.bundle.min.js"></script> <script defer src="/satinbower-legacy/app.js"></script>
