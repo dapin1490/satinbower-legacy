@@ -90,13 +90,13 @@ avatar: assets/img/profile_image.png
 toc: true
 
 comments:
-  active: 'utterances'        # The global switch for posts comments, e.g., 'disqus'.  Keep it empty means disable
+  active: # The global switch for posts comments, e.g., 'disqus'.  Keep it empty means disable
   # The active options are as follows:
   disqus:
     shortname:    # fill with the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
   # utterances settings › https://utteranc.es/
   utterances:
-    repo: 'dapin1490/satinbower'        # <gh-username>/<repo>
+    repo: # <gh-username>/<repo>
     issue_term: 'url'  # < url | pathname | title | ...>
     label: 'blog-comment'
     theme: 'preferred-color-scheme'
@@ -110,10 +110,10 @@ comments:
     # </script>
   # Giscus options › https://giscus.app
   giscus:
-    repo: "dapin1490/satinbower"            # <gh-username>/<repo>
-    repo_id: "R_kgDOH4O5NA"
+    repo: # <gh-username>/<repo>
+    repo_id: 
     category: "blog-comment"
-    category_id: "DIC_kwDOH4O5NM4CRYxf"
+    category_id: 
     mapping: "url"          # optional, default to 'pathname'
     input_position: "top"   # optional, default to 'bottom'
     lang:             # optional, default to the value of `site.lang`
